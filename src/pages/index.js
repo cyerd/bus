@@ -29,7 +29,7 @@ export default function Home(props) {
           <Recon />
           <Reports />
         </div>
-        <div className="hidden lg:flex flex-col items-center justify-center ">
+        <div className="hidden lg:flex flex-col items-center ">
 
           <div className="flex  items-center max-w-md mt-12">
             {/* <Calendar
@@ -47,6 +47,7 @@ export default function Home(props) {
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
+          className="flex items-center"
         >
           Powered by
           <span className="">

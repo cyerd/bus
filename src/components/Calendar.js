@@ -43,16 +43,17 @@ const styles = {
 export default function Calendar() {
   //momentLocalizer(moment);
   const localizer = momentLocalizer(moment);
+//   const formatMonth = format({ locale: es }, "MMM");
   useEffect(() => {
-    moment.locale("en-GB");
-  }, [localizer]);
+    moment.locale("en-US");
+  }, []);
   return (
-    <div className="z-40 bg-white overflow-auto">
-      <div className="flex items-center justify-between mx-4 mb-5">
-        <div className="mx-5">
+    <div className="realative z-40 bg-white overflow-auto h-full">
+      <div className="flex items-center justify-between mx-4 mb-5 ">
+        <div >
           <p className="font-bold text-2xl text-gray-500">{time}</p>
         </div>
-        <div>
+        <div >
           <h2 className="font-bold text-xl text-gray-500">{day}</h2>{" "}
           <p className="italic text-gray-500 text-sm">{date}</p>
         </div>

@@ -10,8 +10,8 @@ const user = {
 };
 const navigation = [
   { name: "Tickets", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
+  { name: "Parcel", href: "#", current: false },
+  { name: "Reconciliations", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
   { name: "Reports", href: "#", current: false },
 ];
