@@ -4,49 +4,49 @@ const navigation = [
   {
     id: "1",
     name: "Home",
-    icon: "/book-parcel.png",
-    color: "green-400",
+    icon: "/reconciliation.png",
+
   },
   {
     id: "2",
     name: "Cash Forward",
-    icon: "/loading sheet.png",
-    color: "yellow-800",
+    icon: "/cash-forward.png",
+  
   },
   {
     id: "3",
     name: "Expenses",
-    icon: "/parcel-list.png",
-    color: "gray-700",
+    icon: "/expense.png",
+ 
   },
   {
     id: "1",
-    name: "Home",
-    icon: "/book-parcel.png",
-    color: "green-400",
+    name: "Bank",
+    icon: "/bank.png",
+ 
   },
   {
     id: "2",
-    name: "Cash Forward",
-    icon: "/loading sheet.png",
+    name: "Branch Status",
+    icon: "/branch-status.png",
+  
+  },
+  {
+    id: "3",
+    name: "Cash Received",
+    icon: "/cash-received.png",
+
+  },
+  {
+    id: "2",
+    name: "User Statement",
+    icon: "/user-statement.png",
     color: "yellow-800",
   },
   {
     id: "3",
-    name: "Expenses",
-    icon: "/parcel-list.png",
-    color: "gray-700",
-  },
-  {
-    id: "2",
-    name: "Cash Forward",
-    icon: "/loading sheet.png",
-    color: "yellow-800",
-  },
-  {
-    id: "3",
-    name: "Expenses",
-    icon: "/parcel-list.png",
+    name: "Mpesa",
+    icon: "/mpesa.png",
     color: "gray-700",
   },
 ];

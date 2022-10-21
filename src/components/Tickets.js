@@ -44,7 +44,7 @@ function Tickets() {
             key={item.id}
             className="flex flex-col justify-around items-center p-0 sm:px-2 md:px-4 lg:px-6  max-h-32"
           >
-            <Image src={item.icon} width="50" height="50" layout="fixed" />
+            <Image src={item.icon} width="50" height="50" />
             <button
               style={{ backgroundColor: item.color }}
               className={`px-2 py-1 rounded-md  text-white my-5 `}

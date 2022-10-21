@@ -3,50 +3,50 @@ import React from "react";
 const navigation = [
   {
     id: "1",
-    name: "Home",
-    icon: "/book-parcel.png",
+    name: "Parcel Report",
+    icon: "/parcel-report.png",
     color: "#675aaa",
   },
   {
     id: "2",
-    name: "Cash Forward",
-    icon: "/loading sheet.png",
+    name: "Sales Report",
+    icon: "/sales-report.png",
     color: "#dcd806",
   },
   {
     id: "3",
-    name: "Expenses",
-    icon: "/parcel-list.png",
+    name: "Bank Report",
+    icon: "/bank-report.png",
     color: "#1072ae",
   },
   {
     id: "1",
-    name: "Home",
-    icon: "/book-parcel.png",
+    name: "Vehicle Collection",
+    icon: "/vehicle-collection.png",
     color: "#93ac0c",
   },
   {
     id: "2",
-    name: "Cash Forward",
-    icon: "/loading sheet.png",
+    name: "Ticket Report",
+    icon: "/ticket-report.png",
     color: "#fbb043",
   },
   {
     id: "3",
-    name: "Expenses",
-    icon: "/parcel-list.png",
+    name: "Trip Report",
+    icon: "/trip-report.png",
     color: "#ee181d",
   },
   {
     id: "2",
-    name: "Cash Forward",
-    icon: "/loading sheet.png",
+    name: "Dispatch Report",
+    icon: "/dispatch-report.png",
     color: "#cf0a98",
   },
   {
     id: "3",
-    name: "Expenses",
-    icon: "/parcel-list.png",
+    name: "Ticket Inspection",
+    icon: "/ticket-inspecton.png",
     color: "#bab1b3",
   },
 ];
@@ -64,7 +64,7 @@ function Reports() {
           className="flex flex-col justify-around items-center py-2"
         >
           <div
-            className={`rounded-md text-black border-2 border-blue-400   flex justify-around px-5 py-2 h-full w-full items-center`}
+            className={`rounded-md text-white    flex justify-around px-5 py-2 h-full w-full items-center`}
             style={{ backgroundColor: item.color }}
           >
             <p> {item.name}</p>

@@ -3,15 +3,15 @@ import Image from "next/image";
 import Tickets from "../components/Tickets";
 import Header from "../components/Header";
 import Parcels from "../components/Parcels";
-import { format, formatDistance, formatRelative, subDays } from "date-fns";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import Recon from "../components/Recon";
 import Reports from "../components/Reports";
+import Calendar from "../components/Calendar";
 
-export default function Home() {
-  const day = format(new Date(), "eeee");
-  const date = format(new Date(), "d-M-y");
-  const time = format(new Date(), "h:m a");
+
+export default function Home(props) {
+
 
   return (
     <div className="flex flex-col h-full justify-between">
@@ -23,19 +23,21 @@ export default function Home() {
       </Head>
       <Header />
       <main className="flex w-full">
-        <div className="flex flex-col w-full lg:w-9/12">
+        <div className="flex flex-col w-full lg:w-9/12 z-0">
           <Tickets />
           <Parcels />
           <Recon />
           <Reports />
         </div>
-        <div className="hidden lg:flex items-center justify-between">
-          <div className="mx-5">
-            <p className="font-bold text-2xl text-gray-500">{time}</p>
-          </div>
-          <div>
-            <h2 className="font-bold text-xl text-gray-500">{day}</h2>{" "}
-            <p className="italic text-gray-500 text-sm">{date}</p>
+        <div className="hidden lg:flex flex-col items-center justify-center ">
+
+          <div className="flex  items-center max-w-md mt-12">
+            {/* <Calendar
+              className="flex flex-col items-center mx-5 p-0 "
+              onChange={onChange}
+              value={value}
+            /> */}
+          <Calendar/>
           </div>
         </div>
       </main>
