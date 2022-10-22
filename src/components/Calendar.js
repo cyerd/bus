@@ -89,7 +89,7 @@ export default function Calendar() {
       </div>
       <div className="flex flex-col h-32 w-full bg-gray-200 mr-2 p-2 border-2 border-gray-300 mt-3">
         <p className="border-b-2 border-blue-300 pb-2 text-xl">
-          Recent Activities
+          Schedule
         </p>
       </div>
       <div className="flex flex-col  w-full bg-gray-200 mr-2 p-2 border-2 border-gray-300 mt-3">
@@ -97,9 +97,25 @@ export default function Calendar() {
           Recent Activities
         </p>
         <ul>
-          <li>Go Home</li>
-          <li>Go Home</li>
-          <li>Go Home</li>
+          <li>
+            logged in at{" "}
+            <span className="italic">
+              {" "}
+              {format(new Date(2022, 9, 22, 9, 25, 15), "dd-MM-yyyy H:m:s")}
+            </span>
+          </li>
+          <li>
+            Booked ticket <span className="font-bold">T6GH902022E</span>{" "}
+            <span className="italic pl-2">
+              {format(new Date(2022, 9, 22, 10, 25, 57), "dd-MM-yyyy H:m:s")}
+            </span>
+          </li>
+          <li>
+            Printed <span className="font-bold">Booking Manifest </span> at
+            <span className="italic pl-2">
+              {format(new Date(2022, 9, 22, 10, 45, 22), "dd-MM-yyyy H:m:s")}
+            </span>
+          </li>
         </ul>
       </div>
     </div>
