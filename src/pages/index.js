@@ -20,13 +20,13 @@ export default function Home(props) {
       </Head>
       <Header />
       <main className="flex w-full">
-        <div className="flex flex-col w-full lg:w-11/12 z-0 lg:pl-5">
+        <div className="flex flex-col w-full lg:w-11/12 z-0 lg:pl-3 xl:px-5">
           <Tickets />
           <Parcels />
           <Recon />
           <Reports />
         </div>
-        <div className="hidden lg:flex flex-col h-full items-center max-w-md mt-12">
+        <div className="hidden lg:flex flex-col h-full items-center max-w-md mt-12 p-0 xl:pr-5">
           <Calendar />
         </div>
       </main>

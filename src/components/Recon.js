@@ -1,40 +1,46 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 const navigation = [
   {
     id: "1",
     name: "Home",
     icon: "/reconciliation.png",
+    href: "/recons/reconciliation"
 
   },
   {
     id: "2",
     name: "Cash Forward",
     icon: "/cash-forward.png",
+    href:"/recons/cashforward"
   
   },
   {
     id: "3",
     name: "Expenses",
     icon: "/expense.png",
+    href:"/recons/expenses"
  
   },
   {
     id: "4",
     name: "Bank",
     icon: "/bank.png",
- 
+ href: "/recons/bank",
   },
   {
     id: "5",
     name: "Branch Status",
     icon: "/branch-status.png",
+    href:"/recons/branchstatus"
   
   },
   {
     id: "6",
     name: "Cash Received",
     icon: "/cash-received.png",
+    href:"/recons/cashreceived"
 
   },
   {
@@ -42,12 +48,14 @@ const navigation = [
     name: "User Statement",
     icon: "/user-statement.png",
     color: "yellow-800",
+    href:"recons/userstatement"
   },
   {
     id: "8",
     name: "Mpesa",
     icon: "/mpesa.png",
     color: "gray-700",
+    href:"/recons/mpesa"
   },
 ];
 function Recon() {
@@ -57,19 +65,20 @@ function Recon() {
         <h1 className="font-bold">Reconciliation</h1>
         <h3 className="italic">Reconcile all your accounts</h3>
       </div>
-      <div className="grid grid-cols-2  gap-x-2 md:grid-cols-4  xl:gap-x-4">
+      <div className="grid grid-cols-2  gap-x-2 gap-y-3 md:grid-cols-4  xl:gap-x-4">
         {navigation.map((item) => (
-          <div
+          <Link
+          href={item.href}
             key={item.id}
             className="flex flex-col justify-around items-center py-2"
           >
-            <div
-              className={` rounded-md  text-black border-2 border-blue-400   flex justify-around px-5 py-2 h-full w-full items-center`}
+            <a
+              className={` rounded-md  text-black border-2 border-blue-400   flex justify-around px-2 py-2 h-full w-full items-center`}
             >
               <p> {item.name}</p>
               <Image src={item.icon} width="30" height="30" layout="fixed" />
-            </div>
-          </div>
+            </a>
+          </Link>
         ))}
       </div>
     </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const navigation = [
@@ -7,24 +8,28 @@ const navigation = [
     name: "Book",
     icon: "/book-ticket.png",
     color: "#94b104",
+    href:"/tickets/bookticket"
   },
   {
     id: "2",
     name: "Manifest",
     icon: "/Manifest.png",
     color: "#d3d803",
+    href:"/tickets/manifest"
   },
   {
     id: "3",
     name: "Booking List",
     icon: "/booking-list.png",
     color: "#979797",
+    href:"/tickets/bookinglist"
   },
   {
     id: "4",
     name: "Dispatch Bus",
     icon: "/Dispatch-bus.png",
     color: "#c9108c",
+    href:"/tickets/dispatcbus"
   },
 ];
 
@@ -44,13 +49,17 @@ function Tickets() {
             key={item.id}
             className="flex flex-col justify-around items-center p-0 sm:px-2 md:px-4 lg:px-6  max-h-32 bg-gray-100  sm:bg-white "
           >
-            <Image src={item.icon} width="50" height="50" />
-            <button
-              style={{ backgroundColor: item.color }}
-              className={`px-2 py-1 rounded-md  text-white my-5 `}
-            >
-              {item.name}
-            </button>
+            <Link href={item.href}>
+              <a className="flex flex-col items-center">
+              <Image src={item.icon} width="50" height="50" />
+              <button
+                style={{ backgroundColor: item.color }}
+                className={`px-2 py-1 rounded-md  text-white my-5 `}
+              >
+                {item.name}
+              </button>
+              </a>
+            </Link>
           </div>
         ))}
       </div>
