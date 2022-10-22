@@ -105,7 +105,7 @@ export default function Calendar() {
             </span>
           </li>
           <li>
-            Booked ticket <span className="font-bold">T6GH902022E</span>{" "}
+            Booked ticket <span className="font-bold">T6GH902022E</span>  at
             <span className="italic pl-2">
               {format(new Date(2022, 9, 22, 10, 25, 57), "dd-MM-yyyy H:m:s")}
             </span>
