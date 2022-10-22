@@ -20,31 +20,31 @@ const navigation = [
  
   },
   {
-    id: "1",
+    id: "4",
     name: "Bank",
     icon: "/bank.png",
  
   },
   {
-    id: "2",
+    id: "5",
     name: "Branch Status",
     icon: "/branch-status.png",
   
   },
   {
-    id: "3",
+    id: "6",
     name: "Cash Received",
     icon: "/cash-received.png",
 
   },
   {
-    id: "2",
+    id: "7",
     name: "User Statement",
     icon: "/user-statement.png",
     color: "yellow-800",
   },
   {
-    id: "3",
+    id: "8",
     name: "Mpesa",
     icon: "/mpesa.png",
     color: "gray-700",

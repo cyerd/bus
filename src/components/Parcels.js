@@ -24,7 +24,7 @@ const navigation = [
 
 function Parcels() {
   return (
-    <div className="mx-2 border p-2  bg-pink-200 ">
+    <div className="mx-2 border p-2  bg-pink-200 rounded-lg">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Parcel</h1>
         <h3 className="italic">Book & manage Parcel</h3>
