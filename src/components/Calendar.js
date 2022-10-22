@@ -98,7 +98,7 @@ export default function Calendar() {
         </p>
         <ul>
           <li>
-            logged in at{" "}
+            Logged in at{" "}
             <span className="italic">
               {" "}
               {format(new Date(2022, 9, 22, 9, 25, 15), "dd-MM-yyyy H:m:s")}

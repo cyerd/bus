@@ -30,19 +30,19 @@ const navigation = [
 
 function Tickets() {
   return (
-    <div className="mx-2 border p-2 ">
+    <div className="mx-2 border p-2 rounded-lg">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Tickets</h1>
         <h3 className="italic">Book & manage Tickets</h3>
       </div>
       <div
-        className="grid grid-cols-2  gap-x-2 md:grid-cols-4  xl:gap-x-4
-        divide-x divide-green-700"
+        className="grid grid-cols-2  gap-x-2 md:grid-cols-4  xl:gap-x-4 
+        sm:divide-x  divide-green-700"
       >
         {navigation.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col justify-around items-center p-0 sm:px-2 md:px-4 lg:px-6  max-h-32"
+            className="flex flex-col justify-around items-center p-0 sm:px-2 md:px-4 lg:px-6  max-h-32 bg-gray-100  sm:bg-white "
           >
             <Image src={item.icon} width="50" height="50" />
             <button

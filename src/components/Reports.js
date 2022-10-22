@@ -52,7 +52,7 @@ const navigation = [
 ];
 function Reports() {
   return (
-       <div className="mx-2 border p-2 ">
+       <div className="mx-2 border p-2 rounded-lg ">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Reports</h1>
         <h3 className="italic">View & Print Reports</h3>
