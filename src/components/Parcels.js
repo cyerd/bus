@@ -28,7 +28,7 @@ const navigation = [
 
 function Parcels() {
   return (
-    <div className="mx-2 border p-2  bg-pink-200 rounded-lg">
+    <div className="mx-2 border p-2  bg-pink-200 rounded-lg rounded border-2 border-gray-400 mt-2">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Parcel</h1>
         <h3 className="italic">Book & manage Parcel</h3>
@@ -36,7 +36,7 @@ function Parcels() {
       <div className="grid grid-cols-2 gap-y-3   gap-x-4 md:grid-cols-3  ">
         {navigation.map((item) => (
           <Link
-          href={item.href}
+            href={item.href}
             key={item.id}
             className="flex flex-col justify-between items-center py-5 overflow-auto"
           >

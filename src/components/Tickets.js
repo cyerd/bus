@@ -35,7 +35,7 @@ const navigation = [
 
 function Tickets() {
   return (
-    <div className="mx-2 border p-2 rounded-lg">
+    <div className="mx-2 border p-2 rounded-lg rounded border-2 border-gray-400 mt-2">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Tickets</h1>
         <h3 className="italic">Book & manage Tickets</h3>
@@ -51,13 +51,13 @@ function Tickets() {
           >
             <Link href={item.href}>
               <a className="flex flex-col items-center">
-              <Image src={item.icon} width="50" height="50" />
-              <button
-                style={{ backgroundColor: item.color }}
-                className={`px-2 py-1 rounded-md  text-white my-5 `}
-              >
-                {item.name}
-              </button>
+                <Image src={item.icon} width="50" height="50" />
+                <button
+                  style={{ backgroundColor: item.color }}
+                  className={`px-2 py-1 rounded-md  text-white my-5 `}
+                >
+                  {item.name}
+                </button>
               </a>
             </Link>
           </div>

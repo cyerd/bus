@@ -36,7 +36,7 @@ import { format, formatDistance, formatRelative, set, subDays } from "date-fns";
 const styles = {
   container: {
     width: "80wv",
-    height: "50vh",
+    height: "45vh",
   },
 };
 

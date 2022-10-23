@@ -61,7 +61,7 @@ function classNames(...classes) {
 
 function Recon() {
   return (
-    <div className="mx-2 border p-5 rounded-lg ">
+    <div className="mx-2 border p-5 rounded-lg rounded border-2 border-gray-400 mt-2">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Reconciliation</h1>
         <h3 className="italic">Reconcile all your accounts</h3>

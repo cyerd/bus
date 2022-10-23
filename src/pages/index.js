@@ -9,6 +9,7 @@ import Recon from "../components/Recon";
 import Reports from "../components/Reports";
 import Calendar from "../components/Calendar";
 
+
 export default function Home(props) {
   return (
     <div className="flex flex-col h-full justify-between">
@@ -20,14 +21,15 @@ export default function Home(props) {
       </Head>
       <Header />
       <main className="flex w-full">
-        <div className="flex flex-col w-full lg:w-11/12 z-0 lg:pl-3 xl:px-5">
+        <div className="flex flex-col w-full lg:w-11/12 z-0 lg:pl-3 xl:px-5 ">
           <Tickets />
           <Parcels />
           <Recon />
           <Reports />
         </div>
-        <div className="hidden lg:flex flex-col h-full items-center max-w-md mt-12 p-0 xl:pr-5">
-          <Calendar />
+        <div className="hidden lg:flex flex-col h-full  max-w-md mt-12 p-0 xl:pr-5">
+          {/* <Calendar /> */}
+          <Calendar/>
         </div>
       </main>
 

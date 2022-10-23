@@ -61,7 +61,7 @@ const navigation = [
 ];
 function Reports() {
   return (
-    <div className="mx-2 border p-2 rounded-lg ">
+    <div className="mx-2 border p-2 rounded-lg rounded border-2 border-gray-400 mt-2 ">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Reports</h1>
         <h3 className="italic">View & Print Reports</h3>
@@ -74,7 +74,7 @@ function Reports() {
             className="flex flex-col justify-between items-center py-5 overflow-auto"
           >
             <a
-    className={`rounded-md text-white flex justify-around  px-5 py-2 h-full w-full items-center`}
+              className="rounded-md text-white flex justify-around  px-5 py-2 h-full w-full items-center"
               style={{ backgroundColor: item.color }}
             >
               <p> {item.name}</p>
