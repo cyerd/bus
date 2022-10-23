@@ -12,7 +12,7 @@ import Calendar from "../components/Calendar";
 
 export default function Home(props) {
   return (
-    <div className="flex flex-col h-full justify-between">
+    <div className="flex flex-col h-full justify-between relative z-0">
       {/* <div> */}
       <Head>
         <title>Online Bus Services</title>
@@ -20,7 +20,7 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="flex w-full">
+      <main className="flex w-full z-0 relative">
         <div className="flex flex-col w-full lg:w-11/12 z-0 lg:pl-3 xl:px-5 ">
           <Tickets />
           <Parcels />

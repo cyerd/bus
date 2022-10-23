@@ -15,15 +15,18 @@ import {
   XMarkIcon,
   ArrowDownIcon,
   ClipboardDocumentCheckIcon,
-  ClipboardDocumentIcon
+  ClipboardDocumentIcon,
+  ArrowRightOnRectangleIcon,
+  UserCircleIcon,
+  Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 import { BanknotesIcon, BookOpenIcon, ChevronDownIcon, ClipboardDocumentListIcon, PlusCircleIcon, PrinterIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", icon: UserCircleIcon, href: "#" },
+  { name: "Settings", icon: Cog6ToothIcon, href: "#" },
+  { name: "Sign out", icon: ArrowRightOnRectangleIcon, href: "#" },
 ];
 
 const user = {
@@ -175,6 +178,36 @@ const report = [
 ];
 
 
+const mobile = [
+  {
+    name: "Help Center",
+    description:
+      "Get all of your questions answered in our forums or contact support.",
+    href: "#",
+    icon: LifebuoyIcon,
+  },
+  {
+    name: "Guides",
+    description:
+      "Learn how to maximize our platform to get the most out of it.",
+    href: "#",
+    icon: BookmarkSquareIcon,
+  },
+  {
+    name: "Events",
+    description:
+      "See what meet-ups and other events we might be planning near you.",
+    href: "#",
+    icon: CalendarIcon,
+  },
+  {
+    name: "Security",
+    description: "Understand how we take your privacy seriously.",
+    href: "#",
+    icon: ShieldCheckIcon,
+  },
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -279,7 +312,6 @@ export default function Header() {
                             </a>
                           ))}
                         </div>
-                       
                       </div>
                     </Popover.Panel>
                   </Transition>
@@ -341,7 +373,6 @@ export default function Header() {
                             </a>
                           ))}
                         </div>
-                     
                       </div>
                     </Popover.Panel>
                   </Transition>
@@ -425,7 +456,6 @@ export default function Header() {
                             </a>
                           ))}
                         </div>
-                      
                       </div>
                     </Popover.Panel>
                   </Transition>
@@ -434,13 +464,13 @@ export default function Header() {
             </Popover>
             <button className="group flex flex-col items-center rounded-md bg-white text-base font-medium hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               <Image
-                src="/Trip.png"
+                src="/Expense-Tracking.png"
                 height="30"
                 width="30"
                 className="ml-2 h-5 w-5 group-hover:text-gray-500"
                 aria-hidden="true"
               />
-              <span>Trip</span>
+              <span>Reconciliation</span>
             </button>
           </Popover.Group>
           <div className="hidden items-center justify-end  md:flex md:flex-1 lg:w-0">
@@ -478,15 +508,18 @@ export default function Header() {
                   {userNavigation.map((item) => (
                     <Menu.Item key={item.name}>
                       {({ active }) => (
-                        <a
-                          href={item.href}
-                          className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
-                          )}
-                        >
-                          {item.name}
-                        </a>
+                        <span className="flex items-center pl-4">
+                          <item.icon height="19" />
+                          <a
+                            href={item.href}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            {item.name}
+                          </a>
+                        </span>
                       )}
                     </Menu.Item>
                   ))}
@@ -508,7 +541,7 @@ export default function Header() {
       >
         <Popover.Panel
           focus
-          className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
+          className=" inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
         >
           <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="px-5 pt-5 pb-6">
@@ -527,15 +560,15 @@ export default function Header() {
                   </Popover.Button>
                 </div>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 bg-white z-40 block">
                 <nav className="grid gap-y-8">
-                  {report.map((item) => (
+                  {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"
                     >
-                      <item.icon
+                      <img src={item.Icon}
                         className="h-6 w-6 flex-shrink-0 text-indigo-600"
                         aria-hidden="true"
                       />
