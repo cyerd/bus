@@ -1,26 +1,23 @@
 import { Fragment } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import {
-  ArrowPathIcon,
+
   Bars3Icon,
   BookmarkSquareIcon,
   CalendarIcon,
-  ChartBarIcon,
-  CursorArrowRaysIcon,
+
   LifebuoyIcon,
-  PhoneIcon,
-  PlayIcon,
+  
   ShieldCheckIcon,
-  Squares2X2Icon,
+
   XMarkIcon,
-  ArrowDownIcon,
-  ClipboardDocumentCheckIcon,
-  ClipboardDocumentIcon,
+
   ArrowRightOnRectangleIcon,
   UserCircleIcon,
   Cog6ToothIcon,
+
 } from "@heroicons/react/24/outline";
-import { BanknotesIcon, BookOpenIcon, ChevronDownIcon, ClipboardDocumentListIcon, PlusCircleIcon, PrinterIcon } from "@heroicons/react/20/solid";
+import { BanknotesIcon, BookOpenIcon, BriefcaseIcon, CalendarDaysIcon, ChevronDownIcon, ClipboardDocumentListIcon, PlusCircleIcon, PrinterIcon, ShieldExclamationIcon, TicketIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 
 const userNavigation = [
@@ -149,31 +146,31 @@ const parcel = [
 
 const report = [
   {
-    name: "Help Center",
+    name: "Sales Report",
     description:
       "Get all of your questions answered in our forums or contact support.",
     href: "#",
-    icon: LifebuoyIcon,
+    icon: BriefcaseIcon,
   },
   {
-    name: "Guides",
+    name: "Ticket Report",
     description:
       "Learn how to maximize our platform to get the most out of it.",
     href: "#",
-    icon: BookmarkSquareIcon,
+    icon: TicketIcon,
   },
   {
-    name: "Events",
+    name: "Activity Report",
     description:
       "See what meet-ups and other events we might be planning near you.",
     href: "#",
-    icon: CalendarIcon,
+    icon: CalendarDaysIcon,
   },
   {
-    name: "Security",
+    name: "Security Report",
     description: "Understand how we take your privacy seriously.",
     href: "#",
-    icon: ShieldCheckIcon,
+    icon: ShieldExclamationIcon,
   },
 ];
 
@@ -305,9 +302,9 @@ export default function Header() {
                                 <p className="text-base font-medium text-gray-900">
                                   {item.name}
                                 </p>
-                                <p className="mt-1 text-sm text-gray-500">
+                                {/* <p className="mt-1 text-sm text-gray-500">
                                   {item.description}
-                                </p>
+                                </p> */}
                               </div>
                             </a>
                           ))}
@@ -366,9 +363,9 @@ export default function Header() {
                                 <p className="text-base font-medium text-gray-900">
                                   {item.name}
                                 </p>
-                                <p className="mt-1 text-sm text-gray-500">
+                                {/* <p className="mt-1 text-sm text-gray-500">
                                   {item.description}
-                                </p>
+                                </p> */}
                               </div>
                             </a>
                           ))}
@@ -442,16 +439,16 @@ export default function Header() {
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                             >
                               <item.icon
-                                className="h-6 w-6 flex-shrink-0 text-indigo-600"
+                                className="h-6 w-6 flex-shrink-0 text-green-700"
                                 aria-hidden="true"
                               />
                               <div className="ml-4">
                                 <p className="text-base font-medium text-gray-900">
                                   {item.name}
                                 </p>
-                                <p className="mt-1 text-sm text-gray-500">
+                                {/* <p className="mt-1 text-sm text-gray-500">
                                   {item.description}
-                                </p>
+                                </p> */}
                               </div>
                             </a>
                           ))}
@@ -586,38 +583,25 @@ export default function Header() {
                   href="#"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
-                  Pricing
+                  Profile
                 </a>
 
                 <a
                   href="#"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
-                  Docs
+                  Settings
                 </a>
-                {report.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-base font-medium text-gray-900 hover:text-gray-700"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+              
               </div>
               <div>
                 <a
                   href="#"
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                 >
-                  Sign up
+                  Log out
                 </a>
-                <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Existing customer?{" "}
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                    Sign in
-                  </a>
-                </p>
+             
               </div>
             </div>
           </div>

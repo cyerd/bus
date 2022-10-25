@@ -2,4 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.rbc-today {
+  background-color: #00b3b3 !important;
+  color: white;
+  width: fit-content !important;
+}
 
