@@ -61,7 +61,7 @@ function classNames(...classes) {
 
 function Recon() {
   return (
-    <div className="mx-2 border p-5 rounded-lg rounded border-2 border-gray-400 mt-2">
+    <div className="mx-2  p-5 rounded-lg  border-2 border-gray-400 mt-2">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Reconciliation</h1>
         <h3 className="italic">Reconcile all your accounts</h3>
@@ -73,7 +73,7 @@ function Recon() {
             key={item.id}
             className="flex flex-col justify-around items-center py-2 "
           >
-            <a
+            <button
               className={classNames(
                 item.disabled
                   ? "bg-blend-lighten text-gray-500 border-gray-300 cursor-not-allowed"
@@ -83,8 +83,8 @@ function Recon() {
               // className="   text-black border-2 border-blue-400   flex justify-around px-2 py-2 h-full w-full items-center"
             >
               <p> {item.name}</p>
-              <Image src={item.icon} width="30" height="30" layout="fixed" />
-            </a>
+              <Image src={item.icon} width="30" height="30" layout="fixed" alt="menuicon"/>
+            </button>
           </Link>
         ))}
       </div>

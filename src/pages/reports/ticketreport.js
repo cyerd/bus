@@ -1,0 +1,12 @@
+import React from 'react'
+import Header from '../../components/Header'
+
+function ticketreport() {
+  return (
+    <div>
+        <Header/>
+        ticketreport</div>
+  )
+}
+
+export default ticketreport

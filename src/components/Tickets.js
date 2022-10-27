@@ -50,15 +50,15 @@ function Tickets() {
             className="flex flex-col justify-around items-center p-0 sm:px-2 md:px-4 lg:px-6  max-h-32 bg-gray-100  sm:bg-white "
           >
             <Link href={item.href}>
-              <a className="flex flex-col items-center">
-                <Image src={item.icon} width="50" height="50" />
+              <button className="flex flex-col items-center">
+                <Image src={item.icon} width="50" height="50" alt="icons" />
                 <button
                   style={{ backgroundColor: item.color }}
                   className={`px-2 py-1 rounded-md  text-white my-5 `}
                 >
                   {item.name}
                 </button>
-              </a>
+              </button>
             </Link>
           </div>
         ))}

@@ -4,13 +4,11 @@ import Tickets from "../components/Tickets";
 import Header from "../components/Header";
 import Parcels from "../components/Parcels";
 
-import { useEffect, useState } from "react";
 import Recon from "../components/Recon";
 import Reports from "../components/Reports";
 import Calendar from "../components/Calendar";
 
-
-export default function Home(props) {
+export default function Home() {
   return (
     <div className="flex flex-col h-full justify-between ">
       {/* <div> */}
@@ -27,9 +25,9 @@ export default function Home(props) {
           <Recon />
           <Reports />
         </div>
-        <div className="hidden lg:flex flex-col h-full  max-w-md mt-12 p-0 xl:pr-5">
+        <div className="hidden lg:flex flex-col h-full  max-w-md mt-2 p-0 xl:pr-5 ">
           {/* <Calendar /> */}
-          <Calendar/>
+          <Calendar />
         </div>
       </main>
 

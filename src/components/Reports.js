@@ -73,13 +73,13 @@ function Reports() {
             key={item.id}
             className="flex flex-col justify-between items-center py-5 overflow-auto"
           >
-            <a
+            <button
               className="rounded-md text-white flex justify-around  px-5 py-2 h-full w-full items-center"
               style={{ backgroundColor: item.color }}
             >
               <p> {item.name}</p>
-              <Image src={item.icon} width="30" height="30" layout="fixed" />
-            </a>
+              <Image src={item.icon} width="30" height="30" layout="fixed"  alt="icons"/>
+            </button>
           </Link>
         ))}
       </div>
