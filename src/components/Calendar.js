@@ -7,7 +7,6 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useEffect, useState } from "react";
 import { format, formatDistance, formatRelative, set, subDays } from "date-fns";
-
 // const day = format(new Date(), "eeee");
 // const date = format(new Date(), "d-M-y");
 // const time = format(new Date(), "H:mm ");
@@ -88,9 +87,7 @@ export default function Calendar() {
         </div>
       </div>
       <div className="flex flex-col h-32 w-full bg-gray-200 mr-2 p-2 border-2 border-gray-300 mt-3">
-        <p className="border-b-2 border-blue-300 pb-2 text-xl">
-          Schedule
-        </p>
+        <p className="border-b-2 border-blue-300 pb-2 text-xl">Schedule</p>
       </div>
       <div className="flex flex-col  w-full bg-gray-200 mr-2 p-2 border-2 border-gray-300 mt-3">
         <p className="border-b-2 border-blue-300 pb-2 text-xl">
@@ -105,7 +102,7 @@ export default function Calendar() {
             </span>
           </li>
           <li>
-            Booked ticket <span className="font-bold">T6GH902022E</span>  at
+            Booked ticket <span className="font-bold">T6GH902022E</span> at
             <span className="italic pl-2">
               {format(new Date(2022, 9, 22, 10, 25, 57), "dd-MM-yyyy H:m:s")}
             </span>

@@ -26,52 +26,14 @@ const userNavigation = [
   { name: "Sign out", icon: ArrowRightOnRectangleIcon, href: "#" },
 ];
 
-const navigation = [
-  {
-    name: "Dashboard",
-    href: "/",
-    current: true,
-    Icon: "/Dashboard.png",
-  },
-  {
-    name: "Schedule",
-    href: "/schedule/schedule",
-    current: false,
-    Icon: "/Bus-Schedule.png",
-  },
-  {
-    name: "Bookings",
-    href: "#",
-    current: false,
-    Icon: "/Booking.png",
-  },
-  { name: "Reports", href: "#", current: false, Icon: "/Trip.png" },
-  {
-    name: "Expense",
-    href: "#",
-    current: false,
-    Icon: "/Exepnse.png",
-  },
-  {
-    name: "Reports",
-    href: "#",
-    current: false,
-    Icon: "/Reports.png",
-  },
-  {
-    name: "Reconciliation",
-    href: "#",
-    current: false,
-    Icon: "/Expense-Tracking.png",
-  },
-];
+
 
 const ticket = [
   {
     name: "Book Ticket",
     description:
       "Get a better understanding of where your traffic is coming from.",
-    href: "#",
+    href: "/tickets/bookticket",
     icon: PlusCircleIcon,
   },
   {
@@ -176,7 +138,7 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-center justify-between border-b-2 border-gray-100 py-3  md:justify-start md:space-x-5">
           <div className="  hidden lg:flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <Link href="/">
               <span className="sr-only">Online Bus Service</span>
               <Image
                 width="30"
@@ -185,7 +147,7 @@ export default function Header() {
                 src="/ishnaaz-Recovered.png"
                 alt="Logo"
               />
-            </a>
+            </Link>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
             <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white  p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -259,7 +221,7 @@ export default function Header() {
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {ticket.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
                               href={item.href}
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-200"
@@ -276,7 +238,7 @@ export default function Header() {
                                   {item.description}
                                 </p> */}
                               </div>
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -321,7 +283,7 @@ export default function Header() {
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {parcel.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
                               href={item.href}
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-200"
@@ -338,7 +300,7 @@ export default function Header() {
                                   {item.description}
                                 </p> */}
                               </div>
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -410,7 +372,7 @@ export default function Header() {
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {report.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
                               href={item.href}
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
@@ -427,7 +389,7 @@ export default function Header() {
                                   {item.description}
                                 </p> */}
                               </div>
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -436,7 +398,7 @@ export default function Header() {
                 </>
               )}
             </Popover>
-            <Link href="/recon/reconciliation">
+            <Link href="/recons/reconciliation">
               <button className="group flex  flex-col  items-center rounded-md bg-white text-base font-medium hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 <Image
                   src="/Expense-Tracking.png"
@@ -451,12 +413,7 @@ export default function Header() {
             </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end  md:flex md:flex-1 lg:w-0">
-            {/* <a
-              href="#"
-              className="ml-4 text-sm lg:text-lg inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-2 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-            >
-              Log In
-            </a> */}
+     
             <Menu as="div" className="relative ml-3">
               <div>
                 <Menu.Button className="flex items-center  ">
@@ -483,7 +440,7 @@ export default function Header() {
                       {({ active }) => (
                         <span className="flex items-center pl-4">
                           <item.icon height="19" />
-                          <a
+                          <Link
                             href={item.href}
                             className={classNames(
                               active ? "bg-gray-100" : "",
@@ -491,7 +448,7 @@ export default function Header() {
                             )}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         </span>
                       )}
                     </Menu.Item>
@@ -610,7 +567,7 @@ export default function Header() {
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                               <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                 {ticket.map((item) => (
-                                  <a
+                                  <Link
                                     key={item.name}
                                     href={item.href}
                                     className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-200"
@@ -627,7 +584,7 @@ export default function Header() {
                                   {item.description}
                                 </p> */}
                                     </div>
-                                  </a>
+                                  </Link>
                                 ))}
                               </div>
                             </div>
@@ -672,7 +629,7 @@ export default function Header() {
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                               <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                 {parcel.map((item) => (
-                                  <a
+                                  <Link
                                     key={item.name}
                                     href={item.href}
                                     className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-200"
@@ -689,7 +646,7 @@ export default function Header() {
                                   {item.description}
                                 </p> */}
                                     </div>
-                                  </a>
+                                  </Link>
                                 ))}
                               </div>
                             </div>
@@ -761,7 +718,7 @@ export default function Header() {
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                               <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                 {report.map((item) => (
-                                  <a
+                                  <Link
                                     key={item.name}
                                     href={item.href}
                                     className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
@@ -778,7 +735,7 @@ export default function Header() {
                                   {item.description}
                                 </p> */}
                                     </div>
-                                  </a>
+                                  </Link>
                                 ))}
                               </div>
                             </div>
@@ -787,7 +744,7 @@ export default function Header() {
                       </>
                     )}
                   </Popover>
-                  <Link href="/recon/reconciliation">
+                  <Link href="/recons/reconciliation">
                     <button className="group flex  space-x-5  items-center rounded-md bg-white text-base font-medium hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <Image
                         src="/Expense-Tracking.png"
@@ -805,27 +762,27 @@ export default function Header() {
             </div>
             <div className="space-y-6 py-6 px-5">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <a
-                  href="#"
+                <Link
+                  href="/Account/profile"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
                   Profile
-                </a>
+                </Link>
 
-                <a
-                  href="#"
+                <Link
+                  href="/Account/settings"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
                   Settings
-                </a>
+                </Link>
               </div>
               <div>
-                <a
-                  href="#"
+                <Link
+                  href="/login"
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                 >
                   Log out
-                </a>
+                </Link>
               </div>
             </div>
           </div>
