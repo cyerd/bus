@@ -45,11 +45,12 @@ export default function Book(props) {
 
   return (
     <div>
+      
       <div className="flex items-center my-2">
         <p>Ticket Details</p>
         <input
           type="text"
-          className="border border-purple-500 rounded p-1 mx-2"
+          className="border-2 border-purple-500 rounded p-1 mx-2"
           placeholder="Search Ticket/Booking"
         />
         <button className="bg-purple-600 text-white text-center px-2 py-1 rounded mx-1">
@@ -120,7 +121,7 @@ export default function Book(props) {
             <div className="flex flex-col mx-4">
               <lable className="font-bold my-2">First Name</lable>
               <input
-                className="border border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-2"
                 placeholder="First Name"
                 type="text"
               />
@@ -128,7 +129,7 @@ export default function Book(props) {
             <div className="flex flex-col mx-4">
               <lable className="font-bold my-2">Last Name</lable>
               <input
-                className="border border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-2"
                 placeholder="Last Name"
                 type="text"
               />
@@ -136,11 +137,11 @@ export default function Book(props) {
             <div className="flex flex-col mx-4">
               <lable className="font-bold my-2">Mobile</lable>
               <div className="flex bg-gray-100 ">
-                <select className="border border-gray-400 rounded px-2">
+                <select className="border-2 border-gray-400 rounded px-2">
                   <option>+254</option>
                 </select>
                 <input
-                  className="border border-gray-300"
+                  className="border-2 border-gray-300"
                   placeholder="Phone"
                   type="text"
                 />
@@ -149,16 +150,16 @@ export default function Book(props) {
             <div className="flex flex-col mx-4">
               <lable className="font-bold my-2">Age</lable>
               <input
-                className="border border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-2"
                 placeholder="Age"
                 type="text"
               />
             </div>
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col mx-2">
               <lable className="font-bold my-2">Gender</lable>
               <div>
                 <input
-                  className="mr-2"
+                  className=""
                   type="radio"
                   name="gender"
                   value="male"
@@ -166,7 +167,7 @@ export default function Book(props) {
                 />
                 M
                 <input
-                  className="mx-2"
+                  className="ml-1"
                   type="radio"
                   name="gender"
                   value="Female"
@@ -178,7 +179,7 @@ export default function Book(props) {
             <div className="flex flex-col mx-4">
               <lable className="font-bold my-2">Nationality</lable>
               <input
-                className="border border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-2"
                 placeholder="Nationality"
                 type="text"
               />
@@ -186,7 +187,7 @@ export default function Book(props) {
             <div className="flex flex-col mx-4">
               <lable className="font-bold my-2">ID</lable>
               <input
-                className="border border-gray-300 rounded px-2 "
+                className="border-2 border-gray-300 rounded px-2 "
                 placeholder="ID No."
                 type="text"
               />
@@ -212,29 +213,29 @@ export default function Book(props) {
       <div>
         <form className="flex mx-2 ">
           <div className="flex flex-col mx-4">
-            <lable>Total Amount</lable>
+            <lable className="font-bold my-2 ">Total Amount</lable>
             <div className="flex bg-gray-100 ">
-              <p className="border border-gray-300 text-lg px-1">KES</p>
-              <input className="border border-gray-300" type="text" />
+              <p className="border-2 border-gray-300 text-lg px-1">KES</p>
+              <input className="border-2 border-gray-300" type="text" />
             </div>
           </div>
           <div className="flex flex-col mx-4">
-            <lable>Dicount</lable>
+            <lable className="font-bold my-2 ">Discount</lable>
             <div className="flex bg-gray-100 ">
-              <p className="border border-gray-300 text-lg px-1">KES</p>
-              <input className="border border-gray-300" type="text" />
+              <p className="border-2 border-gray-300 text-lg px-1">KES</p>
+              <input className="border-2 border-gray-300" type="text" />
             </div>
           </div>
           <div className="flex flex-col mx-4">
-            <lable>Total Paid</lable>
+            <lable className="font-bold my-2 ">Total Paid</lable>
             <div className="flex bg-gray-100 ">
-              <p className="border border-gray-300 text-lg px-1">KES</p>
-              <input className="border border-gray-300" type="text" />
+              <p className="border-2 border-gray-300 text-lg px-1">KES</p>
+              <input className="border-2 border-gray-300" type="text" />
             </div>
           </div>
           <div className="flex flex-col mx-4 ">
-            <lable>Payment Method</lable>
-            <select className="border border-gray-300 px-1 text-lg text-center">
+            <lable className="font-bold my-2 ">Payment Method</lable>
+            <select className="border-2 border-gray-300 px-1 text-lg text-center">
               <option>Cash</option>
               <option>Mpesa</option>
             </select>
@@ -246,20 +247,20 @@ export default function Book(props) {
       <div className="flex mt-10">
         <span className="ml-5 ">
           <input
-            className="border border-gray-300 w-96 p-1"
+            className="border-2 border-gray-300 w-96 p-1"
             type="text"
             placeholder="Note"
           />
           <p className="text-blue-300 font-bold">Max 60 Characters</p>
         </span>
-        <span className="ml-5 ">
+        <span className="ml-5">
           <input
-            className="border border-gray-300 w-96 p-1"
+            className="border-2 border-gray-300 w-96 p-1"
             type="text"
             placeholder="Voucher Code"
           />
           <p className="text-blue-300 font-bold">
-            Type / Paste voucher code and hit enter or ","
+            Type / Paste voucher code and press enter.
           </p>
         </span>
         <span className="flex ">
@@ -282,6 +283,7 @@ export default function Book(props) {
           Reserve Seat
         </book>
       </div>
+
     </div>
   );
 }

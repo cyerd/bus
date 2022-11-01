@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Trips from "../../components/Trips";
 import Book from "../../components/Book";
+import { format } from "date-fns";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -76,6 +77,11 @@ function Bookticket() {
 
   const [startDate, setStartDate] = useState(new Date());
 
+  const handleDate = (date) => setStartDate(date);
+
+  const nedate = format(new Date(startDate), "d-MMM-y");
+  console.log(nedate);
+
   return (
     <div>
       <Head>
@@ -84,64 +90,80 @@ function Bookticket() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="mx-5">
-        <div className="flex bg-blue-300 py-1">
-          <div className="ml-1 ">
-            <select
-              className="w-48 border-2 py-1 px-3 rounded-lg justify-between mr-2"
-              value={place}
-              onChange={handlePlace}
-            >
-              {Places.map((place) => (
-                <option key={place.name} value={place.name}>{place.name}</option>
-              ))}
-            </select>
-          </div>
-          <div className="ml-2 ">
-            <select
-              className="w-48 border-2 py-1 px-3 rounded-lg justify-between mr-2"
-              value={destination}
-              onChange={handleDestination}
-            >
-              {Destination.map((place) => (
-                <option key={place.name} value={place.name}>{place.name}</option>
-              ))}
-            </select>
-          </div>
-          <div className="p-1 border-2 rounded-lg flex divide-x-2 bg-white  divide-gray-400 ">
-            <DatePicker
-              className="ml-2"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              dateFormat="dd/M/yyyy"
-            />
-            <CalendarDaysIcon height="23" className="pl-1" />
-          </div>
-          <button className="ml-5 bg-red-600 rounded-md px-3 flex justify-between w-28 items-center text-white">
-            Lock Trip <ChevronDownIcon height="18" />{" "}
-          </button>
-          <button className="flex items-center ml-5">
-            <label
-              htmlFor="disabled-checked-toggle"
-              className="inline-flex relative items-center cursor-pointer"
-            >
-              <input
-                type="checkbox"
-                defaultValue
-                id="disabled-checked-toggle"
-                className="sr-only peer"
-                defaultChecked
+      <main className="flex flex-col lg:flex-row">
+        <div className="mx-5 w-full lg:w-9/12 overflow-auto">
+          <div className="flex bg-blue-300 py-1">
+            <div className="ml-1 ">
+              <select
+                className="w-48 border-2 py-1 px-3 rounded-lg justify-between mr-2"
+                value={place}
+                onChange={handlePlace}
+              >
+                {Places.map((place) => (
+                  <option key={place.name} value={place.name}>
+                    {place.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="ml-2 ">
+              <select
+                className="w-48 border-2 py-1 px-3 rounded-lg justify-between mr-2"
+                value={destination}
+                onChange={handleDestination}
+              >
+                {Destination.map((place) => (
+                  <option key={place.name} value={place.name}>
+                    {place.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="p-1 border-2 rounded-lg flex divide-x-2 bg-white  divide-gray-400 ">
+              <DatePicker
+                className="ml-2"
+                selected={startDate}
+                onChange={handleDate}
+                dateFormat="dd/M/yyyy"
               />
-              <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" />
-              <span className="ml-3 text-sm text-black font-bold ">
-                Highway
-              </span>
-            </label>
-          </button>
+              <CalendarDaysIcon height="23" className="pl-1" />
+            </div>
+            <button className="ml-5 bg-red-600 rounded-md px-3 flex justify-between w-28 items-center text-white">
+              Lock Trip <ChevronDownIcon height="18" />{" "}
+            </button>
+            <button className="flex items-center ml-5">
+              <label
+                htmlFor="disabled-checked-toggle"
+                className="inline-flex relative items-center cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  defaultValue
+                  id="disabled-checked-toggle"
+                  className="sr-only peer"
+                  defaultChecked
+                />
+                <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" />
+                <span className="ml-3 text-sm text-black font-bold ">
+                  Highway
+                </span>
+              </label>
+            </button>
+          </div>
+
+          {/* Routine table */}
+          <div>
+            <Trips />
+            <Book value={place} />
+          </div>
+          {/* sidebar seat map */}
         </div>
-        <div>
-          <Trips />
-          <Book value={place} />
+        <div className="w-full lg:w-3/12 border border-gray-300">
+          <div className="items-center border-2 border-gray-300">
+            <p className="text-center p-2 text-xl">
+              Travel Date: <span className="text-red-600 font-extrabold">{nedate}</span>
+            </p>
+          </div>
         </div>
       </main>
     </div>

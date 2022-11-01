@@ -6,12 +6,12 @@ import ViewsDatePicker from "../../components/Datepicker";
 import Head from "next/head";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Tooltip, Button } from "@material-tailwind/react";
+import { Tooltip } from "@material-tailwind/react";
 import { format } from "date-fns";
 
-function Schedule() {
-  const today = (new Date());
-  const [startDate, setStartDate] = useState(today);
+function Routine() {
+   const today = (new Date());
+   const [startDate, setStartDate] = useState(today);
 
   const handleDate = (date) => setStartDate(date);
 
@@ -25,14 +25,14 @@ function Schedule() {
       <Header />
       <div className="m-2">
         <div className="border border-gray-200 p-5 w-full h-full">
-          <div className="flex justify-start bg-gray-800 pt-1 rounded">
-            <button className="ml-1 p-2 rounded text-lg bg-white">
+          <div className="flex justify-start  bg-gray-800   pt-1 rounded">
+            <button className="ml-1 p-2 rounded text-lg bg-gray-300  ">
               <Link className="mr-3" href="/schedule/schedule">
                 Daily schedule
               </Link>
             </button>
-            <button className="mx-2 p-2 bg-gray-300 rounded text-lg active:bg-white">
-              <Link href="/schedule/routine">Route Timetable</Link>
+            <button className="mx-2 p-2  rounded text-lg bg-white">
+              <Link href="/schedule/routetimetable">Route Timetable</Link>
             </button>
           </div>
 
@@ -58,7 +58,6 @@ function Schedule() {
                       height="20"
                       className="pr-1 "
                     />
-                   
                   </Tooltip>
                 </div>
                 <p>Promotional Trip</p>
@@ -88,4 +87,4 @@ function Schedule() {
   );
 }
 
-export default schedule;
+export default Routine;
