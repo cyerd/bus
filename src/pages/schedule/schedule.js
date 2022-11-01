@@ -88,4 +88,4 @@ function Schedule() {
   );
 }
 
-export default schedule;
+export default Schedule;
