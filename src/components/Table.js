@@ -3,7 +3,7 @@ import React from 'react'
 function Table() {
   return (
     <div >
-  <div className="b10 flex">
+  <div className="flex">
   <form id="frmSchedule" action className="pj-form frm-filter flex px-3">
     <label className="block float_left t6 r5">Buses on:</label>
     <a href="#" className="pj-button btn-today float_left r10 pj-button-active" data-value="25-10-2022">Today</a>

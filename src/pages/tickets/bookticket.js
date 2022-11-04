@@ -8,6 +8,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import Trips from "../../components/Trips";
 import Book from "../../components/Book";
 import { format } from "date-fns";
+import { Tooltip } from "@material-tailwind/react";
+import Triptest from "../../components/Triptest";
+import SeatMap from "../../components/SeatMap";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -79,6 +82,10 @@ function Bookticket() {
 
   const handleDate = (date) => setStartDate(date);
 
+  const today = new Date()
+
+  const resetDate = (date) => setStartDate(today);
+
   const nedate = format(new Date(startDate), "d-MMM-y");
   console.log(nedate);
 
@@ -91,11 +98,11 @@ function Bookticket() {
       </Head>
       <Header />
       <main className="flex flex-col lg:flex-row">
-        <div className="mx-5 w-full lg:w-9/12 overflow-auto">
-          <div className="flex bg-blue-300 py-1">
-            <div className="ml-1 ">
+        <div className="mx-1 w-full lg:w-9/12 ">
+          <div className="flex bg-blue-300 py-1 flex flex-col lg:flex-row">
+            <div className="ml-1 my-2 lg:my-0">
               <select
-                className="w-48 border-2 py-1 px-3 rounded-lg justify-between mr-2"
+                className=" xl:w-64  border-2 py-1 px-3 rounded-lg justify-between mr-2"
                 value={place}
                 onChange={handlePlace}
               >
@@ -106,9 +113,9 @@ function Bookticket() {
                 ))}
               </select>
             </div>
-            <div className="ml-2 ">
+            <div className="ml-1 my-2 lg:my-0">
               <select
-                className="w-48 border-2 py-1 px-3 rounded-lg justify-between mr-2"
+                className=" xl:w-64 border-2 py-1 px-3 rounded-lg justify-between mr-2"
                 value={destination}
                 onChange={handleDestination}
               >
@@ -119,19 +126,29 @@ function Bookticket() {
                 ))}
               </select>
             </div>
-            <div className="p-1 border-2 rounded-lg flex divide-x-2 bg-white  divide-gray-400 ">
+            <div className="p-1 border-2 rounded-lg flex divide-x-2 bg-white w-64  ml-1  divide-gray-400 my-2 lg:my-0">
               <DatePicker
                 className="ml-2"
                 selected={startDate}
                 onChange={handleDate}
                 dateFormat="dd/M/yyyy"
               />
-              <CalendarDaysIcon height="23" className="pl-1" />
+              <Tooltip
+                content="Reset Date"
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+              >
+                <button onClick={resetDate}>
+                  <CalendarDaysIcon height="23" className="pl-1" />
+                </button>
+              </Tooltip>
             </div>
-            <button className="ml-5 bg-red-600 rounded-md px-3 flex justify-between w-28 items-center text-white">
+            <button className="ml-2 text-sm lg:text-md bg-red-600 rounded-md px-1 flex justify-between w-24 p-1 xl:w-28 items-center text-white my-2 lg:my-0">
               Lock Trip <ChevronDownIcon height="18" />{" "}
             </button>
-            <button className="flex items-center ml-5">
+            <button className="flex items-center ml-2 my-2  lg:my-0">
               <label
                 htmlFor="disabled-checked-toggle"
                 className="inline-flex relative items-center cursor-pointer"
@@ -153,16 +170,20 @@ function Bookticket() {
 
           {/* Routine table */}
           <div>
-            <Trips />
+            <Triptest />
             <Book value={place} />
           </div>
           {/* sidebar seat map */}
         </div>
-        <div className="w-full lg:w-3/12 border border-gray-300">
+        <div className="w-full lg:w-3/12 border border-gray-300 overflow-auto">
           <div className="items-center border-2 border-gray-300">
-            <p className="text-center p-2 text-xl">
-              Travel Date: <span className="text-red-600 font-extrabold">{nedate}</span>
+            <p className="text-center p-2  lg:text-sm xl:text-xl">
+              Travel Date:{" "}
+              <span className="text-red-600 font-extrabold">{nedate}</span>
             </p>
+            <div>
+              <SeatMap/>
+            </div>
           </div>
         </div>
       </main>

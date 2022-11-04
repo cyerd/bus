@@ -78,7 +78,7 @@ function Reports() {
               style={{ backgroundColor: item.color }}
             >
               <p> {item.name}</p>
-              <Image src={item.icon} width="30" height="30" layout="fixed"  alt="icons"/>
+              <Image src={item.icon} width="30" height="30"   alt="icons"/>
             </button>
           </Link>
         ))}

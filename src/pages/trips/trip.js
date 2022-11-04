@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import React from 'react'
 import Header from '../../components/Header';
+import Trips from '../../components/Trips';
+import Triptest from '../../components/Triptest';
 
 function trip() {
   return (
@@ -11,7 +13,7 @@ function trip() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
-      trip
+      <Triptest/>
     </div>
   );
 }

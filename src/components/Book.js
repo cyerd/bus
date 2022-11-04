@@ -11,11 +11,11 @@ export default function Book(props) {
     setDestination(e.target.value);
   };
 
-    const [gender, setgender] = useState();
+  const [gender, setgender] = useState();
 
-    const handlegender = (e) => {
-      setgender(e.target.value);
-    };
+  const handlegender = (e) => {
+    setgender(e.target.value);
+  };
 
   const handlePickup = (e) => {
     setPickup(e.target.value);
@@ -45,7 +45,6 @@ export default function Book(props) {
 
   return (
     <div>
-      
       <div className="flex items-center my-2">
         <p>Ticket Details</p>
         <input
@@ -58,7 +57,7 @@ export default function Book(props) {
         </button>
       </div>
       <div className="w-full flex flex-1">
-        <form className="flex mx-2 ">
+        <form className="flex flex-col lg:flex-row mx-2 ">
           <div className="flex flex-col mx-4">
             <lable className="font-bold my-2">From</lable>
             <p>{props.value}</p>
@@ -117,27 +116,27 @@ export default function Book(props) {
           <TableCellsIcon className="mr-2" height="25" /> Passengers
         </span>
         <div>
-          <form className="flex mx-2 ">
-            <div className="flex flex-col mx-4">
+          <form className="flex flex-col lg:flex-row mx-2 overflow-auto text-sm">
+            <div className="flex flex-col mx-1">
               <lable className="font-bold my-2">First Name</lable>
               <input
-                className="border-2 border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-1"
                 placeholder="First Name"
                 type="text"
               />
             </div>
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col mx-1">
               <lable className="font-bold my-2">Last Name</lable>
               <input
-                className="border-2 border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-1"
                 placeholder="Last Name"
                 type="text"
               />
             </div>
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col mx-1">
               <lable className="font-bold my-2">Mobile</lable>
               <div className="flex bg-gray-100 ">
-                <select className="border-2 border-gray-400 rounded px-2">
+                <select className="border-2 border-gray-400 rounded px-1">
                   <option>+254</option>
                 </select>
                 <input
@@ -147,47 +146,50 @@ export default function Book(props) {
                 />
               </div>
             </div>
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col mx-1">
               <lable className="font-bold my-2">Age</lable>
               <input
-                className="border-2 border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-1"
                 placeholder="Age"
                 type="text"
               />
             </div>
-            <div className="flex flex-col mx-2">
+            <div className="flex flex-col  mx-1">
               <lable className="font-bold my-2">Gender</lable>
-              <div>
-                <input
-                  className=""
-                  type="radio"
-                  name="gender"
-                  value="male"
-                  onChange={handlegender}
-                />
-                M
-                <input
-                  className="ml-1"
-                  type="radio"
-                  name="gender"
-                  value="Female"
-                  onChange={handlegender}
-                />
-                F
+              <div className="flex flex-col lg:flex-row">
+                <span className="flex">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    onChange={handlegender}
+                  />
+                  <p className="pl-1">M</p>
+                </span>
+                <span className="flex lg:ml-1">
+                  <input
+                    className=""
+                    type="radio"
+                    name="gender"
+                    value="Female"
+                    onChange={handlegender}
+                  />
+                  <p className="pl-1">F</p>
+                </span>
               </div>
             </div>
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col mx-1">
               <lable className="font-bold my-2">Nationality</lable>
               <input
-                className="border-2 border-gray-300 rounded px-2"
+                className="border-2 border-gray-300 rounded px-1"
                 placeholder="Nationality"
                 type="text"
               />
             </div>
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col mx-1">
               <lable className="font-bold my-2">ID</lable>
               <input
-                className="border-2 border-gray-300 rounded px-2 "
+                className="border-2 border-gray-300 rounded px-1 "
                 placeholder="ID No."
                 type="text"
               />
@@ -206,36 +208,36 @@ export default function Book(props) {
       </div>
 
       {/* Payment Details section  */}
-      <span className="flex text-center text-white bg-purple-400 mt-2 rounded-t-lg py-1 px-2">
+      <span className="flex text-center text-white bg-purple-400 mt-2 rounded-t-lg py-1 px-2 ">
         <TableCellsIcon className="mr-2" height="25" /> Payment{" "}
       </span>
 
       <div>
-        <form className="flex mx-2 ">
-          <div className="flex flex-col mx-4">
+        <form className="flex flex-col lg:flex-row mx-2 text-sm ">
+          <div className="flex flex-col mx-1">
             <lable className="font-bold my-2 ">Total Amount</lable>
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
               <input className="border-2 border-gray-300" type="text" />
             </div>
           </div>
-          <div className="flex flex-col mx-4">
+          <div className="flex flex-col mx-1">
             <lable className="font-bold my-2 ">Discount</lable>
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
               <input className="border-2 border-gray-300" type="text" />
             </div>
           </div>
-          <div className="flex flex-col mx-4">
+          <div className="flex flex-col mx-1">
             <lable className="font-bold my-2 ">Total Paid</lable>
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
               <input className="border-2 border-gray-300" type="text" />
             </div>
           </div>
-          <div className="flex flex-col mx-4 ">
+          <div className="flex flex-col mx-1 ">
             <lable className="font-bold my-2 ">Payment Method</lable>
-            <select className="border-2 border-gray-300 px-1 text-lg text-center">
+            <select className="border-2 w-32 lg:w-full border-gray-300 px-1 text-lg text-center">
               <option>Cash</option>
               <option>Mpesa</option>
             </select>
@@ -244,18 +246,18 @@ export default function Book(props) {
       </div>
 
       {/* Voucher Section */}
-      <div className="flex mt-10">
-        <span className="ml-5 ">
+      <div className="flex flex-col lg:flex-row mt-10 overflow-auto">
+        <span className="ml-2 my-2 lg:my-0">
           <input
-            className="border-2 border-gray-300 w-96 p-1"
+            className="border-2 border-gray-300  p-1"
             type="text"
             placeholder="Note"
           />
           <p className="text-blue-300 font-bold">Max 60 Characters</p>
         </span>
-        <span className="ml-5">
+        <span className="ml-2 my-2 lg:my-0">
           <input
-            className="border-2 border-gray-300 w-96 p-1"
+            className="border-2 border-gray-300 p-1"
             type="text"
             placeholder="Voucher Code"
           />
@@ -263,8 +265,8 @@ export default function Book(props) {
             Type / Paste voucher code and press enter.
           </p>
         </span>
-        <span className="flex ">
-          <p className="mx-5 px-2 py-1 mb-6 rounded bg-gray-800 text-white text-center ">
+        <span className="flex my-2 lg:my-0">
+          <p className="mx-2 px-2 py-1 mb-6 rounded bg-gray-800 text-white text-center ">
             Apply Voucher
           </p>
           <p className="text-blue-300 underline">Want to get a Voucher?</p>
@@ -272,18 +274,17 @@ export default function Book(props) {
       </div>
 
       {/* bottom three buttons */}
-      <div className="flex justify-end mt-32 text-lg">
-        <button className=" px-2 py-1 rounded mx-1 border border-gray-400">
+      <div className="flex justify-end flex-col  lg:flex-row mt-32 text-lg ">
+        <button className=" px-2 py-1 rounded mx-1 border border-gray-400 my-2 lg:my-0">
           Reset
         </button>
-        <button className="bg-gray-800 text-white px-2 py-1 rounded mx-1 border border-gray-300">
+        <button className="bg-gray-800 text-white px-2 py-1 rounded mx-1 border border-gray-300 my-2 lg:my-0">
           Book
         </button>
-        <book className="bg-red-500 text-white px-2 py-1 rounded mx-1 border border-gray-300">
+        <book className="bg-red-500 text-white px-2 py-1 rounded mx-1 text-center border border-gray-300 my-2 lg:my-0">
           Reserve Seat
         </book>
       </div>
-
     </div>
   );
 }

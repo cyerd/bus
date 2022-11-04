@@ -4,76 +4,76 @@ import React from "react";
 export default function Trips() {
   return (
     <div>
-      <div className="flex flex-col border border-gray-300">
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div className="flex flex-col border border-gray-300 ">
+        <div className=" sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-3 lg:px-8">
             <div className="overflow-hidden">
-              <table className="min-w-full">
+              <table className="min-w-full ">
                 <thead className="bg-black border ">
                   <tr>
                     <th
                       scope="col"
-                      className="text-sm  border border-white  text-white px-3 py-4 text-left"
+                      className="border border-white  text-white px-3 py-4 text-left"
                     >
                       Route
                     </th>
                     <th
                       scope="col"
-                      className="text-sm  border border-white  text-white px-3 py-4 text-left"
+                      className="border border-white  text-white px-3 py-4 text-left"
                     >
                       Fleet
                     </th>
                     <th
                       scope="col"
-                      className="text-sm   border border-white text-white px-3 py-4 text-left"
+                      className=" border border-white text-white px-3 py-4 text-left"
                     >
                       Series
                     </th>
                     <th
                       scope="col"
-                      className="text-sm   border border-white text-white px-3 py-4 text-left"
+                      className=" border border-white text-white px-3 py-4 text-left"
                     >
                       Dep.
                     </th>
                     <th
                       scope="col"
-                      className="text-sm  border border-white  text-white px-3 py-4 text-left"
+                      className="border border-white  text-white px-3 py-4 text-left"
                     >
                       To
                     </th>
                     <th
                       scope="col"
-                      className="text-sm  border border-white  text-white px-3 py-4 text-left"
+                      className="border border-white  text-white px-3 py-4 text-left"
                     >
                       Report Time
                     </th>
                     <th
                       scope="col"
-                      className="text-sm   border border-white text-white px-3 py-4 text-left"
+                      className=" border border-white text-white px-3 py-4 text-left"
                     >
                       Bus Reg No.
                     </th>
                     <th
                       scope="col"
-                      className="text-sm   border border-white text-white px-3 py-4 text-left"
+                      className=" border border-white text-white px-3 py-4 text-left"
                     >
                       Cost
                     </th>
                     <th
                       scope="col"
-                      className="text-sm  border border-white  text-white px-3 py-4 text-left"
+                      className="border border-white  text-white px-3 py-4 text-left"
                     >
                       Available
                     </th>
                     <th
                       scope="col"
-                      className="text-sm  border border-white  text-white px-3 py-4 text-left"
+                      className="border border-white  text-white px-3 py-4 text-left"
                     >
                       Sell
                     </th>
                     <th
                       scope="col"
-                      className="text-sm   border border-white text-white px-3 py-4 text-left"
+                      className=" border border-white text-white px-3 py-4 text-left"
                     >
                       Manifest
                     </th>
