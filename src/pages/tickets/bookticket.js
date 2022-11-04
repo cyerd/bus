@@ -82,12 +82,11 @@ function Bookticket() {
 
   const handleDate = (date) => setStartDate(date);
 
-  const today = new Date()
+  const today = new Date();
 
   const resetDate = (date) => setStartDate(today);
 
   const nedate = format(new Date(startDate), "d-MMM-y");
-  console.log(nedate);
 
   return (
     <div>
@@ -97,8 +96,8 @@ function Bookticket() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="flex flex-col lg:flex-row">
-        <div className="mx-1 w-full lg:w-9/12 ">
+      <main className="flex flex-col xl:flex-row">
+        <div className="mx-1 w-full xl:w-9/12 ">
           <div className="flex bg-blue-300 py-1 flex flex-col lg:flex-row">
             <div className="ml-1 my-2 lg:my-0">
               <select
@@ -175,14 +174,14 @@ function Bookticket() {
           </div>
           {/* sidebar seat map */}
         </div>
-        <div className="w-full lg:w-3/12 border border-gray-300 overflow-auto">
-          <div className="items-center border-2 border-gray-300">
+        <div className="w-full xl:w-3/12 border border-gray-300 overflow-auto rounded-xl">
+          <div className="items-center ">
             <p className="text-center p-2  lg:text-sm xl:text-xl">
               Travel Date:{" "}
               <span className="text-red-600 font-extrabold">{nedate}</span>
             </p>
             <div>
-              <SeatMap/>
+              <SeatMap />
             </div>
           </div>
         </div>
