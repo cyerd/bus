@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export default function VipSeatIcon({ name }) {
   const [isActive, setIsActive] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   const handleClick = (e) => {
     setIsActive((current) => !current);
@@ -10,6 +11,7 @@ export default function VipSeatIcon({ name }) {
 
   const color = isActive ? "darkred" : "white";
   const next = isActive ? "darkred" : "orange";
+  const select = selected ? "gray" : "orange";
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

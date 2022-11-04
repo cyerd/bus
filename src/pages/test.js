@@ -131,7 +131,7 @@ const SectionA = [
 
 ];
 
-export default function test() {
+export default function Test() {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
