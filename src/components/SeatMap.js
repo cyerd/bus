@@ -9,7 +9,13 @@ const seats = [
   { name: "A1" },
   { name: "A2" },
   { name: "A3" },
+
+
 ];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function SeatMap() {
   const [isActive, setIsActive] = useState(false);
@@ -27,24 +33,22 @@ export default function SeatMap() {
                 className="relative flex"
                 onClick={handleClick}
               >
-                <p
-                
-                  className="absolute left-3 font-bold text-xs top-2 "
-                >
-                  {seat.name}
-                </p>
-                <SeatIcon />
+           
+                <SeatIcon name={seat.name} />
               </button>
             ))}
           </div>
           <div>
             {seats.map((seat) => (
-              <span key={seat.name} className="relative bg-red-500">
-                <p className="absolute left-3 font-bold text-xs top-2 ">
-                  {seat.name}
-                </p>
-                <SeatIcon />
-              </span>
+                <button
+                key={seat.name}
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name={seat.name} />
+              </button>
+            
             ))}
           </div>
         </div>
@@ -53,76 +57,99 @@ export default function SeatMap() {
         <div className="flex">
           <div className="px-3">
             {seats.map((seat) => (
-              <span key={seat.name} className="relative">
-                <p className="absolute left-3 font-bold text-xs top-2 ">
-                  {seat.name}
-                </p>
-                <SeatIcon toggle />
-              </span>
+                <button
+                key={seat.name}
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name={seat.name} />
+              </button>
+            
             ))}
           </div>
           <div>
             {seats.map((seat) => (
-              <span key={seat.name} className="relative">
-                <p className="absolute left-3 font-bold text-xs top-2 ">
-                  {seat.name}
-                </p>
-                <SeatIcon toggle />
-              </span>
+                <button
+                key={seat.name}
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name={seat.name} />
+              </button>
+            
             ))}
           </div>
         </div>
       </div>
       {/* middle seat C */}
       <div className="ml-3 absolute bottom-0">
-        <span className="">
-          <p className="absolute left-3 font-bold text-xs top-2 ">C</p>
-          <SeatIcon toggle />
-        </span>
+             <button
+                key="C"
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name="C" />
+              </button>
+            
       </div>
 
       <div>
         <div className="flex">
           <div className="px-3">
             {seats.map((seat) => (
-              <span key={seat.name} className="relative">
-                <p className="absolute left-3 font-bold text-xs top-2 ">
-                  {seat.name}
-                </p>
-                <SeatIcon toggle />
-              </span>
+                <button
+                key={seat.name}
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name={seat.name} />
+              </button>
+            
             ))}
           </div>
           <div>
             {seats.map((seat) => (
-              <span key={seat.name} className="relative">
-                <p className="absolute left-3 font-bold text-xs top-2 ">
-                  {seat.name}
-                </p>
-                <SeatIcon toggle />
-              </span>
+                <button
+                key={seat.name}
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name={seat.name} />
+              </button>
+            
             ))}
           </div>
         </div>
         <div className="flex">
           <div className="px-3">
             {seats.map((seat) => (
-              <span key={seat.name} className="relative">
-                <p className="absolute left-3 font-bold text-xs top-2 ">
-                  {seat.name}
-                </p>
-                <SeatIcon toggle />
-              </span>
+                <button
+                key={seat.name}
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name={seat.name} />
+              </button>
+            
             ))}
           </div>
           <div>
             {seats.map((seat) => (
-              <span key={seat.name} className="relative">
-                <p className="absolute left-3 font-bold text-xs top-2 ">
-                  {seat.name}
-                </p>
-                <SeatIcon toggle />
-              </span>
+                <button
+                key={seat.name}
+                className="relative flex"
+                onClick={handleClick}
+              >
+           
+                <SeatIcon name={seat.name} />
+              </button>
+            
             ))}
           </div>
         </div>
