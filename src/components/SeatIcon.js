@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function SeatIcon({ name }) {
+export default function SeatIcon({ name, selected }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e) => {
@@ -16,11 +16,15 @@ export default function SeatIcon({ name }) {
   }
 
   return (
-    <div className="relative text-center items-center" onClick={handleClick} value={name}>
+    <div
+      className="relative text-center items-center"
+      onClick={handleClick}
+      value={name}
+    >
       <p
         className={classNames(
-          isActive ? " text-white" : "text-gray-800",
-          "absolute left-4 font-bold text-xs top-1 text-center"
+          !selected && isActive ? " text-white" : "text-gray-800",
+          "absolute left-4 font-bold text-xs top-1"
         )}
         value={name}
       >
@@ -35,7 +39,7 @@ export default function SeatIcon({ name }) {
         value={name}
       >
         <g
-          fill={next}
+          fill={selected ? "gray" : next}
           strokeWidth={1}
           stroke="gray"
           strokeMiterlimit={10}
@@ -52,7 +56,7 @@ export default function SeatIcon({ name }) {
           />
         </g>
         <g
-          fill={color}
+          fill={selected ? "gray" : color}
           strokeWidth={1.2}
           stroke="gray"
           strokeMiterlimit={10}

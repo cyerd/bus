@@ -3,26 +3,34 @@ import React, { useState } from "react";
 import SeatIcon from "./SeatIcon";
 import VipSeatIcon from "./VipSeatIcon";
 
-const VIP = [{ name: "VIP1" }, { name: "VIP2" }, { name: "VIP3" }];
+const VIP = [
+  { name: "VIP1", selected: true },
+  { name: "VIP2" },
+  { name: "VIP3" },
+];
 
 const SectionB = [
   {
     name: "B1",
+    selected: true,
   },
   {
     name: "B2",
+    selected: true,
   },
   {
     name: "B3",
   },
   {
     name: "B4",
+    selected: true,
   },
   {
     name: "B5",
   },
   {
     name: "B6",
+    selected: true,
   },
   {
     name: "B7",
@@ -82,6 +90,7 @@ const SectionB = [
 const SectionA = [
   {
     name: "STAFF",
+    selected: true,
   },
   {
     name: "A3",
@@ -100,6 +109,7 @@ const SectionA = [
   },
   {
     name: "A8",
+    selected: true,
   },
   {
     name: "A9",
@@ -115,6 +125,7 @@ const SectionA = [
   },
   {
     name: "A13",
+    selected: true,
   },
   {
     name: "A14",
@@ -143,14 +154,17 @@ export default function SeatMap() {
     <div className="flex justify-around w-full mt-2 relative ">
       <div>
         <div className="flex items-center">
-          <div className="px-3 flex flex-col items-center justify-center">
+          <div className="px-3 flex flex-col items-center justify-center ">
             {VIP.map((seat) => (
               <button
                 key={seat.name}
-                className="relative flex"
+                className={classNames(
+                  seat.selected ? "cursor-not-allowed" : "",
+                  "relative flex"
+                )}
                 onClick={handleClick}
               >
-                <VipSeatIcon name={seat.name} />
+                <VipSeatIcon selected={seat.selected} name={seat.name} />
               </button>
             ))}
             <div className="flex mb-12">
@@ -165,10 +179,11 @@ export default function SeatMap() {
               {SectionA.map((seat) => (
                 <button
                   key={seat.name}
-                  className="relative flex"
+                  className={classNames(
+                  seat.selected ? "cursor-not-allowed" : "","relative flex")}
                   onClick={handleClick}
                 >
-                  <SeatIcon name={seat.name} />
+                  <SeatIcon selected={seat.selected} name={seat.name} />
                 </button>
               ))}
             </div>
@@ -193,10 +208,11 @@ export default function SeatMap() {
               {SectionB.map((seat) => (
                 <button
                   key={seat.name}
-                  className="relative flex"
+                  className={classNames(
+                  seat.selected ? "cursor-not-allowed" : "","relative flex")}
                   onClick={handleClick}
                 >
-                  <SeatIcon name={seat.name} />
+                  <SeatIcon selected={seat.selected} name={seat.name} />
                 </button>
               ))}
             </div>

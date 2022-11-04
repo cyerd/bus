@@ -133,7 +133,7 @@ export default function Triptest() {
               </td>
               <td className="p-3 text-md border border-gray-200">
                 <a href="index.php?controller=pjAdminBuses&action=pjActionTime&id=4786">
-                  <span className="glyphicon glyphicon-pencil icon-margin" />
+                  <span className="glyphicon glyphicon-pencil icon-margin " />
                 </a>
                 <a href="#">
                   More

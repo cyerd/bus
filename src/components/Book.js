@@ -111,14 +111,14 @@ export default function Book(props) {
           </div>
         </form>
       </div>
-      <div>
+      <div className="bg-orange-200">
         <span className="flex text-center text-white bg-purple-400 mt-2 rounded-t-lg py-1 px-2">
           <TableCellsIcon className="mr-2" height="25" /> Passengers
         </span>
         <div>
           <form className="flex flex-col lg:flex-row mx-2 overflow-auto text-sm">
             <div className="flex flex-col mx-1">
-              <lable className="font-bold my-2">First Name</lable>
+              <lable className="font-bold my-2 ">First Name</lable>
               <input
                 className="border-2 border-gray-300 rounded px-1"
                 placeholder="First Name"
