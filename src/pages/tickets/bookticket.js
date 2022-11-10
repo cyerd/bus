@@ -125,7 +125,7 @@ function Bookticket() {
                 ))}
               </select>
             </div>
-            <div className="p-1 border-2 rounded-lg flex divide-x-2 bg-white w-64  ml-1  divide-gray-400 my-2 lg:my-0">
+            <div  className="border-2 rounded-lg flex divide-x-2 w-64 bg-white  ml-1 flex items-center divide-gray-400 my-2 lg:my-0">
               <DatePicker
                 className="ml-2"
                 selected={startDate}
@@ -168,7 +168,7 @@ function Bookticket() {
           </div>
 
           {/* Routine table */}
-          <div>
+          <div className="overflow-auto ">
             <Triptest />
             <Book value={place} />
           </div>

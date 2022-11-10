@@ -30,6 +30,8 @@
     "react-calendar": "^3.9.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-seat-picker": "^1.5.3",
+    "react-tooltip": "^4.4.3",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {

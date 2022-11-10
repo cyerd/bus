@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-export default function SeatIcon({ name, selected }) {
+export default function SeatIcon({ name, Booked }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e) => {
     setIsActive((current) => !current);
-    console.log(e.target.getAttribute("value"));
+
   };
 
   const color = isActive ? "darkred" : "white";
@@ -23,7 +23,7 @@ export default function SeatIcon({ name, selected }) {
     >
       <p
         className={classNames(
-          !selected && isActive ? " text-white" : "text-gray-800",
+          !Booked && isActive ? " text-white" : "text-gray-800",
           "absolute left-4 font-bold text-xs top-1"
         )}
         value={name}
@@ -39,7 +39,7 @@ export default function SeatIcon({ name, selected }) {
         value={name}
       >
         <g
-          fill={selected ? "gray" : next}
+          fill={Booked ? "gray" : next}
           strokeWidth={1}
           stroke="gray"
           strokeMiterlimit={10}
@@ -56,7 +56,7 @@ export default function SeatIcon({ name, selected }) {
           />
         </g>
         <g
-          fill={selected ? "gray" : color}
+          fill={Booked ? "gray" : color}
           strokeWidth={1.2}
           stroke="gray"
           strokeMiterlimit={10}

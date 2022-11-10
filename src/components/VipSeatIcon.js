@@ -1,29 +1,33 @@
 import React, { useState } from "react";
 
-export default function VipSeatIcon({ name, selected }) {
+export default function VipSeatIcon({ name, Booked }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e) => {
     setIsActive((current) => !current);
-    console.log(e.target.getAttribute("value"));
+    // console.log(e.target.getAttribute("value"));
   };
 
   const color = isActive ? "darkred" : "white";
   const next = isActive ? "darkred" : "orange";
- 
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
+
+  console.log(isActive);
+
+
+
+
   return (
     <div className="relative" onClick={handleClick} value={name}>
       <p
-        className={classNames(!selected &&
-          isActive ? " text-white" : "text-gray-800",
+        className={classNames(
+          !Booked && isActive ? " text-white" : "text-gray-800",
           "absolute left-4 font-bold text-xs top-1"
         )}
-
         value={name}
       >
         {name}
@@ -38,7 +42,7 @@ export default function VipSeatIcon({ name, selected }) {
       >
         <g strokeWidth={1} stroke="gray" strokeMiterlimit={10} value={name}>
           <path
-            fill={selected ? "gray" : next}
+            fill={Booked ? "gray" : next}
             value={name}
             className="st0"
             d="M46.9,16.5c-1.4,0-2.5,1.1-2.5,2.4v16.6c-0.2,0.1-0.3,0.1-0.5,0.2c0,0-2.4,1.1-6.2,2.1
@@ -49,7 +53,7 @@ export default function VipSeatIcon({ name, selected }) {
           />
         </g>
         <g
-          fill={selected ? "gray" : color}
+          fill={Booked ? "gray" : color}
           strokeWidth={1.2}
           stroke="gray"
           strokeMiterlimit={10}
