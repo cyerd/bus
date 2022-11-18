@@ -1,15 +1,13 @@
-import { Menu, Transition } from "@headlessui/react";
+
 import { CalendarDaysIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import Head from "next/head";
-import React, { Fragment, useState } from "react";
+import React, {  useState } from "react";
 import Header from "../../components/Layouts/Header";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Book from "../../components/Book";
 import { format } from "date-fns";
 import { Tooltip } from "@material-tailwind/react";
-import Triptest from "../../components/Triptest";
-import Seatmap from "../../components/Seat/SeatMap";
 import SeatMapLayout from "../../components/Seat/SeatMapLayout";
 import { Trips } from "../../components/Seat/SeatConstants";
 import Trip from "../../components/Seat/Trip";
