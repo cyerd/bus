@@ -1,6 +1,8 @@
 import { TableCellsIcon } from "@heroicons/react/20/solid";
 import React, { useState } from "react";
 
+import {sum} from "../components/Seat/SeatMap"
+
 export default function Book(props) {
   const [destination, setDestination] = useState("--Destination");
   const [pickup, setPickup] = useState("--Pickup Point");
@@ -232,7 +234,7 @@ export default function Book(props) {
             <lable className="font-bold my-2 ">Discount</lable>
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
-              <input className="border-2 border-gray-300" type="text" />
+              <input className="border-2 border-gray-300" value={sum} type="text" />
             </div>
           </div>
           <div className="flex flex-col mx-1">

@@ -1,6 +1,7 @@
+import { LockClosedIcon } from "@heroicons/react/20/solid";
 import React, { useState } from "react";
 
-export default function VipSeatIcon({ name, Booked }) {
+export default function VipSeatIcon({ name, Booked, Locked }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e) => {
@@ -8,15 +9,12 @@ export default function VipSeatIcon({ name, Booked }) {
     // console.log(e.target.getAttribute("value"));
   };
 
-  const color = isActive ? "darkred" : "white";
-  const next = isActive ? "darkred" : "orange";
+  const color = !Locked && isActive ? "darkred" : "white";
+  const next = !Locked && isActive ? "darkred" : "orange";
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-
-
-  console.log(isActive);
 
 
 
@@ -25,13 +23,22 @@ export default function VipSeatIcon({ name, Booked }) {
     <div className="relative" onClick={handleClick} value={name}>
       <p
         className={classNames(
-          !Booked && isActive ? " text-white" : "text-gray-800",
-          "absolute left-4 font-bold text-xs top-1"
+          !Booked && !Locked && isActive ? " text-white" : "text-gray-800",
+          "absolute left-4 font-bold text-[11px] top-1"
         )}
         value={name}
       >
         {name}
       </p>
+      <LockClosedIcon
+        className={classNames(
+          !Locked ? "  hidden" : "visible",
+          "absolute left-0 font-bold text-[11px]  -top-2"
+        )}
+        value={name}
+        height={30}
+        width={25}
+      />
 
       <svg
         viewBox="0 0 50 50"
@@ -42,7 +49,7 @@ export default function VipSeatIcon({ name, Booked }) {
       >
         <g strokeWidth={1} stroke="gray" strokeMiterlimit={10} value={name}>
           <path
-            fill={Booked ? "gray" : next}
+            fill={Booked || Locked ? "gray" : next}
             value={name}
             className="st0"
             d="M46.9,16.5c-1.4,0-2.5,1.1-2.5,2.4v16.6c-0.2,0.1-0.3,0.1-0.5,0.2c0,0-2.4,1.1-6.2,2.1

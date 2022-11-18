@@ -7,7 +7,7 @@ export const VIP = [
   { name: "VIP3", price: vip },
 ];
 
-export const SectionB = [
+export const B = [
   {
     name: "B1",
     price: normal,
@@ -105,11 +105,7 @@ export const SectionB = [
     price: normal,
   },
 ];
-export const SectionA = [
-  {
-    name: "STAFF",
-    price: normal,
-  },
+export const A = [
   {
     name: "A3",
     price: normal,
@@ -171,18 +167,21 @@ export const SectionA = [
     price: normal,
   },
 ];
+export const Staff = [{ name: "STAFF", price: 1500 }];
 export const C = [{ name: "C" }];
 export const D = [{ name: "A1" }, { name: "A2" }];
 
 export const Trips = [
   {
     name: "6:30",
-    price: [1800],
-    Booked: ["A2", "STAFF", "VIP1", "B6", "B16"],
+    price: [1500],
+    Booked: ["A2", "VIP1", "B6", "B16"],
+    lock: ["A3", "B2"],
   },
   {
     name: "9:30",
-    price: [1000],
-    Booked: ["A9", "STAFF", "VIP3", "B8"],
+    price: [1800],
+    Booked: ["A9", "VIP3", "B8"],
+    lock: ["VIP2", "STAFF"],
   },
 ];

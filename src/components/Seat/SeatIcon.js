@@ -1,15 +1,15 @@
+import { LockClosedIcon } from "@heroicons/react/20/solid";
 import React, { useState } from "react";
 
-export default function SeatIcon({ name, Booked }) {
+export default function SeatIcon({ name, Booked, Locked }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e) => {
     setIsActive((current) => !current);
-
   };
 
-  const color = isActive ? "darkred" : "white";
-  const next = isActive ? "darkred" : "blue";
+  const color = !Locked && isActive ? "darkred" : "white";
+  const next = !Locked && isActive ? "darkred" : "blue";
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -23,13 +23,22 @@ export default function SeatIcon({ name, Booked }) {
     >
       <p
         className={classNames(
-          !Booked && isActive ? " text-white" : "text-gray-800",
-          "absolute left-4 font-bold text-xs top-1"
+          !Booked && !Locked && isActive ? " text-white" : "text-gray-800",
+          "absolute left-5 font-bold text-[11px]  top-1"
         )}
         value={name}
       >
         {name}
       </p>
+      <LockClosedIcon
+        className={classNames(
+          !Locked ? "  hidden" : "visible",
+          "absolute left-0 font-bold text-[11px]  -top-2"
+        )}
+        value={name}
+        height={30}
+        width={25}
+      />
 
       <svg
         viewBox="0 0 50 50"
@@ -39,7 +48,7 @@ export default function SeatIcon({ name, Booked }) {
         value={name}
       >
         <g
-          fill={Booked ? "gray" : next}
+          fill={Booked || Locked ? "gray" : next}
           strokeWidth={1}
           stroke="gray"
           strokeMiterlimit={10}
