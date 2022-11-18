@@ -1,7 +1,7 @@
 import { CalendarDaysIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import React, { useState } from "react";
-import Header from "../../components/Header";
+import Header from "../../components/Layouts/Header";
 import ViewsDatePicker from "../../components/Datepicker";
 import Head from "next/head";
 import DatePicker from "react-datepicker";

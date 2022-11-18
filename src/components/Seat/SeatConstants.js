@@ -168,8 +168,8 @@ export const A = [
   },
 ];
 export const Staff = [{ name: "STAFF", price: 1500 }];
-export const C = [{ name: "C" }];
-export const D = [{ name: "A1" }, { name: "A2" }];
+export const C = [{ name: "C", price: 1500 }];
+export const D = [{ name: "A1", price: 1500 }, { name: "A2", price: 1500 }];
 
 export const Trips = [
   {

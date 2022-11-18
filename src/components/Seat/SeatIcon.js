@@ -4,7 +4,7 @@ import React, { useState } from "react";
 export default function SeatIcon({ name, Booked, Locked }) {
   const [isActive, setIsActive] = useState(false);
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     setIsActive((current) => !current);
   };
 

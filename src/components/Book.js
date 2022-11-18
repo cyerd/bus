@@ -1,11 +1,12 @@
 import { TableCellsIcon } from "@heroicons/react/20/solid";
 import React, { useState } from "react";
 
-import {sum} from "../components/Seat/SeatMap"
-
-export default function Book(props) {
+export default function Book({  value,  selectedSeats,}) {
+  let sum = 0;
   const [destination, setDestination] = useState("--Destination");
   const [pickup, setPickup] = useState("--Pickup Point");
+
+  const [currentValue, setCurrentValue] = useState(0);
 
   const handleDestination = (e) => {
     setDestination(e.target.value);
@@ -63,7 +64,7 @@ export default function Book(props) {
             <input
               disabled
               type="text"
-              value={props.value}
+              value={value}
               className="bg-transparent outline-0 disabled"
             />
           </div>
@@ -220,28 +221,41 @@ export default function Book(props) {
       <span className="flex text-center text-white bg-purple-400 mt-2 rounded-t-lg py-1 px-2 ">
         <TableCellsIcon className="mr-2" height="25" /> Payment{" "}
       </span>
-
+      {selectedSeats.forEach((subData) => (sum += subData.price))}
       <div>
         <form className="flex flex-col lg:flex-row mx-2 text-sm ">
           <div className="flex flex-col mx-1">
             <lable className="font-bold my-2 ">Total Amount</lable>
-            <div className="flex bg-gray-100 ">
+            <div className="flex bg-gray-100 items-center">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
-              <input className="border-2 border-gray-300" type="text" />
+
+              <p className="bg-white px-5 rounded-lg text-center text-lg font-bold">
+                {sum}
+              </p>
             </div>
           </div>
           <div className="flex flex-col mx-1">
             <lable className="font-bold my-2 ">Discount</lable>
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
-              <input className="border-2 border-gray-300" value={sum} type="text" />
+              <input
+                className="border-2 border-gray-300 text-center text-lg font-bold"
+                value={(currentValue).toLocaleString("en-US")}
+                onChange={(e) => setCurrentValue(e.target.value)}
+                type="text"
+              />
             </div>
           </div>
           <div className="flex flex-col mx-1">
             <lable className="font-bold my-2 ">Total Paid</lable>
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
-              <input className="border-2 border-gray-300" type="text" />
+              <input
+                className="border-2 border-gray-300 font-bold text-center text-lg "
+                disabled={true}
+                value={(sum - currentValue).toLocaleString("en-US")}
+                type="text"
+              />
             </div>
           </div>
           <div className="flex flex-col mx-1 ">

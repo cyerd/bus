@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import Header from "../../components/Header";
+import Header from "../../components/Layouts/Header";
 import Trips from "../../components/Trips";
 import Triptest from "../../components/Triptest";
 

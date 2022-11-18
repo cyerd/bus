@@ -5,12 +5,14 @@ import React, { Fragment, useState } from "react";
 import Header from "../../components/Layouts/Header";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Trips from "../../components/Trips";
 import Book from "../../components/Book";
 import { format } from "date-fns";
 import { Tooltip } from "@material-tailwind/react";
 import Triptest from "../../components/Triptest";
 import Seatmap from "../../components/Seat/SeatMap";
+import SeatMapLayout from "../../components/Seat/SeatMapLayout";
+import { Trips } from "../../components/Seat/SeatConstants";
+import Trip from "../../components/Seat/Trip";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -87,6 +89,12 @@ function Bookticket() {
   const resetDate = (date) => setStartDate(today);
 
   const nedate = format(new Date(startDate), "d-MMM-y");
+
+  // seat
+  const [selectedTrip, setSelectedTrip] = useState(Trips[0]);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [currentValue, setCurrentValue] = useState("");
+  let sum = 0;
 
   return (
     <div>
@@ -169,8 +177,22 @@ function Bookticket() {
 
           {/* Routine table */}
           <div className="overflow-auto ">
-            <Triptest />
-            <Book value={place} />
+            <Trip
+              trip={selectedTrip}
+              selectedSeats={selectedSeats}
+              onChange={(trip) => {
+                setSelectedSeats([]);
+                setSelectedTrip(trip);
+              }}
+            />
+            <Book
+              trip={selectedTrip}
+              selectedSeats={selectedSeats}
+              onSelectedSeatsChange={(selectedSeats) => {
+                setSelectedSeats(selectedSeats);
+              }}
+              value={place}
+            />
           </div>
           {/* sidebar seat map */}
         </div>
@@ -181,7 +203,13 @@ function Bookticket() {
               <span className="text-red-600 font-extrabold">{nedate}</span>
             </p>
             <div>
-              <Seatmap />
+              <SeatMapLayout
+                trip={selectedTrip}
+                selectedSeats={selectedSeats}
+                onSelectedSeatsChange={(selectedSeats) => {
+                  setSelectedSeats(selectedSeats);
+                }}
+              />
             </div>
           </div>
         </div>
