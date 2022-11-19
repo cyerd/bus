@@ -28,7 +28,7 @@ export default function Trip({ trip, onChange }) {
       </div>
 
       {Trips.map((trip) => (
-        <div className="flex items-center">
+        <div key={trip.name} className="flex items-center">
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -51,6 +51,7 @@ export default function Trip({ trip, onChange }) {
             </div>
 
             <button
+            key={trip.name}
               onClick={() => {
                 alert("hello");
               }}
