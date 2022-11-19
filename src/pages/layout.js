@@ -30,8 +30,7 @@ const Trips = [
   },
 ];
 
-const normal = 1500
-
+const normal = 1500;
 
 const seats = [
   {
@@ -155,11 +154,10 @@ export default function Layout() {
       />
 
       <p className="info">
-        You have selected <span className="count">{selectedSeats.slice().toString()}</span> seats
+        You have selected{" "}
+        <span className="count">{selectedSeats.slice().toString()}</span> seats
         for the price of{" "}
-        <span className="total">
-          {selectedSeats.length * selectedTrip}$
-        </span>
+        <span className="total">{selectedSeats.length * selectedTrip}$</span>
       </p>
     </div>
   );
@@ -221,7 +219,7 @@ function Cinema({ trip, selectedSeats, onSelectedSeatsChange }) {
       <div className="seats">
         {seats.map((seat) => {
           const isSelected = selectedSeats.includes(seat);
-          const isOccupied = trip.Booked.includes(seat);
+          const isOccupied = trip.Garissa.Booked.includes(seat);
           return (
             <span
               tabIndex="0"
@@ -231,7 +229,11 @@ function Cinema({ trip, selectedSeats, onSelectedSeatsChange }) {
                 isSelected && "selected",
                 isOccupied && "occupied"
               )}
-              onClick={isOccupied ? null : () => handleSelectedState(seat.name, seat.price)}
+              onClick={
+                isOccupied
+                  ? null
+                  : () => handleSelectedState(seat.name, seat.price)
+              }
               onKeyPress={
                 isOccupied
                   ? null

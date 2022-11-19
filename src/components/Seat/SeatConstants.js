@@ -169,19 +169,22 @@ export const A = [
 ];
 export const Staff = [{ name: "STAFF", price: 1500 }];
 export const C = [{ name: "C", price: 1500 }];
-export const D = [{ name: "A1", price: 1500 }, { name: "A2", price: 1500 }];
+export const D = [
+  { name: "A1", price: 1500 },
+  { name: "A2", price: 1500 },
+];
 
 export const Trips = [
   {
-    name: "6:30",
-    price: [1500],
-    Booked: ["A2",  "B6", "B16"],
+    id: 2,
+    name: "6:00 AM",
+    Booked: ["A2", "B6", "B16"],
     lock: ["A3", "B2"],
   },
   {
-    name: "9:30",
-    price: [1800],
-    Booked: ["A9",  "B8"],
+    id: 2,
+    name: "4:00 PM",
+    Booked: ["A9", "B8"],
     lock: ["VIP2", "STAFF"],
   },
 ];
