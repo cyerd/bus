@@ -1,7 +1,7 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Staffseat({ name, Booked, Locked  }) {
+export default function Staffseat({ name, Booked, Locked, trip }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e) => {
@@ -11,6 +11,10 @@ export default function Staffseat({ name, Booked, Locked  }) {
 
   const color = !Locked && isActive ? "darkred" : "#FFB6C1";
   const next = !Locked && isActive ? "darkred" : "#C71585";
+
+    useEffect(() => {
+      setIsActive(false);
+    }, [trip]);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

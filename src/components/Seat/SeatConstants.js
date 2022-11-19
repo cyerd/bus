@@ -175,13 +175,13 @@ export const Trips = [
   {
     name: "6:30",
     price: [1500],
-    Booked: ["A2", "VIP1", "B6", "B16"],
+    Booked: ["A2",  "B6", "B16"],
     lock: ["A3", "B2"],
   },
   {
     name: "9:30",
     price: [1800],
-    Booked: ["A9", "VIP3", "B8"],
+    Booked: ["A9",  "B8"],
     lock: ["VIP2", "STAFF"],
   },
 ];

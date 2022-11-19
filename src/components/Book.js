@@ -1,12 +1,16 @@
 import { TableCellsIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Book({  value,  selectedSeats,}) {
+export default function Book({  value,  selectedSeats, trip}) {
   let sum = 0;
   const [destination, setDestination] = useState("--Destination");
   const [pickup, setPickup] = useState("--Pickup Point");
 
   const [currentValue, setCurrentValue] = useState(0);
+
+  useEffect(()=>{
+    setCurrentValue("")
+  }, [trip])
 
   const handleDestination = (e) => {
     setDestination(e.target.value);
@@ -229,7 +233,7 @@ export default function Book({  value,  selectedSeats,}) {
             <div className="flex bg-gray-100 items-center">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
 
-              <p className="bg-white px-5 rounded-lg text-center text-lg font-bold">
+              <p className="bg-white text-red-500 px-5 rounded-lg text-center text-lg font-bold">
                 {sum}
               </p>
             </div>
@@ -239,8 +243,8 @@ export default function Book({  value,  selectedSeats,}) {
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
               <input
-                className="border-2 border-gray-300 text-center text-lg font-bold"
-                value={(currentValue).toLocaleString("en-US")}
+                className="border-2 bg-white text-green-500 text-center text-lg font-bold"
+                value={currentValue.toLocaleString("en-US")}
                 onChange={(e) => setCurrentValue(e.target.value)}
                 type="text"
               />
@@ -251,7 +255,7 @@ export default function Book({  value,  selectedSeats,}) {
             <div className="flex bg-gray-100 ">
               <p className="border-2 border-gray-300 text-lg px-1">KES</p>
               <input
-                className="border-2 border-gray-300 font-bold text-center text-lg "
+                className="border-2 border-red-400 bg-yellow-200 font-bold text-center text-lg "
                 disabled={true}
                 value={(sum - currentValue).toLocaleString("en-US")}
                 type="text"

@@ -1,12 +1,9 @@
-
-
 import Image from "next/image";
 import SeatIcon from "./SeatIcon";
 import VipSeatIcon from "./VipSeatIcon";
 import clsx from "clsx";
 import { C, D, A, B, Staff, Trips, VIP } from "./SeatConstants";
 import Staffseat from "./Staffseat";
-
 
 export default function SeatMapLayout({
   trip,
@@ -56,6 +53,7 @@ export default function SeatMapLayout({
                   }
                 >
                   <VipSeatIcon
+                    trip={trip}
                     selectedSeats={selectedSeats}
                     Locked={Locked}
                     Booked={Booked}
@@ -90,6 +88,7 @@ export default function SeatMapLayout({
                     }
                   >
                     <SeatIcon
+                      trip={trip}
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
@@ -123,6 +122,7 @@ export default function SeatMapLayout({
                     }
                   >
                     <Staffseat
+                      trip={trip}
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
@@ -155,6 +155,7 @@ export default function SeatMapLayout({
                     }
                   >
                     <SeatIcon
+                      trip={trip}
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
@@ -190,7 +191,12 @@ export default function SeatMapLayout({
                     }
               }
             >
-              <SeatIcon Locked={Locked} Booked={Booked} name={seat.name} />
+              <SeatIcon
+                trip={trip}
+                Locked={Locked}
+                Booked={Booked}
+                name={seat.name}
+              />
             </button>
           );
         })}
@@ -225,6 +231,7 @@ export default function SeatMapLayout({
                     }
                   >
                     <SeatIcon
+                      trip={trip}
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
