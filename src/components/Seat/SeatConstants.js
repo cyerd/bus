@@ -180,11 +180,17 @@ export const Trips = [
     name: "6:00 AM",
     Booked: ["A2", "B6", "B16"],
     lock: ["A3", "B2"],
+    series: "A",
+    RegNo: "KCZ 108P",
+    Route: "GRS-NBI",
   },
   {
     id: 2,
     name: "4:00 PM",
     Booked: ["A9", "B8"],
     lock: ["VIP2", "STAFF"],
+    series: "B",
+    RegNo: "KCB 998Z",
+    Route: "GRS-NBI",
   },
 ];

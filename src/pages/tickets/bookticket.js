@@ -194,10 +194,10 @@ function Bookticket() {
           </div>
           {/* sidebar seat map */}
         </div>
-        <div className="w-full xl:w-3/12 border border-gray-300 overflow-auto rounded-xl">
+        <div className="w-full xl:w-3/12 border border-gray-300 rounded-xl">
           <div className="items-center ">
             <p className="text-center p-2  lg:text-sm xl:text-xl">
-              Travel Date:{" "}
+              Travel Date:
               <span className="text-red-600 font-extrabold">{nedate}</span>
             </p>
             <div>
