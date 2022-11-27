@@ -194,3 +194,49 @@ export const Trips = [
     Route: "GRS-NBI",
   },
 ];
+
+  export const Destination = [
+    {
+      name: "--Destination",
+    },
+    { name: "BANGAL" },
+    {
+      name: "KANYONYO",
+    },
+    { name: "KITHIMANI" },
+    {
+      name: "KITHYOKA",
+    },
+    { name: "MATUU" },
+    {
+      name: "MWINGI",
+    },
+    { name: "NGUNI" },
+    {
+      name: "UKASI",
+    },
+    { name: "NAIROBI" },
+  ];
+
+  export const Places = [
+    {
+      name: "GARISSA",
+    },
+    { name: "BANGAL" },
+    {
+      name: "KANYONYO",
+    },
+    { name: "KITHIMANI" },
+    {
+      name: "KITHYOKA",
+    },
+    { name: "MATUU" },
+    {
+      name: "MWINGI",
+    },
+    { name: "NGUNI" },
+    {
+      name: "UKASI",
+    },
+    { name: "NAIROBI" },
+  ];

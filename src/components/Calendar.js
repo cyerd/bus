@@ -1,3 +1,6 @@
+
+"use client"
+
 import {
   Calendar as BigCalendar,
   momentLocalizer,
@@ -6,31 +9,8 @@ import {
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useEffect, useState } from "react";
-import { format, formatDistance, formatRelative, set, subDays } from "date-fns";
-// const day = format(new Date(), "eeee");
-// const date = format(new Date(), "d-M-y");
-// const time = format(new Date(), "H:mm ");
+import { format } from "date-fns";
 
-//   const [value, onChange] = useState(new Date());
-
-// moment.locale("en-GB");
-// //momentLocalizer(moment);
-// const localizer = momentLocalizer(moment);
-
-// const events = [
-//   {
-//     id: 11,
-//     title: "Public Holiday",
-//     start: new Date(),
-//     end: format( new Date(22-10-2022), "d-M-y"),
-//     resourceId: 4,
-//   },
-// ];
-
-// const resourceMap = [
-//   { resourceId: 1, resourceTitle: "Board room" },
-
-// ];
 
 const styles = {
   container: {
@@ -41,9 +21,9 @@ const styles = {
 
 export default function Calendar() {
   //momentLocalizer(moment);
-  const localizer = momentLocalizer(moment);
+  const localizer = momentLocalizer(moment) ?  momentLocalizer(moment) : {};
   //   const formatMonth = format({ locale: es }, "MMM");
-  moment.locale("en-US");
+  moment.locale("en-US") ? moment.locale("en-US") : localizer;
 
   const [days, setDays] = useState(format(new Date(), "eeee"));
   const [date, setDate] = useState(format(new Date(), "d-M-y"));

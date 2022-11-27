@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Tickets from "./Tickets";
 import Parcels from "./Parcels";
@@ -15,7 +17,6 @@ function Dashboard() {
         <Reports />
       </div>
       <div className="hidden lg:flex flex-col h-full  max-w-md mt-2 p-0 xl:pr-5 ">
-        {/* <Calendar /> */}
         <Calendar />
       </div>
     </>

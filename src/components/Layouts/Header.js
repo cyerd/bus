@@ -1,3 +1,5 @@
+"use client"
+
 import { Fragment } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import {
@@ -143,10 +145,12 @@ export default function Header() {
               <Image
                 width="30"
                 height="30"
-                className="h-8 w-auto sm:h-10"
+                className="h-8 w-auto sm:h-10 "
                 src="/ishnaaz-Recovered.png"
                 alt="Logo"
+                media="(prefers-color-scheme: dark)"
               />
+              
             </Link>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
@@ -413,7 +417,6 @@ export default function Header() {
             </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end  md:flex md:flex-1 lg:w-0">
-     
             <Menu as="div" className="relative ml-3">
               <div>
                 <Menu.Button className="flex items-center  ">

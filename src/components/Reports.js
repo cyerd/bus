@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -78,7 +80,7 @@ function Reports() {
               style={{ backgroundColor: item.color }}
             >
               <p> {item.name}</p>
-              <Image src={item.icon} width="30" height="30"   alt="icons"/>
+              <Image src={item.icon} width="30" height="30" alt="icons" />
             </button>
           </Link>
         ))}

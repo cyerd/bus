@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -83,7 +85,7 @@ function Recon() {
               // className="   text-black border-2 border-blue-400   flex justify-around px-2 py-2 h-full w-full items-center"
             >
               <p> {item.name}</p>
-              <Image src={item.icon} width="30" height="30" layout="fixed" alt="menuicon"/>
+              <Image src={item.icon} width="30" height="30" alt="menuicon" />
             </button>
           </Link>
         ))}
