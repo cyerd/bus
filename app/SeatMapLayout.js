@@ -4,8 +4,27 @@ import VipSeatIcon from "./VipSeatIcon";
 import clsx from "clsx";
 import { C, D, A, B, Staff, Trips, VIP } from "./SeatConstants";
 import Staffseat from "./Staffseat";
+import fetcher from "../utils/fetchBookings";
 
-export default function SeatMapLayout({
+
+
+  // async function getData() {
+  //   const res = await fetch("http://localhost:3000/api/getBookings");
+  //   // The return value is *not* serialized
+  //   // You can return Date, Map, Set, etc.
+
+  //   // Recommendation: handle errors
+  //   if (!res.ok) {
+  //     // This will activate the closest `error.js` Error Boundary
+  //     throw new Error("Failed to fetch data");
+  //   }
+
+  //   return res.json()
+  // }
+
+
+
+export default  function SeatMapLayout({
   trip,
   selectedSeats,
   onSelectedSeatsChange,
@@ -20,6 +39,11 @@ export default function SeatMapLayout({
       onSelectedSeatsChange([...selectedSeats, seat]);
     }
   }
+  
+
+
+    // const data = await getData();
+    // const Bookedseats = JSON.stringify(data)
 
   return (
     <div className="flex justify-around w-full mt-2 relative ">

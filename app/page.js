@@ -5,9 +5,15 @@ import Header from "../src/components/Layouts/Header";
 
 
 
-export default function Home() {
+
+
+
+export default  function Home() {
+
+
+
   return (
-    <div className="flex flex-col h-full justify-between ">
+    <div className="flex flex-col h-full justify-between  bg-gray-700 text-gray-400 ">
       {/* Page Title */}
       <Head>
         <title>Online Bus Services</title>
@@ -21,6 +27,7 @@ export default function Home() {
       {/* main page content Dashboard */}
       <main className="flex w-full">
         <Dashboard />
+
       </main>
 
       {/* footer */}
