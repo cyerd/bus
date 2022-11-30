@@ -13,7 +13,7 @@ export default  function Home() {
 
 
   return (
-    <div className="flex flex-col h-full justify-between  bg-gray-700 text-gray-400 ">
+    <div className="flex flex-col h-full justify-between  ">
       {/* Page Title */}
       <Head>
         <title>Online Bus Services</title>

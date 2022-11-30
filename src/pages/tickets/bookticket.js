@@ -58,7 +58,7 @@ function Bookticket() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="flex w-full bg-gray-700 text-gray-400">
+      <main className="flex w-full ">
         <Book
           trip={selectedTrip}
           selectedSeats={selectedSeats}
