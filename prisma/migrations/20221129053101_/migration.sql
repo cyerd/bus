@@ -1,5 +1,0 @@
--- CreateTable
-CREATE TABLE "BookedSeats" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "seat" TEXT NOT NULL
-);

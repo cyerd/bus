@@ -1,8 +1,8 @@
 
 
 const fetcher = async () => {
-  const BookedSeats = await fetch("/api/getBookings");
-  const data = await BookedSeats.json();
+  const bookedSeats = await fetch("/api/bookings");
+  const data = await bookedSeats.json();
   const seats = data.seats;
 
 

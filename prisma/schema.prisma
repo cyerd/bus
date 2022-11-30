@@ -7,19 +7,18 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  // url      = "mongodb+srv://admin:300817@cluster0.2d4yz7g.mongodb.net/test"
+  // url = "mongodb://localhost:27017/test"
+  url ="file:./dev.db"
 }
 
 
 
 
-model Post {
-  id Int @id @default(autoincrement())
-  name String
-}
 
-model Bookings {
-  id  String @id
+
+model bookings {
+  id  String @id @map("_id")
       from String
       destination String
       pickup String
@@ -35,13 +34,13 @@ model Bookings {
       discount String
       totalPaid Int
       paymentMethod String
-      seatNo String @unique
+      seatNo String 
       idNumber String
       
 }
 
-model BookedSeats {
-  id String @unique
+model bookedSeats {
+  id String @id  @map("_id")
   date String 
   seats String 
  

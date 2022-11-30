@@ -40,7 +40,7 @@ export default function SeatMapLayout({
     }
   }
 
-  const { data: seats, error, mutate } = useSWR("/api/getBookings", fetcher);
+  const { data: seats, error, mutate } = useSWR("/api/bookings", fetcher);
 
   useEffect(() => {}, [seats]);
 

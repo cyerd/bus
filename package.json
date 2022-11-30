@@ -34,6 +34,7 @@
     "react-calendar": "^3.9.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.40.0",
     "react-seat-picker": "^1.5.3",
     "react-tooltip": "^4.4.3",
     "sqlite": "^4.1.2",
@@ -46,6 +47,7 @@
     "eslint": "8.25.0",
     "eslint-config-next": "^13.0.0",
     "postcss": "^8.4.18",
+    "prisma": "^4.7.0",
     "tailwindcss": "^3.2.0"
   }
 }

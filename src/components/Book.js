@@ -278,10 +278,7 @@ export default function Booking({ value, trip }) {
             </span>
             <div>
               {selectedSeats.map((seat) => (
-                <div
-                  key={seat.name}
-                  className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2"
-                >
+                <div key={seat.name} className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2">
                   <div className="flex flex-col mx-1 ">
                     <lable className="font-bold my-2 ">Full Name</lable>
                     <input
