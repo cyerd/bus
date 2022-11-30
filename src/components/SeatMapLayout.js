@@ -4,7 +4,7 @@ import VipSeatIcon from "./VipSeatIcon";
 import clsx from "clsx";
 import { C, D, A, B, Staff, Trips, VIP } from "./SeatConstants";
 import Staffseat from "./Staffseat";
-import fetcher from "../utils/fetchBookings";
+import fetcher from "../../utils/fetchBookings";
 
 
 

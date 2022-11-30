@@ -8,7 +8,7 @@ import { C, D, A, B, Staff, Trips, VIP } from "./SeatConstants";
 import Staffseat from "./Staffseat";
 import useSWR from "swr";
 import { useEffect } from "react";
-import fetcher from "../../utils/fetchBookings";
+import fetcher from "../../../utils/fetchBookings";
 
 // async function getData() {
 //   const res = await fetch("http://localhost:3000/api/getBookings");
@@ -40,16 +40,11 @@ export default function SeatMapLayout({
     }
   }
 
+  const { data: seats, error, mutate } = useSWR("/api/getBookings", fetcher);
 
-     const {
-       data: seats,
-       error,
-       mutate,
-     } = useSWR("/api/getBookings", fetcher);
+  useEffect(() => {}, [seats]);
 
-     useEffect(() => {}, [seats]);
 
-     console.log("here is some ...", seats);
 
   return (
     <div className="flex justify-around w-full mt-2 relative ">

@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Dashboard from "../src/components/Dashboard";
-import Footer from "../src/components/Layouts/Footer";
-import Header from "../src/components/Layouts/Header";
+import Dashboard from "../components/Dashboard";
+import Footer from "../components/Layouts/Footer";
+import Header from "../components/Layouts/Header";
 
 
 

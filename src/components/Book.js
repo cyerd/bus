@@ -12,9 +12,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { Tooltip } from "@material-tailwind/react";
 
-import { Destination, Places, Trips } from "../../app/Seat/SeatConstants";
-import Trip from "../../app/Seat/Trip";
-import SeatMapLayout from "../../app/Seat/SeatMapLayout";
+import { Destination, Places, Trips } from "./Seat/SeatConstants";
+import Trip from "./Seat/Trip";
+import SeatMapLayout from "./Seat/SeatMapLayout";
 
 export default function Booking({ value, trip }) {
   const [destinations, setDestination] = useState("NAIROBI");
@@ -278,7 +278,10 @@ export default function Booking({ value, trip }) {
             </span>
             <div>
               {selectedSeats.map((seat) => (
-                <div className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2">
+                <div
+                  key={seat.name}
+                  className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2"
+                >
                   <div className="flex flex-col mx-1 ">
                     <lable className="font-bold my-2 ">Full Name</lable>
                     <input

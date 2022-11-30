@@ -7,9 +7,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import Book from "../../components/Book";
 import { format } from "date-fns";
 import { Tooltip } from "@material-tailwind/react";
-import SeatMapLayout from "../../../app/Seat/SeatMapLayout";
-import { Destination, Places, Trips } from "../../../app/Seat/SeatConstants";
-import Trip from "../../../app/Seat/Trip";
+import SeatMapLayout from "../../components/Seat/SeatMapLayout";
+import {
+  Destination,
+  Places,
+  Trips,
+} from "../../components/Seat/SeatConstants";
+import Trip from "../../components/Seat/Trip";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
