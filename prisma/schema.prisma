@@ -11,12 +11,6 @@ datasource db {
   // url = "mongodb://localhost:27017/test"
   url ="file:./dev.db"
 }
-
-
-
-
-
-
 model bookings {
   id  String @id @map("_id")
       from String

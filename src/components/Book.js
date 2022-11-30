@@ -193,6 +193,7 @@ export default function Booking({ value, trip }) {
           </div>
 
           <Trip
+            selectedDate={startDate}
             trip={selectedTrip}
             selectedSeats={selectedSeats}
             onChange={(trip) => {
@@ -278,7 +279,10 @@ export default function Booking({ value, trip }) {
             </span>
             <div>
               {selectedSeats.map((seat) => (
-                <div key={seat.name} className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2">
+                <div
+                  key={seat.name}
+                  className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2"
+                >
                   <div className="flex flex-col mx-1 ">
                     <lable className="font-bold my-2 ">Full Name</lable>
                     <input
@@ -378,7 +382,7 @@ export default function Booking({ value, trip }) {
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       type="text"
                       required
-                      defaultValue={seat.name}
+                      // defaultValue={seat.name}
                       autoFocus
                       value={(seatNo = seat.name)}
                       // onInput={handleSeatNo}

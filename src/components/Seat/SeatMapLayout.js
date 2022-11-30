@@ -52,7 +52,7 @@ export default function SeatMapLayout({
         <div className="flex items-center">
           <div className="px-3 flex flex-col items-center justify-center ">
             {VIP.map((seat) => {
-              const Booked = seats?.includes(seat.name);
+              const Booked = seats?.seats?.includes(seat.name);
               const Locked = trip.lock.includes(seat.name);
 
               return (
@@ -95,7 +95,7 @@ export default function SeatMapLayout({
             })}
             <div className="flex mb-12">
               {D.map((seat) => {
-                const Booked = seats?.includes(seat.name);
+                const Booked = seats?.seats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
 
                 return (
@@ -136,7 +136,7 @@ export default function SeatMapLayout({
             </div>
             <div className="grid grid-cols-2 gap-x-1 ">
               {Staff.map((seat) => {
-                const Booked = seats?.includes(seat.name);
+                const Booked = seats?.seats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
                 return (
                   <button
@@ -175,7 +175,7 @@ export default function SeatMapLayout({
               })}
 
               {A.map((seat) => {
-                const Booked = seats?.includes(seat.name);
+                const Booked = seats?.seats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
                 return (
                   <button
@@ -218,7 +218,7 @@ export default function SeatMapLayout({
       </div>
       <div className=" absolute bottom-0">
         {C.map((seat) => {
-          const Booked = seats?.includes(seat.name);
+          const Booked = seats?.seats?.includes(seat.name);
           const Locked = trip.lock.includes(seat.name);
           return (
             <button
@@ -263,7 +263,7 @@ export default function SeatMapLayout({
             <Image height={50} width={50} src="/driver.png" alt="driver" />
             <div className="grid grid-cols-2 gap-x-1">
               {B.map((seat) => {
-                const Booked = seats?.includes(seat.name);
+                const Booked = seats?.seats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
                 return (
                   <button

@@ -1,7 +1,11 @@
 import { EyeIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
+import ManifestModal from "./manifestModal";
 import { Trips } from "./SeatConstants";
 
 export default function Trip({ trip, onChange }) {
+
+  const [open, setOpen] = useState(false);
   return (
     <div className="w-full">
       <div className="grid grid-flow-col bg-black text-white font-bold w-full p-1">
@@ -39,9 +43,7 @@ export default function Trip({ trip, onChange }) {
 
             <button
               key={trip.name}
-              onClick={() => {
-                alert("hello");
-              }}
+              onClick={() => setOpen(true)}
               className="flex justify-around items-center text-center text-white bg-purple-600  rounded-lg"
             >
               <p className="text-center">View</p> <EyeIcon height={20} />{" "}
@@ -49,6 +51,7 @@ export default function Trip({ trip, onChange }) {
           </button>
         </div>
       ))}
+      <ManifestModal setOpen={setOpen} open={open} />
     </div>
   );
 }

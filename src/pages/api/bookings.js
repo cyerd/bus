@@ -14,7 +14,16 @@ export default async function bookings(req, res) {
     return;
   }
 
-  const bookings = await prisma.bookedSeats.findMany({});
+  const bookings = await prisma.bookedSeats.findMany({
+    // where: {
+    //   date: "Wed Nov 30 2022",
+    // },
+  });
+   const fullDetails = await prisma.bookings.findMany({
+     // where: {
+     //   date: "Wed Nov 30 2022",
+     // },
+   });
   const seats = bookings.map((seat) => seat.seats);
-  res.status(200).json({ bookings, seats });
+  res.status(200).json({ bookings, seats, fullDetails });
 }

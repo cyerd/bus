@@ -179,7 +179,7 @@ export const Trips = [
     id: 2,
     name: "6:00 AM",
     Booked: ["A2", "B6", "B16"],
-    lock: ["A3", "B2"],
+    lock: ["A8", "B2"],
     series: "A",
     RegNo: "KCZ 108P",
     Route: "GRS-NBI",
@@ -195,48 +195,48 @@ export const Trips = [
   },
 ];
 
-  export const Destination = [
-    {
-      name: "--Destination",
-    },
-    { name: "BANGAL" },
-    {
-      name: "KANYONYO",
-    },
-    { name: "KITHIMANI" },
-    {
-      name: "KITHYOKA",
-    },
-    { name: "MATUU" },
-    {
-      name: "MWINGI",
-    },
-    { name: "NGUNI" },
-    {
-      name: "UKASI",
-    },
-    { name: "NAIROBI" },
-  ];
+export const Destination = [
+  {
+    name: "--Destination",
+  },
+  { name: "BANGAL" },
+  {
+    name: "KANYONYO",
+  },
+  { name: "KITHIMANI" },
+  {
+    name: "KITHYOKA",
+  },
+  { name: "MATUU" },
+  {
+    name: "MWINGI",
+  },
+  { name: "NGUNI" },
+  {
+    name: "UKASI",
+  },
+  { name: "NAIROBI" },
+];
 
-  export const Places = [
-    {
-      name: "GARISSA",
-    },
-    { name: "BANGAL" },
-    {
-      name: "KANYONYO",
-    },
-    { name: "KITHIMANI" },
-    {
-      name: "KITHYOKA",
-    },
-    { name: "MATUU" },
-    {
-      name: "MWINGI",
-    },
-    { name: "NGUNI" },
-    {
-      name: "UKASI",
-    },
-    { name: "NAIROBI" },
-  ];
+export const Places = [
+  {
+    name: "GARISSA",
+  },
+  { name: "BANGAL" },
+  {
+    name: "KANYONYO",
+  },
+  { name: "KITHIMANI" },
+  {
+    name: "KITHYOKA",
+  },
+  { name: "MATUU" },
+  {
+    name: "MWINGI",
+  },
+  { name: "NGUNI" },
+  {
+    name: "UKASI",
+  },
+  { name: "NAIROBI" },
+];
