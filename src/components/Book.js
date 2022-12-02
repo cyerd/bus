@@ -26,7 +26,7 @@ export default function Booking({ value, trip }) {
   const [age, setAge] = useState("");
   const [nationality, setNationality] = useState("");
   const [idNumber, setIdNumber] = useState();
-  const [luggage, setLuggage] = useState("0");
+  const [luggage, setLuggage] = useState("NO");
 
   const { messages, error, mutate } = useSWR("/api/getMessages", fetcher);
 
@@ -59,9 +59,9 @@ export default function Booking({ value, trip }) {
   const [payment, setPayment] = useState("CASH");
   let [sum, setSum] = useState(0);
   let [seatNo, setSeatNo] = useState();
-  const handleSeatNo = (e) => {
-    setSeatNo(e.target.value);
-  };
+  // const handleSeatNo = (e) => {
+  //   setSeatNo(e.target.value);
+  // };
   // seat
   const [selectedTrip, setSelectedTrip] = useState(Trips[0]);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -101,6 +101,54 @@ export default function Booking({ value, trip }) {
 
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/addBookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          booking,
+        }),
+      }).then((res) => res.json());
+
+      return [data.booking, ...bookings];
+    };
+    await mutate(uploadMessageToUpstash, {
+      optimisticData: [bookings, ...bookings],
+      rollbackOnError: true,
+    });
+  };
+
+  const ReserveSeats = async (e) => {
+    e.preventDefault();
+
+    const id = uuid();
+
+    const booking = {
+      id,
+      from: value,
+      destination: destinations,
+      pickup: pickup,
+      fullName: fullName,
+      mobile: mobile,
+      age: age,
+      nationality: nationality,
+      luggage: luggage,
+      startDate: startDate.toDateString(),
+      gender: gender,
+      trip: selectedTrip.name,
+      selectedSeats: selectedSeats.toString,
+      totalAmount: sum,
+      discount: currentValue,
+      totalPaid: sum - currentValue,
+      paymentMethod: payment,
+      seatNo: seatNo,
+      idNumber: idNumber,
+    };
+
+    const bookings = [];
+
+    const uploadMessageToUpstash = async () => {
+      const data = await fetch("/api/reserveSeat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -516,9 +564,12 @@ export default function Booking({ value, trip }) {
             >
               Book
             </button>
-            <div className="bg-red-500 text-white px-2 py-1 rounded mx-1 text-center border border-gray-300 my-2 lg:my-0">
+            <button
+              onClick={ReserveSeats}
+              className="bg-red-500 text-white px-2 py-1 rounded mx-1 text-center border border-gray-300 my-2 lg:my-0"
+            >
               Reserve Seat
-            </div>
+            </button>
           </div>
         </div>
 

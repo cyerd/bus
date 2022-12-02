@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../../utils/prismaClient";
 
-const prisma = new PrismaClient();
 
 export default async function bookings(req, res) {
   if (req.method !== "GET") {
@@ -12,15 +11,26 @@ export default async function bookings(req, res) {
 
   const { date: query, ...everything } = req.query;
 
-  const bookings = await prisma.bookings.findMany({
-    where: {
-      startDate: query,
-      trip: everything.trip,
-    },
-  });
+  try {
+    const bookings = await prisma.bookings.findMany({
+      where: {
+        startDate: query,
+        trip: everything.trip,
+      },
+    });
 
-  const takenSeats = bookings.map((seat) => seat.seatNo);
-  
+     const reserves = await prisma.bookedSeats.findMany({
+       where: {
+         startDate: query,
+         trip: everything.trip,
+       },
+     });
 
-  res.status(200).json({ takenSeats, bookings });
+    const takenSeats = bookings.map((seat) => seat.seatNo);
+    const reservedSeats = reserves.map((seat) => seat.seatNo);
+
+    res.status(200).json({ takenSeats, bookings, reservedSeats });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error, ...error });
+  }
 }

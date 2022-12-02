@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url = "mongodb+srv://admin:300817@cluster0.2d4yz7g.mongodb.net/test"
+  url = env("MONGODB_URI")
 }
 model bookings {
   id  String @id @map("_id")
@@ -32,9 +32,24 @@ model bookings {
 }
 
 model bookedSeats {
-  id String @id  @map("_id")
-  date String 
-  seats String 
+  id  String @id @map("_id")
+      from String
+      destination String
+      pickup String
+      fullName String
+      mobile String
+      age String
+      nationality String
+      luggage String
+      startDate String
+      gender String
+      trip String
+      totalAmount Int
+      discount String
+      totalPaid Int
+      paymentMethod String
+      seatNo String 
+      idNumber String
  
   
 }

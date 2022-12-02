@@ -50,7 +50,7 @@ export default function VipSeatIcon({ name, Booked, Locked, trip }) {
       >
         <g strokeWidth={1} stroke="gray" strokeMiterlimit={10} value={name}>
           <path
-            fill={Booked || Locked ? "gray" : next}
+            fill={Booked ? "gray" : next}
             value={name}
             className="st0"
             d="M46.9,16.5c-1.4,0-2.5,1.1-2.5,2.4v16.6c-0.2,0.1-0.3,0.1-0.5,0.2c0,0-2.4,1.1-6.2,2.1

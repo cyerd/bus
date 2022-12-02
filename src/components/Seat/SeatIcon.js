@@ -52,7 +52,7 @@ export default function SeatIcon({ name, Booked, Locked, trip }) {
         value={name}
       >
         <g
-          fill={Booked || Locked ? "gray" : next}
+          fill={Booked ? "gray" : next}
           strokeWidth={1}
           stroke="gray"
           strokeMiterlimit={10}

@@ -68,8 +68,9 @@ export default function SeatMapLayout({
           <div className="px-3 flex flex-col items-center justify-center ">
             {VIP.map((seat) => {
               const Booked = seats?.takenSeats?.includes(seat.name);
+              
 
-              const Locked = trip.lock.includes(seat.name);
+              const Locked = seats?.reservedSeats?.includes(seat.name);
 
               return (
                 <button
@@ -115,7 +116,7 @@ export default function SeatMapLayout({
             <div className="flex mb-12">
               {D.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = trip.lock.includes(seat.name);
+                const Locked = seats?.reservedSeats?.includes(seat.name);
 
                 return (
                   <button
@@ -158,7 +159,7 @@ export default function SeatMapLayout({
             <div className="grid grid-cols-2 gap-x-1 ">
               {Staff.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = trip.lock.includes(seat.name);
+                const Locked = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
@@ -199,7 +200,7 @@ export default function SeatMapLayout({
 
               {A.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = trip.lock.includes(seat.name);
+                const Locked = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
@@ -244,7 +245,7 @@ export default function SeatMapLayout({
       <div className=" absolute bottom-0">
         {C.map((seat) => {
           const Booked = seats?.takenSeats?.includes(seat.name);
-          const Locked = trip.lock.includes(seat.name);
+          const Locked = seats?.reservedSeats?.includes(seat.name);
           return (
             <button
               key={seat.name}
@@ -289,7 +290,7 @@ export default function SeatMapLayout({
             <div className="grid grid-cols-2 gap-x-1">
               {B.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = trip.lock.includes(seat.name);
+                const Locked = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
