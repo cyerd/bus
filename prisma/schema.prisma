@@ -6,10 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  // url      = "mongodb+srv://admin:300817@cluster0.2d4yz7g.mongodb.net/test"
-  // url = "mongodb://localhost:27017/test"
-  url ="file:./dev.db"
+  provider = "mongodb"
+  url = "mongodb+srv://admin:300817@cluster0.2d4yz7g.mongodb.net/test"
 }
 model bookings {
   id  String @id @map("_id")
