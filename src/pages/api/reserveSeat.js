@@ -13,8 +13,6 @@ export default async function handler(req, res) {
     ...booking,
   };
 
-  console.log("reserved data", newBooking);
-
   try {
     await prisma.bookedSeats.create({
       data: newBooking,
