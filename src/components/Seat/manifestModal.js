@@ -77,7 +77,7 @@ export default function ManifestModal({ open, setOpen }) {
                             </tr>
                           </thead>
                           {bookings?.bookings?.map((booking) => (
-                            <tbody>
+                            <tbody key={booking.id}>
                               <tr className="border border-gray-400">
                                 <td className="border w-fit px-5 border-gray-400">
                                   {booking.id}
