@@ -1,7 +1,8 @@
 
 
 const fetcher = async () => {
-  const bookedSeats = await fetch("/api/bookings");
+  const params = `/api/bookings/${query}`;
+  const bookedSeats = await fetch(params);
   const data = await bookedSeats.json();
   const seats = data;
 

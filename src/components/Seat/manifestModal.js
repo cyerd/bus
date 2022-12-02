@@ -7,9 +7,9 @@ import useSWR from "swr";
 export default function ManifestModal({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
 
-  const { data: seats, error, mutate } = useSWR("/api/bookings", fetcher);
+  const { data: bookings, error, mutate } = useSWR("/api/bookings", fetcher);
 
-  useEffect(() => {}, [seats]);
+  useEffect(() => {}, [bookings]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -45,7 +45,6 @@ export default function ManifestModal({ open, setOpen }) {
               <Dialog.Panel className="relative  transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 ">
                 <div className=" bg-white  px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                 
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title
                         as="h3"
@@ -57,15 +56,27 @@ export default function ManifestModal({ open, setOpen }) {
                         <table class="table flex justify-center items-center">
                           <thead>
                             <tr className="border">
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4" >ID</th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4" >DATE</th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4" >SEAT NO</th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4" >FULL NAME</th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4" >MOBILE NO</th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4" >TOTAL PAID</th>
+                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                ID
+                              </th>
+                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                DATE
+                              </th>
+                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                SEAT NO
+                              </th>
+                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                FULL NAME
+                              </th>
+                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                MOBILE NO
+                              </th>
+                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                TOTAL PAID
+                              </th>
                             </tr>
                           </thead>
-                          {seats?.fullDetails?.map((booking) => (
+                          {bookings?.bookings?.map((booking) => (
                             <tbody>
                               <tr className="border border-gray-400">
                                 <td className="border w-fit px-5 border-gray-400">

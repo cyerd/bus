@@ -6,21 +6,18 @@ export default function Staffseat({ name, Booked, Locked, trip }) {
 
   const handleClick = (e) => {
     setIsActive((current) => !current);
-    // console.log(e.target.getAttribute("value"));
   };
 
   const color = !Locked && isActive ? "darkred" : "#FFB6C1";
   const next = !Locked && isActive ? "darkred" : "#C71585";
 
-    useEffect(() => {
-      setIsActive(false);
-    }, [trip]);
+  useEffect(() => {
+    setIsActive(false);
+  }, [trip]);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-
-
 
   return (
     <div className="relative" onClick={handleClick} value={name}>

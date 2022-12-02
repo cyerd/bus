@@ -8,7 +8,6 @@ import { C, D, A, B, Staff, Trips, VIP } from "./SeatConstants";
 import Staffseat from "./Staffseat";
 import useSWR from "swr";
 import { useEffect } from "react";
-import fetcher from "../../../utils/fetchBookings";
 
 // async function getData() {
 //   const res = await fetch("http://localhost:3000/api/getBookings");
@@ -28,6 +27,7 @@ export default function SeatMapLayout({
   trip,
   selectedSeats,
   onSelectedSeatsChange,
+  selectedDate,
 }) {
   function handleSelectedState(seat) {
     const isSelected = selectedSeats.includes(seat);
@@ -40,11 +40,26 @@ export default function SeatMapLayout({
     }
   }
 
-  const { data: seats, error, mutate } = useSWR("/api/bookings", fetcher);
+  const date = selectedDate.toDateString();
+  const selectedtrip = trip.name;
 
-  useEffect(() => {}, [seats]);
+  const params = `/api/bookings/${date}?trip=${selectedtrip}`;
 
+  const fetcher = async () => {
+    const bookedSeats = await fetch(params);
+    const data = await bookedSeats.json();
+    const seats = data;
 
+    return seats;
+  };
+
+  const { data: seats, error, mutate } = useSWR(params, fetcher);
+
+  useEffect(() => {}, [seats, selectedDate]);
+
+  const now = new Date();
+
+  const previousDates = now.toDateString() < date;
 
   return (
     <div className="flex justify-around w-full mt-2 relative ">
@@ -52,20 +67,23 @@ export default function SeatMapLayout({
         <div className="flex items-center">
           <div className="px-3 flex flex-col items-center justify-center ">
             {VIP.map((seat) => {
-              const Booked = seats?.seats?.includes(seat.name);
+              const Booked = seats?.takenSeats?.includes(seat.name);
+
               const Locked = trip.lock.includes(seat.name);
 
               return (
                 <button
                   key={seat.name}
                   className={clsx(
-                    Booked || Locked ? "cursor-not-allowed" : "",
+                    Booked || Locked || previousDates
+                      ? "cursor-not-allowed"
+                      : "",
                     "relative flex"
                   )}
                   // onClick={handleClick}
 
                   onClick={
-                    Booked || Locked
+                    Booked || Locked || previousDates
                       ? null
                       : (e) => {
                           e.preventDefault();
@@ -73,7 +91,7 @@ export default function SeatMapLayout({
                         }
                   }
                   onKeyPress={
-                    Booked || Locked
+                    Booked || Locked || previousDates
                       ? null
                       : (e) => {
                           if (e.key === "Enter") {
@@ -84,6 +102,7 @@ export default function SeatMapLayout({
                   }
                 >
                   <VipSeatIcon
+                    selectedDate={date}
                     trip={trip}
                     selectedSeats={selectedSeats}
                     Locked={Locked}
@@ -95,18 +114,20 @@ export default function SeatMapLayout({
             })}
             <div className="flex mb-12">
               {D.map((seat) => {
-                const Booked = seats?.seats?.includes(seat.name);
+                const Booked = seats?.takenSeats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
 
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked ? "cursor-not-allowed" : "",
+                      Booked || Locked || previousDates
+                        ? "cursor-not-allowed"
+                        : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked
+                      Booked || Locked || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();
@@ -136,17 +157,19 @@ export default function SeatMapLayout({
             </div>
             <div className="grid grid-cols-2 gap-x-1 ">
               {Staff.map((seat) => {
-                const Booked = seats?.seats?.includes(seat.name);
+                const Booked = seats?.takenSeats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked ? "cursor-not-allowed" : "",
+                      Booked || Locked || previousDates
+                        ? "cursor-not-allowed"
+                        : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked
+                      Booked || Locked || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();
@@ -175,17 +198,19 @@ export default function SeatMapLayout({
               })}
 
               {A.map((seat) => {
-                const Booked = seats?.seats?.includes(seat.name);
+                const Booked = seats?.takenSeats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked ? "cursor-not-allowed" : "",
+                      Booked || Locked || previousDates
+                        ? "cursor-not-allowed"
+                        : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked
+                      Booked || Locked || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();
@@ -218,17 +243,17 @@ export default function SeatMapLayout({
       </div>
       <div className=" absolute bottom-0">
         {C.map((seat) => {
-          const Booked = seats?.seats?.includes(seat.name);
+          const Booked = seats?.takenSeats?.includes(seat.name);
           const Locked = trip.lock.includes(seat.name);
           return (
             <button
               key={seat.name}
               className={clsx(
-                Booked || Locked ? "cursor-not-allowed" : "",
+                Booked || Locked || previousDates ? "cursor-not-allowed" : "",
                 "relative flex"
               )}
               onClick={
-                Booked || Locked
+                Booked || Locked || previousDates
                   ? null
                   : (e) => {
                       e.preventDefault();
@@ -236,7 +261,7 @@ export default function SeatMapLayout({
                     }
               }
               onKeyPress={
-                Booked || Locked
+                Booked || Locked || previousDates
                   ? null
                   : (e) => {
                       if (e.key === "Enter") {
@@ -263,17 +288,19 @@ export default function SeatMapLayout({
             <Image height={50} width={50} src="/driver.png" alt="driver" />
             <div className="grid grid-cols-2 gap-x-1">
               {B.map((seat) => {
-                const Booked = seats?.seats?.includes(seat.name);
+                const Booked = seats?.takenSeats?.includes(seat.name);
                 const Locked = trip.lock.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked ? "cursor-not-allowed" : "",
+                      Booked || Locked || previousDates
+                        ? "cursor-not-allowed"
+                        : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked
+                      Booked || Locked || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();

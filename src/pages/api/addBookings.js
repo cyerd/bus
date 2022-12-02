@@ -20,14 +20,6 @@ export default async function handler(req, res) {
       data: newBooking,
     });
 
-    const seatsBooked = newBooking.seatNo;
-    const startDate = newBooking.startDate;
-    const id = newBooking.id;
-    console.log(seatsBooked, startDate, id);
-
-    await prisma.bookedSeats.create({
-      data: { id: id, seats: seatsBooked, date: startDate },
-    });
     res.status(200).json({ booking: newBooking });
   } catch (error) {
     res.status(500).json({

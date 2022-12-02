@@ -3,9 +3,11 @@ import { useState } from "react";
 import ManifestModal from "./manifestModal";
 import { Trips } from "./SeatConstants";
 
-export default function Trip({ trip, onChange }) {
+import clsx from "clsx";
 
+export default function Trip({ selectedTrip, onChange }) {
   const [open, setOpen] = useState(false);
+
   return (
     <div className="w-full">
       <div className="grid grid-flow-col bg-black text-white font-bold w-full p-1">
@@ -19,7 +21,13 @@ export default function Trip({ trip, onChange }) {
       </div>
 
       {Trips.map((trip) => (
-        <div key={trip.name} className="grid grid-flow-col w-full lg:-ml-10 ">
+        <div
+          key={trip.name}
+          className={clsx(
+            selectedTrip.name == trip.name ? "bg-red-200" : "",
+            "grid grid-flow-col lg:-ml-10 "
+          )}
+        >
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -29,7 +37,7 @@ export default function Trip({ trip, onChange }) {
             }}
             key={trip.name}
             value={trip.name}
-            className="grid grid-flow-col   hover:bg-pink-100 focus:bg-pink-300 py-2 "
+            className="grid grid-flow-col   py-2"
           >
             <div className=" ">{trip.Route}</div>
             <div className="">44 Seater</div>

@@ -194,7 +194,7 @@ export default function Booking({ value, trip }) {
 
           <Trip
             selectedDate={startDate}
-            trip={selectedTrip}
+            selectedTrip={selectedTrip}
             selectedSeats={selectedSeats}
             onChange={(trip) => {
               setSelectedSeats([]);
@@ -530,6 +530,7 @@ export default function Booking({ value, trip }) {
             </p>
             <div>
               <SeatMapLayout
+                selectedDate={startDate}
                 trip={selectedTrip}
                 selectedSeats={selectedSeats}
                 onSelectedSeatsChange={(selectedSeats) => {
