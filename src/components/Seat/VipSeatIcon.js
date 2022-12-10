@@ -1,16 +1,14 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 
-export default function VipSeatIcon({ name, Booked, Locked, trip }) {
+export default function VipSeatIcon({ name, Booked, Locked, trip, previousDates }) {
   const [isActive, setIsActive] = useState(false);
   const handleClick = (e) => {
     setIsActive((current) => !current);
   };
 
-  const color = !Locked && isActive ? "darkred" : "white";
-  const next = !Locked && isActive ? "darkred" : "orange";
-
-
+  const color = !Locked && ! previousDates && !previousDates && isActive ? "darkred" : "white";
+  const next = !Locked && ! previousDates && !previousDates && isActive ? "darkred" : "orange";
 
   useEffect(() => {
     setIsActive(false);
@@ -24,7 +22,7 @@ export default function VipSeatIcon({ name, Booked, Locked, trip }) {
     <div className="relative " onClick={handleClick} value={name}>
       <p
         className={classNames(
-          !Booked && !Locked && isActive ? " text-white" : "text-gray-800",
+          !Booked && !Locked && ! previousDates && isActive ? " text-white" : "text-gray-800",
           "absolute left-4 font-bold text-[11px] top-1"
         )}
         value={name}

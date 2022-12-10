@@ -40,7 +40,7 @@ export default function SeatMapLayout({
     }
   }
 
-  const date = selectedDate.toDateString();
+  const date= selectedDate.toDateString();
   const selectedtrip = trip.name;
 
   const params = `/api/bookings/${date}?trip=${selectedtrip}`;
@@ -57,9 +57,10 @@ export default function SeatMapLayout({
 
   useEffect(() => {}, [seats, selectedDate]);
 
-  const now = new Date();
+  const now = new Date().toDateString();
 
-  const previousDates = now.toDateString() < date;
+  const previousDates = date < now ;
+  console.log("now",now, "date:", date,  "prev:",previousDates, "selected:", selectedDate);
 
   return (
     <div className="flex justify-around w-full mt-2 relative ">
@@ -109,6 +110,7 @@ export default function SeatMapLayout({
                     Locked={Locked}
                     Booked={Booked}
                     name={seat.name}
+                    previousDates={previousDates}
                   />
                 </button>
               );
@@ -151,6 +153,7 @@ export default function SeatMapLayout({
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
+                      previousDates={previousDates}
                     />
                   </button>
                 );
@@ -193,6 +196,7 @@ export default function SeatMapLayout({
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
+                      previousDates={previousDates}
                     />
                   </button>
                 );
@@ -234,6 +238,7 @@ export default function SeatMapLayout({
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
+                      previousDates={previousDates}
                     />
                   </button>
                 );
@@ -277,6 +282,7 @@ export default function SeatMapLayout({
                 Locked={Locked}
                 Booked={Booked}
                 name={seat.name}
+                previousDates={previousDates}
               />
             </button>
           );
@@ -324,6 +330,7 @@ export default function SeatMapLayout({
                       Locked={Locked}
                       Booked={Booked}
                       name={seat.name}
+                      previousDates={previousDates}
                     />
                   </button>
                 );

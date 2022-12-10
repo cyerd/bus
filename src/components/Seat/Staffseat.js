@@ -1,15 +1,27 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 
-export default function Staffseat({ name, Booked, Locked, trip }) {
+export default function Staffseat({
+  name,
+  Booked,
+  Locked,
+  trip,
+  previousDates,
+}) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e) => {
     setIsActive((current) => !current);
   };
 
-  const color = !Locked && isActive ? "darkred" : "#FFB6C1";
-  const next = !Locked && isActive ? "darkred" : "#C71585";
+  const color =
+    !Locked && !previousDates && !previousDates && isActive
+      ? "darkred"
+      : "#FFB6C1";
+  const next =
+    !Locked && !previousDates && !previousDates && isActive
+      ? "darkred"
+      : "#C71585";
 
   useEffect(() => {
     setIsActive(false);
@@ -23,7 +35,9 @@ export default function Staffseat({ name, Booked, Locked, trip }) {
     <div className="relative" onClick={handleClick} value={name}>
       <p
         className={classNames(
-          !Booked && !Locked && isActive ? " text-white" : "text-green-800",
+          !Booked && !Locked && !previousDates && isActive
+            ? " text-white"
+            : "text-green-800",
           "absolute left-3.5  font-extrabold text-[10px] top-0.5"
         )}
         value={name}
@@ -49,7 +63,7 @@ export default function Staffseat({ name, Booked, Locked, trip }) {
       >
         <g strokeWidth={1} stroke="pink" strokeMiterlimit={20} value={name}>
           <path
-            fill={Booked  ? "gray" : next}
+            fill={Booked ? "gray" : next}
             value={name}
             className="st0"
             d="M46.9,16.5c-1.4,0-2.5,1.1-2.5,2.4v16.6c-0.2,0.1-0.3,0.1-0.5,0.2c0,0-2.4,1.1-6.2,2.1

@@ -1,19 +1,19 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 
-export default function SeatIcon({ name, Booked, Locked, trip }) {
+export default function SeatIcon({ name, Booked, Locked, trip, previousDates }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
     setIsActive((current) => !current);
   };
 
-  const color = !Locked && isActive ? "darkred" : "white";
-  const next = !Locked && isActive ? "darkred" : "blue";
+  const color =  !Locked && ! previousDates && !previousDates && isActive ?  "darkred" : "white";
+  const next =  !Locked && ! previousDates && !previousDates && isActive ?  "darkred" : "blue";
 
-    useEffect(() => {
-      setIsActive(false);
-    }, [trip]);
+  useEffect(() => {
+    setIsActive(false);
+  }, [trip]);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -27,7 +27,9 @@ export default function SeatIcon({ name, Booked, Locked, trip }) {
     >
       <p
         className={classNames(
-          !Booked && !Locked && isActive ? " text-white" : "text-gray-800",
+          !Booked && !Locked && !previousDates && isActive
+            ? " text-white"
+            : "text-gray-800",
           "absolute left-5 font-bold text-[11px]  top-1"
         )}
         value={name}
