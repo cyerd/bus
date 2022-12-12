@@ -20,7 +20,7 @@ function ParcelList({ selectedDate, selectedTrip }) {
 
   return (
     <div>
-      <table class="table flex justify-center items-center">
+      <table class="table flex mx-5 justify-center items-center">
         <thead>
           <tr className="border">
             <th className="border border-gray-400 bg-gray-800 text-white px-4">
@@ -44,10 +44,10 @@ function ParcelList({ selectedDate, selectedTrip }) {
           </tr>
         </thead>
         {Products?.Products?.map((booking) => (
-          <tbody key={booking.id}>
+          <tbody key={booking.name}>
             <tr className="border w-full border-gray-400">
-              <td className="border   px-5  border-gray-400">
-                {booking.seller}
+              <td className="border text-clip overflow-hidden w-10 h-10 px-5  border-gray-400">
+                {booking.name}
               </td>
               <td className="border w-fit px-5 border-gray-400">
                 {booking.stock}
