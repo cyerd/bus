@@ -167,19 +167,17 @@ export const A = [
     price: normal,
   },
 ];
-export const Staff = [{ name: "STAFF", price: 1500 }];
-export const C = [{ name: "C", price: 1500 }];
+export const Staff = [{ name: "STAFF", normal }];
+export const C = [{ name: "C", normal }];
 export const D = [
-  { name: "A1", price: 1500 },
-  { name: "A2", price: 1500 },
+  { name: "A1", normal },
+  { name: "A2", normal },
 ];
 
 export const Trips = [
   {
     id: 2,
     name: "6:00 AM",
-    Booked: ["A2", "B6", "B16"],
-    lock: ["A8", "B2"],
     series: "A",
     RegNo: "KCZ 108P",
     Route: "GRS-NBI",
@@ -187,8 +185,6 @@ export const Trips = [
   {
     id: 2,
     name: "4:00 PM",
-    Booked: ["A9", "B8"],
-    lock: ["VIP2", "STAFF"],
     series: "B",
     RegNo: "KCB 998Z",
     Route: "GRS-NBI",

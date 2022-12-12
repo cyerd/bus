@@ -1,15 +1,28 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 
-export default function SeatIcon({ name, Booked, Locked, trip, previousDates }) {
+export default function SeatIcon({
+  name,
+  Booked,
+  Reserved,
+  trip,
+  previousDates,
+}) {
   const [isActive, setIsActive] = useState(false);
+  const Locked = false;
 
   const handleClick = () => {
     setIsActive((current) => !current);
   };
 
-  const color =  !Locked && ! previousDates && !previousDates && isActive ?  "darkred" : "white";
-  const next =  !Locked && ! previousDates && !previousDates && isActive ?  "darkred" : "blue";
+  const color =
+    !Reserved && !previousDates && !previousDates && isActive
+      ? "darkred"
+      : "white";
+  const next =
+    !Reserved && !previousDates && !previousDates && isActive
+      ? "darkred"
+      : "blue";
 
   useEffect(() => {
     setIsActive(false);
@@ -27,7 +40,7 @@ export default function SeatIcon({ name, Booked, Locked, trip, previousDates }) 
     >
       <p
         className={classNames(
-          !Booked && !Locked && !previousDates && isActive
+          !Booked && !Reserved && !previousDates && isActive
             ? " text-white"
             : "text-gray-800",
           "absolute left-5 font-bold text-[11px]  top-1"
@@ -54,7 +67,7 @@ export default function SeatIcon({ name, Booked, Locked, trip, previousDates }) 
         value={name}
       >
         <g
-          fill={Booked ? "gray" : next}
+          fill={Booked ? "gray" : Reserved ? "#ff00ff" : next}
           strokeWidth={1}
           stroke="gray"
           strokeMiterlimit={10}

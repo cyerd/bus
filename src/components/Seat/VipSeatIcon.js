@@ -1,14 +1,28 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 
-export default function VipSeatIcon({ name, Booked, Locked, trip, previousDates }) {
+export default function VipSeatIcon({
+  name,
+  Booked,
+  Reserved,
+  trip,
+  previousDates,
+}) {
   const [isActive, setIsActive] = useState(false);
   const handleClick = (e) => {
     setIsActive((current) => !current);
   };
 
-  const color = !Locked && ! previousDates && !previousDates && isActive ? "darkred" : "white";
-  const next = !Locked && ! previousDates && !previousDates && isActive ? "darkred" : "orange";
+  const color =
+    !Reserved && !previousDates && !previousDates && isActive
+      ? "darkred"
+      : "white";
+  const next =
+    !Reserved && !previousDates && !previousDates && isActive
+      ? "darkred"
+      : "orange";
+
+  const Locked = false;
 
   useEffect(() => {
     setIsActive(false);
@@ -22,7 +36,9 @@ export default function VipSeatIcon({ name, Booked, Locked, trip, previousDates 
     <div className="relative " onClick={handleClick} value={name}>
       <p
         className={classNames(
-          !Booked && !Locked && ! previousDates && isActive ? " text-white" : "text-gray-800",
+          !Booked && !Reserved && !previousDates && isActive
+            ? " text-white"
+            : "text-gray-800",
           "absolute left-4 font-bold text-[11px] top-1"
         )}
         value={name}
@@ -48,7 +64,7 @@ export default function VipSeatIcon({ name, Booked, Locked, trip, previousDates 
       >
         <g strokeWidth={1} stroke="gray" strokeMiterlimit={10} value={name}>
           <path
-            fill={Booked ? "gray" : next}
+            fill={Booked ? "gray" : Reserved ? "#ff00ff" : next}
             value={name}
             className="st0"
             d="M46.9,16.5c-1.4,0-2.5,1.1-2.5,2.4v16.6c-0.2,0.1-0.3,0.1-0.5,0.2c0,0-2.4,1.1-6.2,2.1

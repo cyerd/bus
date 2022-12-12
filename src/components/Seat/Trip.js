@@ -1,11 +1,11 @@
 import { EyeIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-import ManifestModal from "./manifestModal";
+import ManifestModal from "./ManifestModal";
 import { Trips } from "./SeatConstants";
 
 import clsx from "clsx";
 
-export default function Trip({ selectedTrip, onChange }) {
+export default function Trip({ selectedTrip, onChange, selectedDate }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -59,7 +59,7 @@ export default function Trip({ selectedTrip, onChange }) {
           </button>
         </div>
       ))}
-      <ManifestModal setOpen={setOpen} open={open} />
+      <ManifestModal selectedDate={selectedDate} selectedTrip={selectedTrip} setOpen={setOpen} open={open} />
     </div>
   );
 }

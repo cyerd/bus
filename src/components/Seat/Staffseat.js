@@ -4,24 +4,25 @@ import React, { useEffect, useState } from "react";
 export default function Staffseat({
   name,
   Booked,
-  Locked,
+  Reserved,
   trip,
   previousDates,
 }) {
   const [isActive, setIsActive] = useState(false);
+  const Locked = false;
 
   const handleClick = (e) => {
     setIsActive((current) => !current);
   };
 
   const color =
-    !Locked && !previousDates && !previousDates && isActive
+    !Reserved && !previousDates && !previousDates && isActive
       ? "darkred"
       : "#FFB6C1";
   const next =
-    !Locked && !previousDates && !previousDates && isActive
+    !Reserved && !previousDates && !previousDates && isActive
       ? "darkred"
-      : "#C71585";
+      : "#FFB6C1";
 
   useEffect(() => {
     setIsActive(false);
@@ -35,7 +36,7 @@ export default function Staffseat({
     <div className="relative" onClick={handleClick} value={name}>
       <p
         className={classNames(
-          !Booked && !Locked && !previousDates && isActive
+          !Booked && !Reserved && !previousDates && isActive
             ? " text-white"
             : "text-green-800",
           "absolute left-3.5  font-extrabold text-[10px] top-0.5"
@@ -61,7 +62,7 @@ export default function Staffseat({
         width={60}
         value={name}
       >
-        <g strokeWidth={1} stroke="pink" strokeMiterlimit={20} value={name}>
+        <g strokeWidth={1} stroke="#FFB6C1" strokeMiterlimit={20} value={name}>
           <path
             fill={Booked ? "gray" : next}
             value={name}
@@ -76,7 +77,7 @@ export default function Staffseat({
         <g
           fill={Booked ? "gray" : color}
           strokeWidth={1.2}
-          stroke="pink"
+          stroke="#FFB6C1"
           strokeMiterlimit={20}
           value={name}
         >

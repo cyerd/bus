@@ -9,20 +9,6 @@ import Staffseat from "./Staffseat";
 import useSWR from "swr";
 import { useEffect } from "react";
 
-// async function getData() {
-//   const res = await fetch("http://localhost:3000/api/getBookings");
-//   // The return value is *not* serialized
-//   // You can return Date, Map, Set, etc.
-
-//   // Recommendation: handle errors
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   return res.json()
-// }
-
 export default function SeatMapLayout({
   trip,
   selectedSeats,
@@ -40,7 +26,10 @@ export default function SeatMapLayout({
     }
   }
 
-  const date= selectedDate.toDateString();
+  const date = new Date(selectedDate).toDateString();
+  const timestamp = Date.now();
+  const now = new Date(timestamp).toDateString();
+
   const selectedtrip = trip.name;
 
   const params = `/api/bookings/${date}?trip=${selectedtrip}`;
@@ -55,12 +44,17 @@ export default function SeatMapLayout({
 
   const { data: seats, error, mutate } = useSWR(params, fetcher);
 
-  useEffect(() => {}, [seats, selectedDate]);
 
-  const now = new Date().toDateString();
 
-  const previousDates = date < now ;
-  console.log("now",now, "date:", date,  "prev:",previousDates, "selected:", selectedDate);
+  useEffect(() => {
+  
+  }, [seats, selectedDate]);
+
+    
+
+  const previousDates = date < now;
+
+  console.log("the time", now, "previous", date, previousDates);
 
   return (
     <div className="flex justify-around w-full mt-2 relative ">
@@ -69,15 +63,14 @@ export default function SeatMapLayout({
           <div className="px-3 flex flex-col items-center justify-center ">
             {VIP.map((seat) => {
               const Booked = seats?.takenSeats?.includes(seat.name);
-              
 
-              const Locked = seats?.reservedSeats?.includes(seat.name);
+              const Reserved = seats?.reservedSeats?.includes(seat.name);
 
               return (
                 <button
                   key={seat.name}
                   className={clsx(
-                    Booked || Locked || previousDates
+                    Booked || Reserved || previousDates
                       ? "cursor-not-allowed"
                       : "",
                     "relative flex"
@@ -85,7 +78,7 @@ export default function SeatMapLayout({
                   // onClick={handleClick}
 
                   onClick={
-                    Booked || Locked || previousDates
+                    Booked || Reserved || previousDates
                       ? null
                       : (e) => {
                           e.preventDefault();
@@ -93,7 +86,7 @@ export default function SeatMapLayout({
                         }
                   }
                   onKeyPress={
-                    Booked || Locked || previousDates
+                    Booked || Reserved || previousDates
                       ? null
                       : (e) => {
                           if (e.key === "Enter") {
@@ -107,7 +100,7 @@ export default function SeatMapLayout({
                     selectedDate={date}
                     trip={trip}
                     selectedSeats={selectedSeats}
-                    Locked={Locked}
+                    Reserved={Reserved}
                     Booked={Booked}
                     name={seat.name}
                     previousDates={previousDates}
@@ -118,19 +111,19 @@ export default function SeatMapLayout({
             <div className="flex mb-12">
               {D.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = seats?.reservedSeats?.includes(seat.name);
+                const Reserved = seats?.reservedSeats?.includes(seat.name);
 
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? "cursor-not-allowed"
                         : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();
@@ -138,7 +131,7 @@ export default function SeatMapLayout({
                           }
                     }
                     onKeyPress={
-                      Booked
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
                             if (e.key === "Enter") {
@@ -150,7 +143,7 @@ export default function SeatMapLayout({
                   >
                     <SeatIcon
                       trip={trip}
-                      Locked={Locked}
+                      Reserved={Reserved}
                       Booked={Booked}
                       name={seat.name}
                       previousDates={previousDates}
@@ -162,18 +155,18 @@ export default function SeatMapLayout({
             <div className="grid grid-cols-2 gap-x-1 ">
               {Staff.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = seats?.reservedSeats?.includes(seat.name);
+                const Reserved = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? "cursor-not-allowed"
                         : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();
@@ -181,9 +174,10 @@ export default function SeatMapLayout({
                           }
                     }
                     onKeyPress={
-                      Booked
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
+                            e.preventDefault();
                             if (e.key === "Enter") {
                               e.preventDefault();
                               handleSelectedState(seat);
@@ -193,7 +187,7 @@ export default function SeatMapLayout({
                   >
                     <Staffseat
                       trip={trip}
-                      Locked={Locked}
+                      Reserved={Reserved}
                       Booked={Booked}
                       name={seat.name}
                       previousDates={previousDates}
@@ -204,18 +198,18 @@ export default function SeatMapLayout({
 
               {A.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = seats?.reservedSeats?.includes(seat.name);
+                const Reserved = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? "cursor-not-allowed"
                         : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();
@@ -223,9 +217,10 @@ export default function SeatMapLayout({
                           }
                     }
                     onKeyPress={
-                      Booked
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
+                            e.preventDefault();
                             if (e.key === "Enter") {
                               e.preventDefault();
                               handleSelectedState(seat);
@@ -235,7 +230,7 @@ export default function SeatMapLayout({
                   >
                     <SeatIcon
                       trip={trip}
-                      Locked={Locked}
+                      Reserved={Reserved}
                       Booked={Booked}
                       name={seat.name}
                       previousDates={previousDates}
@@ -250,16 +245,16 @@ export default function SeatMapLayout({
       <div className=" absolute bottom-0">
         {C.map((seat) => {
           const Booked = seats?.takenSeats?.includes(seat.name);
-          const Locked = seats?.reservedSeats?.includes(seat.name);
+          const Reserved = seats?.reservedSeats?.includes(seat.name);
           return (
             <button
               key={seat.name}
               className={clsx(
-                Booked || Locked || previousDates ? "cursor-not-allowed" : "",
+                Booked || Reserved || previousDates ? "cursor-not-allowed" : "",
                 "relative flex"
               )}
               onClick={
-                Booked || Locked || previousDates
+                Booked || Reserved || previousDates
                   ? null
                   : (e) => {
                       e.preventDefault();
@@ -267,9 +262,10 @@ export default function SeatMapLayout({
                     }
               }
               onKeyPress={
-                Booked || Locked || previousDates
+                Booked || Reserved || previousDates
                   ? null
                   : (e) => {
+                      e.preventDefault();
                       if (e.key === "Enter") {
                         e.preventDefault();
                         handleSelectedState(seat);
@@ -279,7 +275,7 @@ export default function SeatMapLayout({
             >
               <SeatIcon
                 trip={trip}
-                Locked={Locked}
+                Reserved={Reserved}
                 Booked={Booked}
                 name={seat.name}
                 previousDates={previousDates}
@@ -296,18 +292,18 @@ export default function SeatMapLayout({
             <div className="grid grid-cols-2 gap-x-1">
               {B.map((seat) => {
                 const Booked = seats?.takenSeats?.includes(seat.name);
-                const Locked = seats?.reservedSeats?.includes(seat.name);
+                const Reserved = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <button
                     key={seat.name}
                     className={clsx(
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? "cursor-not-allowed"
                         : "",
                       "relative flex"
                     )}
                     onClick={
-                      Booked || Locked || previousDates
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
                             e.preventDefault();
@@ -315,9 +311,10 @@ export default function SeatMapLayout({
                           }
                     }
                     onKeyPress={
-                      Booked
+                      Booked || Reserved || previousDates
                         ? null
                         : (e) => {
+                            e.preventDefault();
                             if (e.key === "Enter") {
                               e.preventDefault();
                               handleSelectedState(seat);
@@ -327,7 +324,7 @@ export default function SeatMapLayout({
                   >
                     <SeatIcon
                       trip={trip}
-                      Locked={Locked}
+                      Reserved={Reserved}
                       Booked={Booked}
                       name={seat.name}
                       previousDates={previousDates}

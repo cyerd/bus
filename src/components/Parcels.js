@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -10,27 +10,27 @@ const navigation = [
     name: "Book",
     icon: "/book-parcel.png",
     color: "#c50b09",
-    href:"/parcel/bookparcel"
+    href: "/parcel/bookparcel",
   },
   {
     id: "2",
     name: "Loading Sheet",
     icon: "/loading sheet.png",
     color: "#c50b09",
-    href:"/parcel/loadingsheet"
+    href: "/parcel/loadingsheet",
   },
   {
     id: "3",
     name: "Parcel List",
     icon: "/parcel-list.png",
     color: "#c50b09",
-    href:"/parcel/parcelist"
+    href: "/parcel/parcelist",
   },
 ];
 
 function Parcels() {
   return (
-    <div className="mx-2 border p-2  bg-pink-200 rounded-lg rounded border-2 border-gray-400 mt-2">
+    <div className="mx-2 border p-2  bg-#ff00ff-200 rounded-lg rounded border-2 border-gray-400 mt-2">
       <div className="flex flex-col text-green-700 text-lg mb-3">
         <h1 className="font-bold">Parcel</h1>
         <h3 className="italic">Book & manage Parcel</h3>

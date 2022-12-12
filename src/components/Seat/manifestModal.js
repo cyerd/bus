@@ -4,10 +4,31 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import fetcher from "../../../utils/fetchBookings";
 import useSWR from "swr";
 
-export default function ManifestModal({ open, setOpen }) {
+export default function ManifestModal({
+  open,
+  setOpen,
+  selectedDate,
+  selectedTrip,
+}) {
   const cancelButtonRef = useRef(null);
 
-  const { data: bookings, error, mutate } = useSWR("/api/bookings", fetcher);
+  const date = new Date(selectedDate).toDateString();
+  const timestamp = Date.now();
+  const now = new Date(timestamp).toDateString();
+
+  const selectedtrip = selectedTrip?.name;
+
+  const params = `/api/bookings/${date}?trip=${selectedtrip}`;
+
+  const fetcher = async () => {
+    const bookedSeats = await fetch(params);
+    const data = await bookedSeats.json();
+    const seats = data;
+
+    return seats;
+  };
+
+  const { data: bookings, error, mutate } = useSWR(params, fetcher);
 
   useEffect(() => {}, [bookings]);
 
@@ -35,7 +56,7 @@ export default function ManifestModal({ open, setOpen }) {
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-out duration-200"
               enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               enterTo="opacity-100 translate-y-0 sm:scale-100"
               leave="ease-in duration-200"
@@ -53,54 +74,58 @@ export default function ManifestModal({ open, setOpen }) {
                         Deactivate account
                       </Dialog.Title>
                       <div className="mt-2">
-                        <table class="table flex justify-center items-center">
-                          <thead>
-                            <tr className="border">
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
-                                ID
-                              </th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
-                                DATE
-                              </th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
-                                SEAT NO
-                              </th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
-                                FULL NAME
-                              </th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
-                                MOBILE NO
-                              </th>
-                              <th className="border border-gray-400 bg-gray-800 text-white px-4">
-                                TOTAL PAID
-                              </th>
-                            </tr>
-                          </thead>
-                          {bookings?.bookings?.map((booking) => (
-                            <tbody key={booking.id}>
-                              <tr className="border border-gray-400">
-                                <td className="border w-fit px-5 border-gray-400">
-                                  {booking.id}
-                                </td>
-                                <td className="border w-fit px-5 border-gray-400">
-                                  {booking.startDate}
-                                </td>
-                                <td className="border w-fit px-5 border-gray-400">
-                                  {booking.seatNo}
-                                </td>
-                                <td className="border w-fit px-5 border-gray-400">
-                                  {booking.fullName}
-                                </td>
-                                <td className="border w-fit px-5 border-gray-400">
-                                  {booking.mobile}
-                                </td>
-                                <td className="border w-fit px-5 border-gray-400">
-                                  {booking.totalPaid}
-                                </td>
+                        {bookings?.bookings ? (
+                          <table class="table flex justify-center items-center">
+                            <thead>
+                              <tr className="border">
+                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                  ID
+                                </th>
+                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                  DATE
+                                </th>
+                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                  SEAT NO
+                                </th>
+                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                  FULL NAME
+                                </th>
+                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                  MOBILE NO
+                                </th>
+                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                  TOTAL PAID
+                                </th>
                               </tr>
-                            </tbody>
-                          ))}
-                        </table>
+                            </thead>
+                            {bookings?.bookings?.map((booking) => (
+                              <tbody key={booking.id}>
+                                <tr className="border w-full border-gray-400">
+                                  <td className="border   px-5  border-gray-400">
+                                    {booking.id}
+                                  </td>
+                                  <td className="border w-fit px-5 border-gray-400">
+                                    {booking.startDate}
+                                  </td>
+                                  <td className="border w-fit px-5 border-gray-400">
+                                    {booking.seatNo}
+                                  </td>
+                                  <td className="border w-fit px-5 border-gray-400">
+                                    {booking.fullName}
+                                  </td>
+                                  <td className="border w-fit px-5 border-gray-400">
+                                    {booking.mobile}
+                                  </td>
+                                  <td className="border w-fit px-5 border-gray-400">
+                                    {booking.totalPaid}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            ))}
+                          </table>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </div>
@@ -108,18 +133,11 @@ export default function ManifestModal({ open, setOpen }) {
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
-                  >
-                    Deactivate
-                  </button>
-                  <button
-                    type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
                   >
-                    Cancel
+                    Close
                   </button>
                 </div>
               </Dialog.Panel>
