@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import Header from "../../components/Layouts/Header";
+import AddParcel from "../../components/Seat/AddParcel";
 import ParcelList from "../../components/Seat/ParcelList";
 
 export default function addparcel() {
@@ -76,8 +77,11 @@ export default function addparcel() {
             </div>
           </div>
         </div>
+        <div className="flex flex-col">
+        <AddParcel/>
 
         <ParcelList />
+        </div>
       </form>
     </div>
   );

@@ -1,9 +1,9 @@
 import { EyeIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-import ManifestModal from "./ManifestModal";
 import { Trips } from "./SeatConstants";
 
 import clsx from "clsx";
+import ManifestModal from "./manifestModal";
 
 export default function Trip({ selectedTrip, onChange, selectedDate }) {
   const [open, setOpen] = useState(false);
