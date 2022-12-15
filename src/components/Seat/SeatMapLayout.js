@@ -44,13 +44,9 @@ export default function SeatMapLayout({
 
   const { data: seats, error, mutate } = useSWR(params, fetcher);
 
+  // useEffect(() => {
 
-
-  useEffect(() => {
-  
-  }, [seats, selectedDate]);
-
-    
+  // }, [seats, selectedDate]);
 
   const previousDates = date < now;
 

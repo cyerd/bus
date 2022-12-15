@@ -26,7 +26,7 @@ export default function VipSeatIcon({
 
   useEffect(() => {
     setIsActive(false);
-  }, [trip]);
+  }, [trip, previousDates]);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 .rbc-today {
-  background-color: #00b3b3 !important;
-  color: white;
+  background-color: #77bbff !important;
   width: fit-content !important;
+
 }
+
+
+
 
 .MuiFormLabel-root {
   display: none !important;
@@ -32,12 +35,6 @@
   display: none !important;
 }
 
-
-
-
-
-
-
-.css-yrdy0g-MuiDataGrid-columnHeaderRow  {
+.css-yrdy0g-MuiDataGrid-columnHeaderRow {
   color: "white" !important;
 }

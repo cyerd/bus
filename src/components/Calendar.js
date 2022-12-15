@@ -15,7 +15,7 @@ import { format } from "date-fns";
 const styles = {
   container: {
     width: "80wv",
-    height: "400px",
+    height: "20vh",
   },
 };
 

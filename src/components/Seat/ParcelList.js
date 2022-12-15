@@ -16,7 +16,7 @@ function ParcelList({ selectedDate, selectedTrip }) {
 
   const { data: Products, error, mutate } = useSWR(params, fetcher);
 
-  useEffect(() => {}, [Products]);
+//   useEffect(() => {}, [Products]);
 
   return (
     <div>

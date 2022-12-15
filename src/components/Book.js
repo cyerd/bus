@@ -15,6 +15,7 @@ import { Tooltip } from "@material-tailwind/react";
 import { Destination, Places, Trips } from "./Seat/SeatConstants";
 import Trip from "./Seat/Trip";
 import SeatMapLayout from "./Seat/SeatMapLayout";
+import { Router, useRouter } from "next/router";
 
 export default function Booking({ value, trip }) {
   const [destinations, setDestination] = useState("NAIROBI");
@@ -66,9 +67,9 @@ export default function Booking({ value, trip }) {
   const [selectedTrip, setSelectedTrip] = useState(Trips[0]);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
-  useEffect(() => {
-    setCurrentValue("");
-  }, [trip, seatNo]);
+  // useEffect(() => {
+  //   setCurrentValue("");
+  // }, [trip, seatNo]);
 
   const BookTicket = async (e) => {
     e.preventDefault();
@@ -116,6 +117,8 @@ export default function Booking({ value, trip }) {
       optimisticData: [bookings, ...bookings],
       rollbackOnError: true,
     });
+
+
   };
 
   const ReserveSeats = async (e) => {
@@ -467,7 +470,7 @@ export default function Booking({ value, trip }) {
           </span>
           {selectedSeats.forEach((subData) => (sum += subData.price))}
           <div>
-            <div className="flex flex-col lg:flex-row mx-2 text-sm ">
+            <div className="flex flex-col lg:flex-row mx-2 text-sm overflow-auto justify-evenly ">
               <div className="flex flex-col mx-1">
                 <lable className="font-bold my-2 ">Total Amount</lable>
                 <div className="flex bg-gray-100 items-center">
@@ -478,7 +481,7 @@ export default function Booking({ value, trip }) {
                     disabled
                     onChange={(e) => setSum(e.target.value)}
                     type="text"
-                    className="bg-white text-red-500 px-5 rounded-lg text-center text-lg font-bold"
+                    className="bg-white text-red-500 px-5 w-fit rounded-lg text-center text-lg font-bold"
                   />
                 </div>
               </div>
@@ -490,7 +493,9 @@ export default function Booking({ value, trip }) {
                     className="border-2 bg-white text-green-500 text-center text-lg font-bold"
                     value={currentValue.toLocaleString("en-US")}
                     onChange={(e) => setCurrentValue(e.target.value)}
-                    type="text"
+                    type="number"
+                    minLength={2}
+                    maxLength={3}
                   />
                 </div>
               </div>

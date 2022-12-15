@@ -30,7 +30,7 @@ export default function ManifestModal({
 
   const { data: bookings, error, mutate } = useSWR(params, fetcher);
 
-  useEffect(() => {}, [bookings]);
+  // useEffect(() => {}, [bookings]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
