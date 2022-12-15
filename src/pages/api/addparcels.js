@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 //     return;
 //   }
   const { parcel } = req.body;
-  console.log("query body", parcel)
+
 
   const newParcel = {
     ...parcel,
@@ -17,7 +17,6 @@ export default async function handler(req, res) {
     await prisma.parcels.create({
       data: newParcel,
     });
-    console.log(newParcel, "new dat5a");
 
     res.status(200).json({ parcel: newParcel });
   } catch (error) {

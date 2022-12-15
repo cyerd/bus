@@ -31,7 +31,7 @@ export default function Addparcel() {
 
   const { data: parcelList, error, mutate } = useSWR("/api/getparcel", fetcher);
 
-  console.log("parcelList: ", parcelList);
+
 
   const pickDate = new Date();
 
