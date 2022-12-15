@@ -31,8 +31,6 @@ export default function Addparcel() {
 
   const { data: parcelList, error, mutate } = useSWR("/api/getparcel", fetcher);
 
-
-
   const pickDate = new Date();
 
   const handleParcel = async (e) => {
@@ -91,7 +89,7 @@ export default function Addparcel() {
 
       {/* Navigation bar || header bar  */}
       <Header />
-      <form className="flex h-fit ">
+      <form className="md:flex h-fit ">
         <div
           className=" md:w-4/12 flex flex-col "
           style={{ backgroundColor: "#FBEAD8", padding: 10 }}
@@ -218,9 +216,9 @@ export default function Addparcel() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col space-y-5 justify-evenly w-full overflow-hidden">
+        <div className="flex flex-col space-y-5 justify-evenly w-full mb-10">
           <div className="flex flex-col bg-yellow-100 rounded-lg">
-            <div className="flex">
+            <div className="md:flex">
               <div className="flex flex-col items-center ">
                 <label>Item Type</label>
                 <input

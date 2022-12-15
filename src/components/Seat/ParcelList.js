@@ -111,7 +111,7 @@ export default function ParcelList() {
   if (!parcel ) { let parcel = [];}
 
   return (
-    <div style={{ height: 650, width: "100%" }}>
+    <div  style={{ height: 650, width: "100%" }}>
       {parcel ? (
         <DataGrid
           className="bg-green-200"
