@@ -71,6 +71,8 @@ export default function Booking({ value, trip }) {
   //   setCurrentValue("");
   // }, [trip, seatNo]);
 
+  const router = useRouter();
+
   const BookTicket = async (e) => {
     e.preventDefault();
 
@@ -118,7 +120,7 @@ export default function Booking({ value, trip }) {
       rollbackOnError: true,
     });
 
-
+    await router.reload();
   };
 
   const ReserveSeats = async (e) => {
@@ -167,6 +169,8 @@ export default function Booking({ value, trip }) {
       optimisticData: [bookings, ...bookings],
       rollbackOnError: true,
     });
+
+    await router.reload();
   };
 
   return (
