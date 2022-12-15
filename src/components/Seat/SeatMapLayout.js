@@ -50,7 +50,7 @@ export default function SeatMapLayout({
 
   const previousDates = date < now;
 
-  console.log("the time", now, "previous", date, previousDates);
+
 
   return (
     <div className="flex justify-around w-full mt-2 relative ">

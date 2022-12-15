@@ -10,7 +10,7 @@ const navigation = [
     name: "Book",
     icon: "/book-parcel.png",
     color: "#c50b09",
-    href: "/parcel/bookparcel",
+    href: "/parcel/addparcel",
   },
   {
     id: "2",

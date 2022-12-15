@@ -1,13 +1,12 @@
 
 
 const fetcher = async () => {
-  const params = `/api/bookings/${query}`;
-  const bookedSeats = await fetch(params);
-  const data = await bookedSeats.json();
-  const seats = data;
+  const ParcelList = await fetch("/api/getparcel");
+  const data = await ParcelList.json();
+  const parcels = data.parcelList;
 
 
-  return seats;
+  return parcels;
 };
 
 export default fetcher;

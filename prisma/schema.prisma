@@ -53,3 +53,23 @@ model bookedSeats {
  
   
 }
+
+model parcels {
+  id String @id @map("_id")
+  from String
+  pickup String
+  destination String
+  drop String
+  sender String
+  senderMobile Int
+  receiver String
+  receiverMobile Int
+  itemType String
+  pickDate DateTime
+  itemName String
+  itemQty Int
+  cost Int
+  totalAmount Int
+
+
+}
