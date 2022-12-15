@@ -76,7 +76,6 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import useSWR from "swr";
 import Loading from "./Loading";
-import fetcher from "../../../utils/fetchBookings";
 
 const columns = [
   { field: "from", headerName: "FROM", width: 70 },
@@ -86,6 +85,8 @@ const columns = [
   { field: "senderMobile", headerName: "SENDER MOBILE", width: 130 },
   { field: "receiver", headerName: "RECIVER", width: 130 },
   { field: "receiverMobile", headerName: "RECEIVER MOBILE", width: 130 },
+  { field: "itemType", headerName: "ITEM TYPE", width: 130 },
+  { field: "itemName", headerName: "ITEM NAME", width: 130 },
 ];
 
 const rows = [
@@ -101,17 +102,38 @@ const rows = [
 ];
 
 export default function ParcelList() {
-  const params = `/api/getparcel`;
+  const [query, setQuery] = React.useState("");
+  const fetcher = async () => {
+    const ParcelList = await fetch(`/api/getparcel?receiver=${query}`);
+    const data = await ParcelList.json();
+    const parcels = data.parcelList;
 
+    return parcels;
+  };
 
+  const {
+    data: parcel,
+    error,
+    mutate,
+  } = useSWR(`/api/getparcel?receiver=${query}`, fetcher);
 
- 
-  const { data: parcel, error, mutate } = useSWR("/api/getparcel", fetcher);
-
-  if (!parcel ) { let parcel = [];}
+  if (!parcel) {
+    let parcel = [];
+  }
 
   return (
-    <div  style={{ height: 650, width: "100%" }}>
+    <div style={{ height: 650, width: "100%" }}>
+      <div>
+        <div>
+          <input
+            onChange={(e) => setQuery(e.target.value)}
+            value={query}
+            type="search"
+            placeholder="search"
+            className="p-2 border border-gray-400 bg-purple-100  rounded-lg my-2 ml-5"
+          />
+        </div>
+      </div>
       {parcel ? (
         <DataGrid
           className="bg-green-200"
@@ -119,6 +141,7 @@ export default function ParcelList() {
           columns={columns}
           pageSize={10}
           rowsPerPageOptions={[10]}
+          checkboxSelection
         />
       ) : (
         <Loading />
