@@ -15,7 +15,6 @@ import { Tooltip } from "@material-tailwind/react";
 import { Destination, Places, Trips } from "./Seat/SeatConstants";
 import Trip from "./Seat/Trip";
 import SeatMapLayout from "./Seat/SeatMapLayout";
-import { Router, useRouter } from "next/router";
 
 export default function Booking({ value, trip }) {
   const [destinations, setDestination] = useState("NAIROBI");
@@ -29,7 +28,6 @@ export default function Booking({ value, trip }) {
   const [idNumber, setIdNumber] = useState();
   const [luggage, setLuggage] = useState("NO");
 
-  const { messages, error, mutate } = useSWR("/api/getMessages", fetcher);
 
   const handleDestination = (e) => {
     setDestination(e.target.value);
@@ -67,11 +65,28 @@ export default function Booking({ value, trip }) {
   const [selectedTrip, setSelectedTrip] = useState(Trips[0]);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
-  // useEffect(() => {
-  //   setCurrentValue("");
-  // }, [trip, seatNo]);
+  useEffect(() => {
+    setCurrentValue("");
+  }, [trip, seatNo]);
 
-  const router = useRouter();
+
+    const date = new Date(startDate).toDateString();
+    const timestamp = Date.now();
+    const now = new Date(timestamp).toDateString();
+
+    const selectedtrip = trip.name;
+
+    const params = `/api/bookings/${date}?trip=${selectedtrip}`;
+
+    const fetcher = async () => {
+      const bookedSeats = await fetch(params);
+      const data = await bookedSeats.json();
+      const seats = data;
+
+      return seats;
+    };
+
+    const { data: seats, error, mutate } = useSWR(params, fetcher);
 
   const BookTicket = async (e) => {
     e.preventDefault();
@@ -116,11 +131,9 @@ export default function Booking({ value, trip }) {
       return [data.booking, ...bookings];
     };
     await mutate(uploadMessageToUpstash, {
-      optimisticData: [bookings, ...bookings],
+      optimisticData: [booking, ...seats?.bookings],
       rollbackOnError: true,
     });
-
-    await router.reload();
   };
 
   const ReserveSeats = async (e) => {
@@ -163,14 +176,12 @@ export default function Booking({ value, trip }) {
         }),
       }).then((res) => res.json());
 
-      return [data.booking, ...bookings];
+      return [data.booking, ...seats?.bookings];
     };
     await mutate(uploadMessageToUpstash, {
-      optimisticData: [bookings, ...bookings],
+      optimisticData: [booking, ...seats?.bookings],
       rollbackOnError: true,
     });
-
-    await router.reload();
   };
 
   return (
@@ -183,6 +194,7 @@ export default function Booking({ value, trip }) {
                 className="w-fit h-fit border-2 py-1 px-3 rounded-lg justify-between mr-2"
                 value={place}
                 onChange={handlePlace}
+                name="place"
               >
                 {Places.map((place) => (
                   <option key={place.name} value={place.name}>
@@ -196,6 +208,7 @@ export default function Booking({ value, trip }) {
                 className=" w-fit h-fit border-2 py-1 px-3 rounded-lg justify-between mr-2"
                 value={destinations}
                 onChange={handleDestination}
+                name="destination"
               >
                 {Destination.map((place) => (
                   <option key={place.name} value={place.name}>
@@ -211,6 +224,7 @@ export default function Booking({ value, trip }) {
                 selected={startDate}
                 onChange={handleDate}
                 dateFormat="dd/M/yyyy"
+                name="traveldate"
               />
               <Tooltip
                 content="Reset Date"
@@ -226,24 +240,6 @@ export default function Booking({ value, trip }) {
             </div>
             <button className="ml-2 text-sm lg:text-md bg-red-600 rounded-md px-1 flex justify-between w-fit h-fit p-1  items-center text-white my-2 lg:my-0">
               Lock Trip <ChevronDownIcon height="18" />{" "}
-            </button>
-            <button className="flex items-center ml-2 my-2  lg:my-0">
-              <label
-                htmlFor="disabled-checked-toggle"
-                className="inline-flex relative items-center cursor-pointer"
-              >
-                <input
-                  type="checkbox"
-                  defaultValue
-                  id="disabled-checked-toggle"
-                  className="sr-only peer"
-                  defaultChecked
-                />
-                <div className="w-11 h-6 bg-gray-200 rounded-full" />
-                <span className="ml-3 text-sm text-black font-bold ">
-                  Highway
-                </span>
-              </label>
             </button>
           </div>
 
@@ -277,6 +273,7 @@ export default function Booking({ value, trip }) {
                   type="text"
                   value={value}
                   className="bg-transparent outline-0 disabled"
+                  name="from"
                 />
               </div>
               <div className="flex flex-col mx-4">
@@ -286,6 +283,7 @@ export default function Booking({ value, trip }) {
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
                   value={destinations}
                   onChange={handleDestination}
+                  name="destination"
                 >
                   {Destination.map((place) => (
                     <option key={place.name} value={place.name}>
@@ -301,6 +299,7 @@ export default function Booking({ value, trip }) {
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
                   value={pickup}
                   onChange={handlePickup}
+                  name="pickup"
                 >
                   {Destination.map((place) => (
                     <option key={place.name} value={place.name}>
@@ -315,8 +314,7 @@ export default function Booking({ value, trip }) {
                 <select
                   disabled
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
-                  value={pickup}
-                  onChange={handlePickup}
+                  name="currency"
                 >
                   <option key="1" className="text-center " value="ksh">
                     Kenyan Shilling
@@ -349,6 +347,7 @@ export default function Booking({ value, trip }) {
                       onChange={(e) => {
                         setFullName(e.target.value);
                       }}
+                      name="fullName"
                     />
                   </div>
 
@@ -367,6 +366,7 @@ export default function Booking({ value, trip }) {
                         onChange={(e) => {
                           setMobile(e.target.value);
                         }}
+                        name="mobile"
                       />
                     </span>
                   </div>
@@ -380,6 +380,7 @@ export default function Booking({ value, trip }) {
                       onChange={(e) => {
                         setAge(e.target.value);
                       }}
+                      name="Age"
                     />
                   </div>
                   <div className="flex flex-col  mx-1">
@@ -416,6 +417,7 @@ export default function Booking({ value, trip }) {
                       onChange={(e) => {
                         setNationality(e.target.value);
                       }}
+                      name="nationality"
                     />
                   </div>
                   <div className="flex flex-col mx-1">
@@ -428,6 +430,7 @@ export default function Booking({ value, trip }) {
                       onChange={(e) => {
                         setIdNumber(e.target.value);
                       }}
+                      name="idnumber"
                     />
                   </div>
                   <div className="flex flex-col mx-1">
@@ -441,6 +444,7 @@ export default function Booking({ value, trip }) {
                       autoFocus
                       value={(seatNo = seat.name)}
                       // onInput={handleSeatNo}
+                      name="seatno"
                     />
                   </div>
                 </div>
@@ -457,6 +461,7 @@ export default function Booking({ value, trip }) {
               onInput={(e) => {
                 setLuggage(e.target.value);
               }}
+              name="luggage"
               className="text-sm mx-3 my-2 py-1 px-2 bg-blue-300 rounded px-2"
             >
               <option className="bg-gray-100" value="No">
@@ -474,7 +479,7 @@ export default function Booking({ value, trip }) {
           </span>
           {selectedSeats.forEach((subData) => (sum += subData.price))}
           <div>
-            <div className="flex flex-col lg:flex-row mx-2 text-sm overflow-auto justify-evenly ">
+            <div className="flex flex-col lg:flex-row mx-2 text-sm ">
               <div className="flex flex-col mx-1">
                 <lable className="font-bold my-2 ">Total Amount</lable>
                 <div className="flex bg-gray-100 items-center">
@@ -485,7 +490,8 @@ export default function Booking({ value, trip }) {
                     disabled
                     onChange={(e) => setSum(e.target.value)}
                     type="text"
-                    className="bg-white text-red-500 px-5 w-fit rounded-lg text-center text-lg font-bold"
+                    className="bg-white text-red-500 px-5 rounded-lg text-center text-lg font-bold"
+                    name="sum"
                   />
                 </div>
               </div>
@@ -497,9 +503,8 @@ export default function Booking({ value, trip }) {
                     className="border-2 bg-white text-green-500 text-center text-lg font-bold"
                     value={currentValue.toLocaleString("en-US")}
                     onChange={(e) => setCurrentValue(e.target.value)}
-                    type="number"
-                    minLength={2}
-                    maxLength={3}
+                    type="text"
+                    name="discount"
                   />
                 </div>
               </div>
@@ -513,16 +518,18 @@ export default function Booking({ value, trip }) {
                     value={(sum - currentValue).toLocaleString("en-US")}
                     type="text"
                     onChange={(e) => setTotalAmount(e.target.value)}
+                    name="total"
                   />
                 </div>
               </div>
               <div className="flex flex-col mx-4">
-                <lable className="font-bold my-2">Pickup Point</lable>
+                <lable className="font-bold my-2">Payment Method</lable>
 
                 <select
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
                   value={payment}
                   onChange={(e) => setPayment(e.target.value)}
+                  name="payment"
                 >
                   <option value="CASH">CASH</option>
                   <option value="MPESA">MPESA</option>
@@ -538,6 +545,7 @@ export default function Booking({ value, trip }) {
                 className="border-2 border-gray-300  p-1"
                 type="text"
                 placeholder="Note"
+                name="note"
               />
               <p className="text-blue-300 font-bold">Max 60 Characters</p>
             </span>
@@ -546,6 +554,7 @@ export default function Booking({ value, trip }) {
                 className="border-2 border-gray-300 p-1"
                 type="text"
                 placeholder="Voucher Code"
+                name="voucher"
               />
               <p className="text-blue-300 font-bold">
                 Type / Paste voucher code and press enter.

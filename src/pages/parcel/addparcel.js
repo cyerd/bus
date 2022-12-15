@@ -1,3 +1,5 @@
+"use client";
+
 import Head from "next/head";
 import React, { useState } from "react";
 import Header from "../../components/Layouts/Header";
@@ -7,7 +9,7 @@ import useSWR from "swr";
 import { Router, useRouter } from "next/router";
 import fetcher from "../../../utils/fetchBookings";
 
-export default function addparcel() {
+export default function Addparcel() {
   const [from, setFrom] = useState("");
   const [destination, setDestination] = useState("");
   const [pickup, setPickup] = useState("");
@@ -22,19 +24,14 @@ export default function addparcel() {
   const [cost, setCost] = useState("");
   let [totalAmount, setTotalAmount] = useState("");
 
-
-
-
-
-  const router = useRouter()
-  const reload =()=> {
-    router.reload()
-  }
+  const router = useRouter();
+  const reload = () => {
+    router.reload();
+  };
 
   const { data: parcelList, error, mutate } = useSWR("/api/getparcel", fetcher);
 
-console.log("parcelList: ", parcelList);
-
+  console.log("parcelList: ", parcelList);
 
   const pickDate = new Date();
 
@@ -61,10 +58,6 @@ console.log("parcelList: ", parcelList);
 
       pickDate: pickDate,
     };
-
- 
-
-
 
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/addparcels", {

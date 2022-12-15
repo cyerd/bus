@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Fragment } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
@@ -27,8 +27,6 @@ const userNavigation = [
   { name: "Settings", icon: Cog6ToothIcon, href: "#" },
   { name: "Sign out", icon: ArrowRightOnRectangleIcon, href: "#" },
 ];
-
-
 
 const ticket = [
   {
@@ -70,7 +68,7 @@ const parcel = [
     name: "Book Parcel",
     description:
       "Get a better understanding of where your traffic is coming from.",
-    href: "/parcel/addparcel",
+    href: "/parcel/Addparcel",
     icon: PlusCircleIcon,
   },
   {
@@ -150,7 +148,6 @@ export default function Header() {
                 alt="Logo"
                 media="(prefers-color-scheme: dark)"
               />
-              
             </Link>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
