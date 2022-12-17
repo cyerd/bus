@@ -67,7 +67,8 @@ export default function Booking({ value, trip }) {
 
   useEffect(() => {
     setCurrentValue("");
-  }, [trip, seatNo]);
+    setSelectedSeats([])
+  }, [trip, seatNo, startDate]);
 
 
     const date = new Date(startDate).toDateString();
@@ -572,7 +573,14 @@ export default function Booking({ value, trip }) {
 
           {/* bottom three buttons */}
           <div className="flex justify-end flex-col  lg:flex-row mt-32 mb-10 text-lg mx-20 lg:mx-5">
-            <button className=" px-2 py-1 rounded mx-1 border border-gray-400 my-2 lg:my-0">
+            <button onClick={()=>{
+              setFullName("")
+              setMobile("")
+              setAge("")
+              setNationality("")
+              setIdNumber("")
+              setSelectedSeats([]);
+            }} type="reset" className=" px-2 py-1 rounded mx-1 border border-gray-400 my-2 lg:my-0">
               Reset
             </button>
             <button

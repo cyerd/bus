@@ -40,22 +40,24 @@ export default function Addparcel() {
 
     const parcel = {
       id,
-      from: from,
-      destination: destination,
-      pickup: pickup,
-      drop: drop,
-      sender: sender,
+      from: from.toUpperCase(),
+      destination: destination.toUpperCase(),
+      pickup: pickup.toUpperCase(),
+      drop: drop.toUpperCase(),
+      sender: sender.toUpperCase(),
       senderMobile: Number(senderMobile),
-      receiver: receiver,
+      receiver: receiver.toUpperCase(),
       receiverMobile: Number(receiverMobile),
-      itemType: itemType,
-      itemName: itemName,
+      itemType: itemType.toUpperCase(),
+      itemName: itemName.toUpperCase(),
       itemQty: Number(itemQty),
       cost: Number(cost),
       totalAmount: Number(totalAmount),
 
       pickDate: pickDate,
     };
+
+
 
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/addparcels", {
@@ -101,7 +103,7 @@ export default function Addparcel() {
             <p> SOURCE</p>
             <div className="flex flex-col w-7/12 ">
               <select
-                className="rounded my-2"
+                className="rounded my-2  uppercase"
                 value={from}
                 onChange={(e) => {
                   setFrom(e.target.value);
@@ -111,7 +113,7 @@ export default function Addparcel() {
                 <option value="Garissa">GARISSA</option>
               </select>
               <select
-                className="rounded"
+                className="rounded uppercase"
                 value={pickup}
                 onChange={(e) => {
                   setPickup(e.target.value);
@@ -120,7 +122,7 @@ export default function Addparcel() {
                 <option>Pickup Point</option>
                 <option
                   value="Garissa Office"
-                  className="text-gray-50 bg-gray-500"
+                  className="text-gray-50 bg-gray-500 uppercase"
                 >
                   Garissa Office
                 </option>
@@ -131,7 +133,7 @@ export default function Addparcel() {
             <p> DESTINATION</p>
             <div className="flex flex-col  w-7/12 ">
               <select
-                className="rounded my-2"
+                className="rounded my-2 uppercase"
                 value={destination}
                 onChange={(e) => {
                   setDestination(e.target.value);
@@ -141,7 +143,7 @@ export default function Addparcel() {
                 <option value="Nairobi">Nairobi</option>
               </select>
               <select
-                className="rounded"
+                className="rounded uppercase"
                 value={drop}
                 onChange={(e) => {
                   setDrop(e.target.value);
@@ -150,7 +152,7 @@ export default function Addparcel() {
                 <option>Drop Point</option>
                 <option
                   value="Nairobi Office"
-                  className="text-gray-50 bg-gray-500"
+                  className="text-gray-50 bg-gray-500 uppercase"
                 >
                   Nairobi Office
                 </option>
@@ -168,7 +170,7 @@ export default function Addparcel() {
                 type="text"
                 required
                 placeholder="Sender Name"
-                className="pl-3 border border-gray-200 mb-2  outline-none"
+                className="pl-3 border border-gray-200 mb-2  outline-none uppercase"
               />
               <p className="bg-white flex ">
                 <span className="border border-gray-200 bg-white px-1  ">
@@ -181,7 +183,7 @@ export default function Addparcel() {
                   value={senderMobile}
                   type="text"
                   pattern="\d*"
-                  className=" outline-none w-7/12   pl-2"
+                  className=" outline-none w-7/12   pl-2 uppercase"
                 />
               </p>
             </div>
@@ -197,7 +199,7 @@ export default function Addparcel() {
                 type="text"
                 required
                 placeholder="Receiver Name"
-                className="pl-3 border border-gray-200 mb-2  outline-none"
+                className="pl-3 border border-gray-200 mb-2 uppercase outline-none"
               />
               <p className="bg-white flex ">
                 <span className="border border-gray-200 bg-white px-1  ">
@@ -210,7 +212,7 @@ export default function Addparcel() {
                   value={receiverMobile}
                   type="text"
                   pattern="\d*"
-                  className=" outline-none w-7/12   pl-2"
+                  className=" outline-none w-7/12 uppercase  pl-2"
                 />
               </p>
             </div>
@@ -226,7 +228,7 @@ export default function Addparcel() {
                     setItemType(e.target.value);
                   }}
                   value={itemType}
-                  className="px-5 rounded border border-gray-300 w-32 p-2 mt-2 mx-4 "
+                  className="px-5 rounded border uppercase border-gray-300 w-32 p-2 mt-2 mx-4 "
                   type="text"
                   required
                   placeholder="Item Type"
@@ -239,7 +241,7 @@ export default function Addparcel() {
                     setItemName(e.target.value);
                   }}
                   value={itemName}
-                  className="px-5 rounded border border-gray-300 w-32 p-2 mt-2 mx-4"
+                  className="px-5 rounded border uppercase border-gray-300 w-32 p-2 mt-2 mx-4"
                   type="text"
                   required
                   placeholder="Item Name"
@@ -292,7 +294,17 @@ export default function Addparcel() {
               <button
                 className="rounded-lg bg-gray-200 my-5 border border-gray-400 font-mono font-bold py-2  px-5 hover:bg-gray-800 hover:text-white mx-12"
                 type="reset"
-                onClick={reload}
+                onClick={ ()=>{
+                  setItemType("")
+                  setItemName("")
+                  setItemQty("")
+                  setCost("")
+                  setReceiver("")
+                  setSender("")
+                  setReceiverMobile("")
+                  setSenderMobile("")
+                  
+                }}
               >
                 Reset
               </button>
@@ -310,7 +322,21 @@ export default function Addparcel() {
                   !senderMobile ||
                   !receiverMobile
                 }
-                onClick={handleParcel}
+                onClick={
+                  !itemQty ||
+                  !from ||
+                  !destination ||
+                  !drop ||
+                  !sender ||
+                  !receiver ||
+                  !cost ||
+                  !itemName ||
+                  !pickup ||
+                  !senderMobile ||
+                  !receiverMobile
+                    ? null
+                    : handleParcel
+                }
                 className="rounded-lg bg-green-800 my-5 disabled:cursor-not-allowed disabled:bg-gray-500 border border-gray-400  text-white font-mono font-bold py-2 px-5 hover:bg-green-300 hover:text-black mx-12"
                 type="submit"
               >

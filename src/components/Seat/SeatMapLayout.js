@@ -7,7 +7,8 @@ import clsx from "clsx";
 import { C, D, A, B, Staff, Trips, VIP } from "./SeatConstants";
 import Staffseat from "./Staffseat";
 import useSWR from "swr";
-import { useEffect } from "react";
+
+import { format } from "date-fns";
 
 export default function SeatMapLayout({
   trip,
@@ -27,8 +28,9 @@ export default function SeatMapLayout({
   }
 
   const date = new Date(selectedDate).toDateString();
-  const timestamp = Date.now();
-  const now = new Date(timestamp).toDateString();
+  const dbDate = format(new Date(selectedDate), "y-M-dd");
+  const timestamp = Date();
+  const now = format(new Date(timestamp), "y-M-dd");
 
   const selectedtrip = trip.name;
 
@@ -48,7 +50,7 @@ export default function SeatMapLayout({
 
   // }, [seats, selectedDate]);
 
-  const previousDates = date < now;
+  const previousDates = now > dbDate;
 
 
 
@@ -138,6 +140,8 @@ export default function SeatMapLayout({
                     }
                   >
                     <SeatIcon
+                      selectedSeats={selectedSeats}
+                      selectedDate={date}
                       trip={trip}
                       Reserved={Reserved}
                       Booked={Booked}
@@ -182,6 +186,8 @@ export default function SeatMapLayout({
                     }
                   >
                     <Staffseat
+                      selectedSeats={selectedSeats}
+                      selectedDate={date}
                       trip={trip}
                       Reserved={Reserved}
                       Booked={Booked}
@@ -225,6 +231,8 @@ export default function SeatMapLayout({
                     }
                   >
                     <SeatIcon
+                      selectedSeats={selectedSeats}
+                      selectedDate={date}
                       trip={trip}
                       Reserved={Reserved}
                       Booked={Booked}
@@ -270,6 +278,8 @@ export default function SeatMapLayout({
               }
             >
               <SeatIcon
+                selectedSeats={selectedSeats}
+                selectedDate={date}
                 trip={trip}
                 Reserved={Reserved}
                 Booked={Booked}
@@ -319,6 +329,8 @@ export default function SeatMapLayout({
                     }
                   >
                     <SeatIcon
+                      selectedSeats={selectedSeats}
+                      selectedDate={date}
                       trip={trip}
                       Reserved={Reserved}
                       Booked={Booked}

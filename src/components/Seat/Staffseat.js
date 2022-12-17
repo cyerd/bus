@@ -7,26 +7,31 @@ export default function Staffseat({
   Reserved,
   trip,
   previousDates,
+   selectedSeats,
+  selectedDate
 }) {
   const [isActive, setIsActive] = useState(false);
   const Locked = false;
 
   const handleClick = (e) => {
+    e.preventDefault();
     setIsActive((current) => !current);
   };
 
   const color =
-    !Reserved && !previousDates && !previousDates && isActive
+    !Reserved && !previousDates  && isActive
       ? "darkred"
       : "#FFB6C1";
   const next =
-    !Reserved && !previousDates && !previousDates && isActive
+    !Reserved && !previousDates  && isActive
       ? "darkred"
       : "#FFB6C1";
 
   useEffect(() => {
-    setIsActive(false);
-  }, [trip, previousDates]);
+    if (selectedSeats.length <= 0) {
+      setIsActive(false);
+    }
+  }, [trip, previousDates, selectedSeats, selectedDate]);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

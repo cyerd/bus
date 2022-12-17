@@ -167,11 +167,11 @@ export const A = [
     price: normal,
   },
 ];
-export const Staff = [{ name: "STAFF", normal }];
-export const C = [{ name: "C", normal }];
+export const Staff = [{ name: "STAFF", price: normal }];
+export const C = [{ name: "C", price: normal }];
 export const D = [
-  { name: "A1", normal },
-  { name: "A2", normal },
+  { name: "A1", price: normal },
+  { name: "A2", price: normal },
 ];
 
 export const Trips = [

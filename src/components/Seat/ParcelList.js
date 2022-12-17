@@ -76,6 +76,7 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import useSWR from "swr";
 import Loading from "./Loading";
+import { makeStyles } from "@mui/styles";
 
 const columns = [
   { field: "from", headerName: "FROM", width: 70 },
@@ -119,6 +120,15 @@ export default function ParcelList() {
 
   if (!parcel) {
     let parcel = [];
+
+    const useStyles = makeStyles({
+      root: {
+        "& .MuiTableCell-head": {
+          color: "white",
+          backgroundColor: "blue",
+        },
+      },
+    });
   }
 
   return (
@@ -126,11 +136,11 @@ export default function ParcelList() {
       <div>
         <div>
           <input
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
+            onChange={(e) => setQuery(e.target.value.toUpperCase())}
+            value={query.toUpperCase()}
             type="search"
             placeholder="search"
-            className="p-2 border border-gray-400 bg-purple-100  rounded-lg my-2 ml-5"
+            className="p-2 border uppercase border-gray-400 bg-purple-100  rounded-lg my-2 ml-5"
           />
         </div>
       </div>
@@ -141,7 +151,13 @@ export default function ParcelList() {
           columns={columns}
           pageSize={10}
           rowsPerPageOptions={[10]}
-          checkboxSelection
+          sx={{
+            "& .MuiDataGrid-columnHeader" : {
+              color: "white",
+              backgroundColor: "black",
+            },
+            textAlign: "center",
+          }}
         />
       ) : (
         <Loading />
