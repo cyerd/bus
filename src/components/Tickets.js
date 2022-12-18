@@ -31,7 +31,7 @@ const navigation = [
     name: "Dispatch Bus",
     icon: "/Dispatch-bus.png",
     color: "#c9108c",
-    href:"/tickets/dispatcbus"
+    href:"/tickets/dispatchbus"
   },
 ];
 
@@ -51,16 +51,16 @@ function Tickets() {
             key={item.id}
             className="flex flex-col justify-around items-center p-0 sm:px-2 md:px-4 lg:px-6  max-h-32 bg-gray-100  sm:bg-white "
           >
-            <Link href={item.href}>
-              <button className="flex flex-col items-center">
+            <Link  href={item.href}>
+              <span className="flex flex-col items-center">
                 <Image src={item.icon} width="50" height="50" alt="icons" />
-                <button
+                <p
                   style={{ backgroundColor: item.color }}
                   className={`px-2 py-1 rounded-md  text-white my-5 `}
                 >
                   {item.name}
-                </button>
-              </button>
+                </p>
+              </span>
             </Link>
           </div>
         ))}

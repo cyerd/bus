@@ -17,11 +17,7 @@ function Routine() {
 
   return (
     <div>
-      <Head>
-        <title>Online Bus Services</title>
-        <meta name="description" content="Developed by hudheyfa cyerd" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  
       <Header />
       <div className="m-2">
         <div className="border border-gray-200 p-5 w-full h-full">

@@ -28,7 +28,6 @@ export default function Booking({ value, trip }) {
   const [idNumber, setIdNumber] = useState();
   const [luggage, setLuggage] = useState("NO");
 
-
   const handleDestination = (e) => {
     setDestination(e.target.value);
   };
@@ -67,27 +66,26 @@ export default function Booking({ value, trip }) {
 
   useEffect(() => {
     setCurrentValue("");
-    setSelectedSeats([])
+    setSelectedSeats([]);
   }, [trip, seatNo, startDate]);
 
+  const date = new Date(startDate).toDateString();
+  const timestamp = Date.now();
+  const now = new Date(timestamp).toDateString();
 
-    const date = new Date(startDate).toDateString();
-    const timestamp = Date.now();
-    const now = new Date(timestamp).toDateString();
+  const selectedtrip = trip.name;
 
-    const selectedtrip = trip.name;
+  const params = `/api/bookings/${date}?trip=${selectedtrip}`;
 
-    const params = `/api/bookings/${date}?trip=${selectedtrip}`;
+  const fetcher = async () => {
+    const bookedSeats = await fetch(params);
+    const data = await bookedSeats.json();
+    const seats = data;
 
-    const fetcher = async () => {
-      const bookedSeats = await fetch(params);
-      const data = await bookedSeats.json();
-      const seats = data;
+    return seats;
+  };
 
-      return seats;
-    };
-
-    const { data: seats, error, mutate } = useSWR(params, fetcher);
+  const { data: seats, error, mutate } = useSWR(params, fetcher);
 
   const BookTicket = async (e) => {
     e.preventDefault();
@@ -268,7 +266,7 @@ export default function Booking({ value, trip }) {
           <div className="w-full flex flex-1 bg-teal-100 py-5">
             <div className="flex flex-col lg:flex-row mx-2 ">
               <div className="flex flex-col mx-4">
-                <lable className="font-bold my-2">From</lable>
+                <label className="font-bold my-2">From</label>
                 <input
                   disabled
                   type="text"
@@ -278,7 +276,7 @@ export default function Booking({ value, trip }) {
                 />
               </div>
               <div className="flex flex-col mx-4">
-                <lable className="font-bold my-2">Destination</lable>
+                <label className="font-bold my-2">Destination</label>
 
                 <select
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
@@ -294,7 +292,7 @@ export default function Booking({ value, trip }) {
                 </select>
               </div>
               <div className="flex flex-col mx-4">
-                <lable className="font-bold my-2">Pickup Point</lable>
+                <label className="font-bold my-2">Pickup Point</label>
 
                 <select
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
@@ -310,7 +308,7 @@ export default function Booking({ value, trip }) {
                 </select>
               </div>
               <div className="flex flex-col mx-4">
-                <lable className="font-bold my-2">Currency</lable>
+                <label className="font-bold my-2">Currency</label>
 
                 <select
                   disabled
@@ -338,7 +336,7 @@ export default function Booking({ value, trip }) {
                   className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2"
                 >
                   <div className="flex flex-col mx-1 ">
-                    <lable className="font-bold my-2 ">Full Name</lable>
+                    <label className="font-bold my-2 ">Full Name</label>
                     <input
                       className="border-2 border-gray-300 rounded px-1 w-fit py-2"
                       placeholder="Full Name"
@@ -353,7 +351,7 @@ export default function Booking({ value, trip }) {
                   </div>
 
                   <div className="flex flex-col mx-1">
-                    <lable className="font-bold my-2">Mobile</lable>
+                    <label className="font-bold my-2">Mobile</label>
                     <span className="flex bg-gray-100 ">
                       <select className="border border-gray-300 bg-gray-200 font-bold  py-2">
                         <option>+254</option>
@@ -372,7 +370,7 @@ export default function Booking({ value, trip }) {
                     </span>
                   </div>
                   <div className="flex flex-col mx-1">
-                    <lable className="font-bold my-2">Age</lable>
+                    <label className="font-bold my-2">Age</label>
                     <input
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="Age"
@@ -385,7 +383,7 @@ export default function Booking({ value, trip }) {
                     />
                   </div>
                   <div className="flex flex-col  mx-1">
-                    <lable className="font-bold my-2">Gender</lable>
+                    <label className="font-bold my-2">Gender</label>
                     <div className="flex flex-col lg:flex-row pt-3">
                       <span className="flex">
                         <input
@@ -409,7 +407,7 @@ export default function Booking({ value, trip }) {
                     </div>
                   </div>
                   <div className="flex flex-col mx-1">
-                    <lable className="font-bold my-2">Nationality</lable>
+                    <label className="font-bold my-2">Nationality</label>
                     <input
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="Nationality"
@@ -422,7 +420,7 @@ export default function Booking({ value, trip }) {
                     />
                   </div>
                   <div className="flex flex-col mx-1">
-                    <lable className="font-bold my-2">ID Number</lable>
+                    <label className="font-bold my-2">ID Number</label>
                     <input
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="ID No."
@@ -435,7 +433,7 @@ export default function Booking({ value, trip }) {
                     />
                   </div>
                   <div className="flex flex-col mx-1">
-                    <lable className="font-bold my-2">SEAT</lable>
+                    <label className="font-bold my-2">SEAT</label>
 
                     <input
                       className="border-2 border-gray-300 rounded px-1 py-2"
@@ -482,7 +480,7 @@ export default function Booking({ value, trip }) {
           <div>
             <div className="flex flex-col lg:flex-row mx-2 text-sm ">
               <div className="flex flex-col mx-1">
-                <lable className="font-bold my-2 ">Total Amount</lable>
+                <label className="font-bold my-2 ">Total Amount</label>
                 <div className="flex bg-gray-100 items-center">
                   <p className="border-2 border-gray-300 text-lg px-1">KES</p>
 
@@ -497,7 +495,7 @@ export default function Booking({ value, trip }) {
                 </div>
               </div>
               <div className="flex flex-col mx-1">
-                <lable className="font-bold my-2 ">Discount</lable>
+                <label className="font-bold my-2 ">Discount</label>
                 <div className="flex bg-gray-100 ">
                   <p className="border-2 border-gray-300 text-lg px-1">KES</p>
                   <input
@@ -510,7 +508,7 @@ export default function Booking({ value, trip }) {
                 </div>
               </div>
               <div className="flex flex-col mx-1">
-                <lable className="font-bold my-2 ">Total Paid</lable>
+                <label className="font-bold my-2 ">Total Paid</label>
                 <div className="flex bg-gray-100 ">
                   <p className="border-2 border-gray-300 text-lg px-1">KES</p>
                   <input
@@ -524,7 +522,7 @@ export default function Booking({ value, trip }) {
                 </div>
               </div>
               <div className="flex flex-col mx-4">
-                <lable className="font-bold my-2">Payment Method</lable>
+                <label className="font-bold my-2">Payment Method</label>
 
                 <select
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
@@ -573,14 +571,18 @@ export default function Booking({ value, trip }) {
 
           {/* bottom three buttons */}
           <div className="flex justify-end flex-col  lg:flex-row mt-32 mb-10 text-lg mx-20 lg:mx-5">
-            <button onClick={()=>{
-              setFullName("")
-              setMobile("")
-              setAge("")
-              setNationality("")
-              setIdNumber("")
-              setSelectedSeats([]);
-            }} type="reset" className=" px-2 py-1 rounded mx-1 border border-gray-400 my-2 lg:my-0">
+            <button
+              onClick={() => {
+                setFullName("");
+                setMobile("");
+                setAge("");
+                setNationality("");
+                setIdNumber("");
+                setSelectedSeats([]);
+              }}
+              type="reset"
+              className=" px-2 py-1 rounded mx-1 border border-gray-400 my-2 lg:my-0"
+            >
               Reset
             </button>
             <button

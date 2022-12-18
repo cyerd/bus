@@ -6,14 +6,19 @@ export default function Footer() {
   return (
     <footer className="flex flex-1 border-t-1 border-gray-100 justify-center items-center ">
       <Link
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+        href="/"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center"
       >
-        Powered by
-        <span className="">
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+       <p className='italic text-lg bg-slate-200 rounded-lg m-2 p-4'> Developed and Maintained by <span className='font-bold'> HUDHEYFA CYERD</span> </p>
+        <span className="ml-5">
+          <Image
+            src="/ishnaaz-Recovered.png"
+            alt="Vercel Logo"
+            width={45}
+            height={16}
+          />
         </span>
       </Link>
     </footer>

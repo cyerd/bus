@@ -82,12 +82,7 @@ export default function Addparcel() {
 
   return (
     <div className="">
-      {/* Page Title */}
-      <Head>
-        <title>Online Bus Services</title>
-        <meta name="description" content="Developed by hudheyfa cyerd" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+
 
       {/* Navigation bar || header bar  */}
       <Header />
