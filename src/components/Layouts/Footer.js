@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 export default function Footer() {
   return (
@@ -11,14 +11,13 @@ export default function Footer() {
         rel="noopener noreferrer"
         className="flex items-center"
       >
-       <p className='italic text-lg bg-slate-200 rounded-lg m-2 p-4'> Developed and Maintained by <span className='font-bold'> HUDHEYFA CYERD</span> </p>
+        <p className="italic text-lg bg-slate-200 rounded-lg m-2 p-4">
+          {" "}
+          Developed and Maintained by{" "}
+          <span className="font-bold"> HUDHEYFA CYERD</span>{" "}
+        </p>
         <span className="ml-5">
-          <Image
-            src="/ishnaaz-Recovered.png"
-            alt="Vercel Logo"
-            width={45}
-            height={16}
-          />
+          <Image src="/main.svg" alt="Vercel Logo" width={50} height={30} />
         </span>
       </Link>
     </footer>

@@ -105,7 +105,7 @@ const rows = [
 export default function ParcelList() {
   const [query, setQuery] = React.useState("");
   const fetcher = async () => {
-    const ParcelList = await fetch(`/api/getparcel?receiver=${query}`);
+    const ParcelList = await fetch(`/api/getparcel?receiver=${query}`, "force-cache");
     const data = await ParcelList.json();
     const parcels = data.parcelList;
 

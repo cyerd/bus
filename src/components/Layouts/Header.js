@@ -141,10 +141,10 @@ export default function Header() {
             <Link href="/">
               <span className="sr-only">Online Bus Service</span>
               <Image
-                width="30"
+                width="50"
                 height="30"
                 className="h-8 w-auto sm:h-10 "
-                src="/ishnaaz-Recovered.png"
+                src="/main.svg"
                 alt="Logo"
                 media="(prefers-color-scheme: dark)"
               />
