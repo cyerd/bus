@@ -11,7 +11,7 @@ export default async function bookings(req, res) {
     return;
   }
 
-  const parcelList = await prisma.parcels.findMany({
+  const parcelLists = await prisma.parcels.findMany({
     where: {
       OR: [
         {
@@ -25,9 +25,10 @@ export default async function bookings(req, res) {
     },
   });
 
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=10, stale-while-revalidate=59"
-  )
+    const parcelList = parcelLists
+      .map((parcel) => parcel)
+      .sort((a, b) => b.parcelNo - a.parcelNo );
+
+
   res.status(200).json({ parcelList });
 }

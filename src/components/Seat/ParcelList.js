@@ -1,111 +1,45 @@
-// import React, { useEffect } from 'react'
-// import useSWR from 'swr';
-
-// function ParcelList({ selectedDate, selectedTrip }) {
-
-//   const params = `/api/getparcel`;
-
-//   const fetcher = async () => {
-//     const parcelDetails = await fetch(params);
-//     const data = await parcelDetails.json();
-
-//     return data;
-//   };
-
-//   const { data: Products, error, mutate } = useSWR(params, fetcher);
-
-// //   useEffect(() => {}, [Products]);
-
-//   return (
-//     <div>
-//       <table className="table flex justify-center items-center">
-//         <thead>
-//           <tr className="border">
-//             <th className="border border-gray-400 bg-gray-800 text-white px-4">
-//               ID
-//             </th>
-//             <th className="border border-gray-400 bg-gray-800 text-white px-4">
-//               DATE
-//             </th>
-//             <th className="border border-gray-400 bg-gray-800 text-white px-4">
-//               SEAT NO
-//             </th>
-//             <th className="border border-gray-400 bg-gray-800 text-white px-4">
-//               FULL NAME
-//             </th>
-//             <th className="border border-gray-400 bg-gray-800 text-white px-4">
-//               MOBILE NO
-//             </th>
-//             <th className="border border-gray-400 bg-gray-800 text-white px-4">
-//               TOTAL PAID
-//             </th>
-//           </tr>
-//         </thead>
-//         {Products?.Products?.map((booking) => (
-//           <tbody key={booking.id}>
-//             <tr className="border w-full border-gray-400">
-//               <td className="border   px-5  border-gray-400">
-//                 {booking.seller}
-//               </td>
-//               <td className="border w-fit px-5 border-gray-400">
-//                 {booking.stock}
-//               </td>
-//               <td className="border w-fit px-5 border-gray-400">
-//                 {booking.ratings}
-//               </td>
-//               <td className="border w-fit px-5 border-gray-400">
-//                 {booking.category}
-//               </td>
-//               <td className="border w-fit px-5 border-gray-400">
-//                 {booking.price}
-//               </td>
-//               <td className="border w-fit px-5 border-gray-400">
-//                 {booking.numOfReviews}
-//               </td>
-//             </tr>
-//           </tbody>
-//         ))}
-//       </table>
-//     </div>
-//   );
-// }
-
-// export default ParcelList
-
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import useSWR from "swr";
 import Loading from "./Loading";
 import { makeStyles } from "@mui/styles";
+import { Box } from "@mui/material";
+import { format } from "date-fns";
 
 const columns = [
+  { field: "id", headerName: "ID", width: 130 },
+  {
+    field: "pickDate",
+    headerName: "DATE",
+    width: 140,
+    valueGetter: (params) =>
+      format(new Date(params.row.pickDate), "eee d-MMM-y H:mm:ss"),
+  },
+  { field: "parcelNo", headerName: "PARCEL NO", width: 150 },
+  { field: "itemQty", headerName: "QTY", width: 70 },
   { field: "from", headerName: "FROM", width: 70 },
   { field: "pickup", headerName: "PICKUP POINT", width: 130 },
   { field: "destination", headerName: "DESTINATION", width: 130 },
+  { field: "drop", headerName: "DROP POINT", width: 70 },
   { field: "sender", headerName: "SENDER", width: 150 },
   { field: "senderMobile", headerName: "SENDER MOBILE", width: 130 },
-  { field: "receiver", headerName: "RECIVER", width: 130 },
+  { field: "receiver", headerName: "RECEIVER", width: 130 },
+  { field: "cost", headerName: "COST", width: 130 },
+  { field: "totalAmount", headerName: "TOTAL AMOUNT", width: 130 },
   { field: "receiverMobile", headerName: "RECEIVER MOBILE", width: 130 },
-  { field: "itemType", headerName: "ITEM TYPE", width: 130 },
-  { field: "itemName", headerName: "ITEM NAME", width: 130 },
-];
-
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  {
+    field: "item",
+    headerName: "ITEM TYPE",
+    width: 130,
+    valueGetter: (params) =>
+      `${params.row.itemName || ""} ${params.row.itemType || ""}`,
+  },
 ];
 
 export default function ParcelList() {
   const [query, setQuery] = React.useState("");
   const fetcher = async () => {
-    const ParcelList = await fetch(`/api/getparcel?receiver=${query}`, "force-cache");
+    const ParcelList = await fetch(`/api/getparcel?receiver=${query}`);
     const data = await ParcelList.json();
     const parcels = data.parcelList;
 
@@ -118,21 +52,21 @@ export default function ParcelList() {
     mutate,
   } = useSWR(`/api/getparcel?receiver=${query}`, fetcher);
 
-  if (!parcel) {
-    let parcel = [];
-
-    const useStyles = makeStyles({
-      root: {
-        "& .MuiTableCell-head": {
-          color: "white",
-          backgroundColor: "blue",
-        },
-      },
-    });
-  }
+  const [columnVisibilityModel, setColumnVisibilityModel] = React.useState({
+    id: false,
+    from: false,
+    destination: false,
+    receiverMobile: false,
+    drop: false,
+    pickup: false,
+    senderMobile: false,
+    cost: false,
+    totalAmount: false,
+    itemQty: false,
+  });
 
   return (
-    <div style={{ height: 650, width: "100%" }}>
+    <div>
       <div>
         <div>
           <input
@@ -145,20 +79,67 @@ export default function ParcelList() {
         </div>
       </div>
       {parcel ? (
-        <DataGrid
-          className="bg-green-200"
-          rows={parcel}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
+        <Box
           sx={{
-            "& .MuiDataGrid-columnHeader" : {
-              color: "white",
-              backgroundColor: "black",
-            },
+            height: 650,
+            width: "100%",
+            backgroundColor: "gray",
             textAlign: "center",
           }}
-        />
+        >
+          <DataGrid
+            columnVisibilityModel={columnVisibilityModel}
+            onColumnVisibilityModelChange={(newModel) =>
+              setColumnVisibilityModel(newModel)
+            }
+            className="bg-gray-200"
+            checkboxSelection
+            rows={parcel}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            sx={{
+              "& .MuiDataGrid-columnHeader": {
+                color: "white",
+                backgroundColor: "black",
+                borderRadius: "5px",
+                marginRight: "2px",
+                width: "100%",
+              },
+              "& .MuiDataGrid-menuIcon": {
+                color: "white",
+                backgroundColor: "black",
+              },
+
+              // ".MuiSvgIcon-root": {
+              //   color: "white",
+              //   text: "red",
+              //   border: "black 1px solid",
+              //   outline: "none",
+              // },
+              ".css-1m9pwf3t": {
+                color: "white",
+              },
+              ".MuiDataGrid-iconSeparator": {
+                display: "none",
+              },
+              ".MuiDataGrid-cell": {
+                marginRight: "2px",
+                backgroundColor: "#fff",
+                borderRadius: "5px",
+                textAlign: "center",
+                alignItems: "center",
+              },
+              ".MuiDataGrid-menuIconButton": {
+                color: "white",
+              },
+
+              ".MuiDataGrid-sortIcon": {
+                color: "white",
+              },
+            }}
+          />
+        </Box>
       ) : (
         <Loading />
       )}

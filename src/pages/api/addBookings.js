@@ -12,11 +12,15 @@ export default async function handler(req, res) {
   const newBooking = {
     ...booking,
   };
+  
+    console.log(req);
 
   try {
     await prisma.bookings.create({
       data: newBooking,
     });
+    
+    console.log(req.body);
 
     res.status(200).json({ booking: newBooking });
   } catch (error) {

@@ -50,12 +50,10 @@ model bookedSeats {
       paymentMethod String
       seatNo String 
       idNumber String
- 
-  
 }
 
 model parcels {
-  id String @id @map("_id")
+  id  String @id @map("_id")
   from String
   pickup String
   destination String
@@ -70,6 +68,9 @@ model parcels {
   itemQty Int
   cost Int
   totalAmount Int
-
+  status String
+  parcelNo Int 
+  updateAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 
 }

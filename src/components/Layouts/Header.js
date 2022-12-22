@@ -68,7 +68,7 @@ const parcel = [
     name: "Book Parcel",
     description:
       "Get a better understanding of where your traffic is coming from.",
-    href: "/parcel/Addparcel",
+    href: "/parcel/addparcel",
     icon: PlusCircleIcon,
   },
   {

@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="flex flex-1 border-t-1 border-gray-100 justify-center items-center ">
       <Link
-        href="/"
+        href="shop/productpage"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center"

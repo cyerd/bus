@@ -7,7 +7,7 @@ import ParcelList from "../../components/Seat/ParcelList";
 import { v4 as uuid } from "uuid";
 import useSWR from "swr";
 import { Router, useRouter } from "next/router";
-import fetcher from "../../../utils/fetchBookings";
+import { format } from "date-fns";
 
 export default function Addparcel() {
   const [from, setFrom] = useState("");
@@ -24,12 +24,21 @@ export default function Addparcel() {
   const [cost, setCost] = useState("");
   let [totalAmount, setTotalAmount] = useState("");
 
-  const router = useRouter();
-  const reload = () => {
-    router.reload();
-  };
 
-  const { data: parcelList, error, mutate } = useSWR("/api/getparcel", fetcher);
+    const [query, setQuery] = useState("");
+    const fetcher = async () => {
+      const ParcelList = await fetch(`/api/getparcel?receiver=${query}`);
+      const data = await ParcelList.json();
+      const parcels = data.parcelList;
+
+      return parcels;
+    };
+
+  const {
+    data: parcelList,
+    error,
+    mutate,
+  } = useSWR(`/api/getparcel?receiver=${query}`, fetcher);
 
   const pickDate = new Date();
 
@@ -37,6 +46,8 @@ export default function Addparcel() {
     e.preventDefault();
 
     const id = uuid();
+    const parcelNo = format(new Date(), "MMddyhmmss")
+
 
     const parcel = {
       id,
@@ -53,11 +64,11 @@ export default function Addparcel() {
       itemQty: Number(itemQty),
       cost: Number(cost),
       totalAmount: Number(totalAmount),
-
       pickDate: pickDate,
+      status: "In Process",
+      parcelNo: Number(parcelNo),
+
     };
-
-
 
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/addparcels", {
@@ -82,8 +93,6 @@ export default function Addparcel() {
 
   return (
     <div className="">
-
-
       {/* Navigation bar || header bar  */}
       <Header />
       <form className="md:flex h-fit ">
@@ -217,7 +226,7 @@ export default function Addparcel() {
           <div className="flex flex-col bg-yellow-100 rounded-lg">
             <div className="md:flex">
               <div className="flex flex-col items-center ">
-                <label>Item Type</label>
+                <label>Item</label>
                 <input
                   onChange={(e) => {
                     setItemType(e.target.value);
@@ -226,11 +235,11 @@ export default function Addparcel() {
                   className="px-5 rounded border uppercase border-gray-300 w-32 p-2 mt-2 mx-4 "
                   type="text"
                   required
-                  placeholder="Item Type"
+                  placeholder="Item"
                 />
               </div>
               <div className="flex flex-col items-center ">
-                <label>Item Name</label>
+                <label>Item  Color</label>
                 <input
                   onChange={(e) => {
                     setItemName(e.target.value);
@@ -239,7 +248,7 @@ export default function Addparcel() {
                   className="px-5 rounded border uppercase border-gray-300 w-32 p-2 mt-2 mx-4"
                   type="text"
                   required
-                  placeholder="Item Name"
+                  placeholder="Item Color"
                 />
               </div>
               <div className="flex flex-col items-center ">
@@ -289,16 +298,15 @@ export default function Addparcel() {
               <button
                 className="rounded-lg bg-gray-200 my-5 border border-gray-400 font-mono font-bold py-2  px-5 hover:bg-gray-800 hover:text-white mx-12"
                 type="reset"
-                onClick={ ()=>{
-                  setItemType("")
-                  setItemName("")
-                  setItemQty("")
-                  setCost("")
-                  setReceiver("")
-                  setSender("")
-                  setReceiverMobile("")
-                  setSenderMobile("")
-                  
+                onClick={() => {
+                  setItemType("");
+                  setItemName("");
+                  setItemQty("");
+                  setCost("");
+                  setReceiver("");
+                  setSender("");
+                  setReceiverMobile("");
+                  setSenderMobile("");
                 }}
               >
                 Reset

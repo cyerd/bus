@@ -1,5 +1,5 @@
 import { TableCellsIcon } from "@heroicons/react/20/solid";
-import React, { use, useEffect, useState } from "react";
+import React, { use, useEffect, useId, useState } from "react";
 import useSWR from "swr";
 import fetcher from "../../utils/fetchBookings";
 import { v4 as uuid } from "uuid";
@@ -85,6 +85,8 @@ export default function Booking({ value, trip }) {
     return seats;
   };
 
+
+
   const { data: seats, error, mutate } = useSWR(params, fetcher);
 
   const BookTicket = async (e) => {
@@ -114,7 +116,6 @@ export default function Booking({ value, trip }) {
       idNumber: idNumber,
     };
 
-    const bookings = [];
 
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/addBookings", {
@@ -127,12 +128,14 @@ export default function Booking({ value, trip }) {
         }),
       }).then((res) => res.json());
 
-      return [data.booking, ...bookings];
+      return [data.booking, ...seats?.bookings];
     };
     await mutate(uploadMessageToUpstash, {
       optimisticData: [booking, ...seats?.bookings],
       rollbackOnError: true,
     });
+
+    setSelectedSeats([]);
   };
 
   const ReserveSeats = async (e) => {
@@ -162,8 +165,6 @@ export default function Booking({ value, trip }) {
       idNumber: idNumber,
     };
 
-    const bookings = [];
-
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/reserveSeat", {
         method: "POST",
@@ -181,15 +182,23 @@ export default function Booking({ value, trip }) {
       optimisticData: [booking, ...seats?.bookings],
       rollbackOnError: true,
     });
+    setSelectedSeats([]);
   };
+
+  const id = useId()
 
   return (
     <div className="flex w-full">
-      <form onSubmit={BookTicket} className="flex w-full flex-col xl:flex-row">
-        <div className="mx-1 w-full xl:w-9/12 ">
+      <form
+        id={id}
+        onSubmit={BookTicket}
+        className="flex w-full flex-col xl:flex-row"
+      >
+        <div className="mx-1 w-full xl:w-9/12 overflow-auto ">
           <div className="flex bg-blue-300 py-1 flex flex-col lg:flex-row items-center">
             <div className="ml-1 my-2 lg:my-0">
               <select
+                id={id}
                 className="w-fit h-fit border-2 py-1 px-3 rounded-lg justify-between mr-2"
                 value={place}
                 onChange={handlePlace}
@@ -204,6 +213,7 @@ export default function Booking({ value, trip }) {
             </div>
             <div className="ml-1 my-2 lg:my-0">
               <select
+                id={id}
                 className=" w-fit h-fit border-2 py-1 px-3 rounded-lg justify-between mr-2"
                 value={destinations}
                 onChange={handleDestination}
@@ -218,6 +228,7 @@ export default function Booking({ value, trip }) {
             </div>
             <div className="border-2 rounded-lg flex divide-x-2 w-fit h-fit p-1 bg-white items-center ml-1 flex items-center divide-gray-400 my-2 lg:my-0">
               <DatePicker
+                id={id}
                 className="ml-2"
                 value={startDate}
                 selected={startDate}
@@ -255,6 +266,7 @@ export default function Booking({ value, trip }) {
           <div className="flex items-center my-2 bg-gray-200 p-2">
             <p>Ticket Details</p>
             <input
+              id={id}
               type="text"
               className="border-2 border-purple-500 rounded p-1 mx-2"
               placeholder="Search Ticket/Booking"
@@ -268,6 +280,7 @@ export default function Booking({ value, trip }) {
               <div className="flex flex-col mx-4">
                 <label className="font-bold my-2">From</label>
                 <input
+                  id={id}
                   disabled
                   type="text"
                   value={value}
@@ -279,6 +292,7 @@ export default function Booking({ value, trip }) {
                 <label className="font-bold my-2">Destination</label>
 
                 <select
+                  id={id}
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
                   value={destinations}
                   onChange={handleDestination}
@@ -295,13 +309,14 @@ export default function Booking({ value, trip }) {
                 <label className="font-bold my-2">Pickup Point</label>
 
                 <select
+                  id={id}
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
                   value={pickup}
                   onChange={handlePickup}
                   name="pickup"
                 >
                   {Destination.map((place) => (
-                    <option key={place.name} value={place.name}>
+                    <option id={id} key={place.name} value={place.name}>
                       {place.name}
                     </option>
                   ))}
@@ -311,14 +326,15 @@ export default function Booking({ value, trip }) {
                 <label className="font-bold my-2">Currency</label>
 
                 <select
+                  id={id}
                   disabled
                   className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
                   name="currency"
                 >
-                  <option key="1" className="text-center " value="ksh">
+                  <option id={id} key="1" className="text-center " value="ksh">
                     Kenyan Shilling
                   </option>
-                  <option key="2" className="text-center " value="usd">
+                  <option id={id} key="2" className="text-center " value="usd">
                     USD
                   </option>
                 </select>
@@ -332,12 +348,14 @@ export default function Booking({ value, trip }) {
             <div>
               {selectedSeats.map((seat) => (
                 <div
+                  id={id}
                   key={seat.name}
                   className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2"
                 >
                   <div className="flex flex-col mx-1 ">
                     <label className="font-bold my-2 ">Full Name</label>
                     <input
+                      id={id}
                       className="border-2 border-gray-300 rounded px-1 w-fit py-2"
                       placeholder="Full Name"
                       type="text"
@@ -353,10 +371,14 @@ export default function Booking({ value, trip }) {
                   <div className="flex flex-col mx-1">
                     <label className="font-bold my-2">Mobile</label>
                     <span className="flex bg-gray-100 ">
-                      <select className="border border-gray-300 bg-gray-200 font-bold  py-2">
+                      <select
+                        id={id}
+                        className="border border-gray-300 bg-gray-200 font-bold  py-2"
+                      >
                         <option>+254</option>
                       </select>
                       <input
+                        id={id}
                         className="border-2 border-gray-300 rounded px-1 py-2 "
                         placeholder="Mobile"
                         type="text"
@@ -372,6 +394,7 @@ export default function Booking({ value, trip }) {
                   <div className="flex flex-col mx-1">
                     <label className="font-bold my-2">Age</label>
                     <input
+                      id={id}
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="Age"
                       type="text"
@@ -387,6 +410,7 @@ export default function Booking({ value, trip }) {
                     <div className="flex flex-col lg:flex-row pt-3">
                       <span className="flex">
                         <input
+                          id={id}
                           type="radio"
                           name="gender"
                           value="male"
@@ -396,6 +420,7 @@ export default function Booking({ value, trip }) {
                       </span>
                       <span className="flex lg:ml-1">
                         <input
+                          id={id}
                           className=""
                           type="radio"
                           name="gender"
@@ -409,6 +434,7 @@ export default function Booking({ value, trip }) {
                   <div className="flex flex-col mx-1">
                     <label className="font-bold my-2">Nationality</label>
                     <input
+                      id={id}
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="Nationality"
                       type="text"
@@ -422,6 +448,7 @@ export default function Booking({ value, trip }) {
                   <div className="flex flex-col mx-1">
                     <label className="font-bold my-2">ID Number</label>
                     <input
+                      id={id}
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="ID No."
                       type="text"
@@ -436,6 +463,7 @@ export default function Booking({ value, trip }) {
                     <label className="font-bold my-2">SEAT</label>
 
                     <input
+                      id={id}
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       type="text"
                       required
@@ -455,6 +483,7 @@ export default function Booking({ value, trip }) {
           <div className="my-5">
             <p> Luggage Present?</p>
             <select
+              id={id}
               type="text"
               value={luggage}
               onInput={(e) => {
@@ -463,77 +492,84 @@ export default function Booking({ value, trip }) {
               name="luggage"
               className="text-sm mx-3 my-2 py-1 px-2 bg-blue-300 rounded px-2"
             >
-              <option className="bg-gray-100" value="No">
+              <option id={id} className="bg-gray-100" value="No">
                 NO
               </option>
-              <option className="bg-blue-100" value="YES">
+              <option id={id} className="bg-blue-100" value="YES">
                 YES
               </option>
             </select>
           </div>
 
           {/* Payment Details section  */}
-          <span className="flex text-center text-white bg-purple-400 mt-2 rounded-t-lg py-1 px-2 ">
+          <span className="flex text-center text-white bg-purple-400 mt-2  rounded-t-lg py-1 px-2 ">
             <TableCellsIcon className="mr-2" height="25" /> Payment{" "}
           </span>
           {selectedSeats.forEach((subData) => (sum += subData.price))}
-          <div>
-            <div className="flex flex-col lg:flex-row mx-2 text-sm ">
-              <div className="flex flex-col mx-1">
-                <label className="font-bold my-2 ">Total Amount</label>
-                <div className="flex bg-gray-100 items-center">
-                  <p className="border-2 border-gray-300 text-lg px-1">KES</p>
 
-                  <input
-                    value={sum}
-                    disabled
-                    onChange={(e) => setSum(e.target.value)}
-                    type="text"
-                    className="bg-white text-red-500 px-5 rounded-lg text-center text-lg font-bold"
-                    name="sum"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col mx-1">
-                <label className="font-bold my-2 ">Discount</label>
-                <div className="flex bg-gray-100 ">
-                  <p className="border-2 border-gray-300 text-lg px-1">KES</p>
-                  <input
-                    className="border-2 bg-white text-green-500 text-center text-lg font-bold"
-                    value={currentValue.toLocaleString("en-US")}
-                    onChange={(e) => setCurrentValue(e.target.value)}
-                    type="text"
-                    name="discount"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col mx-1">
-                <label className="font-bold my-2 ">Total Paid</label>
-                <div className="flex bg-gray-100 ">
-                  <p className="border-2 border-gray-300 text-lg px-1">KES</p>
-                  <input
-                    className="border-2 border-red-400 bg-yellow-200 font-bold text-center text-lg "
-                    disabled={true}
-                    value={(sum - currentValue).toLocaleString("en-US")}
-                    type="text"
-                    onChange={(e) => setTotalAmount(e.target.value)}
-                    name="total"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col mx-4">
-                <label className="font-bold my-2">Payment Method</label>
+          <div className="flex flex-col  lg:flex-row mx-2 text-sm justify-between overflow-auto">
+            <div className="flex flex-col mx-1 w-fit">
+              <label className="font-bold my-2 ">Total Amount</label>
+              <div className="flex bg-gray-100 items-center">
+                <p className="border-2 border-gray-300 text-lg px-1">KES</p>
 
-                <select
-                  className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
-                  value={payment}
-                  onChange={(e) => setPayment(e.target.value)}
-                  name="payment"
-                >
-                  <option value="CASH">CASH</option>
-                  <option value="MPESA">MPESA</option>
-                </select>
+                <input
+                  id={id}
+                  value={sum}
+                  disabled
+                  onChange={(e) => setSum(e.target.value)}
+                  type="text"
+                  className="bg-white text-red-500 px-5 lg:w-20 rounded-lg text-center text-lg font-bold"
+                  name="sum"
+                />
               </div>
+            </div>
+            <div className="flex flex-col mx-1 w-fit">
+              <label className="font-bold my-2 ">Discount</label>
+              <div className="flex bg-gray-100 ">
+                <p className="border-2 border-gray-300 text-lg px-1">KES</p>
+                <input
+                  id={id}
+                  className="border-2 bg-white text-green-500 text-center text-lg font-bold"
+                  value={currentValue.toLocaleString("en-US")}
+                  onChange={(e) => setCurrentValue(e.target.value)}
+                  type="text"
+                  name="discount"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col mx-1 w-fit">
+              <label className="font-bold my-2 ">Total Paid</label>
+              <div className="flex bg-gray-100 ">
+                <p className="border-2 border-gray-300 text-lg px-1">KES</p>
+                <input
+                  id={id}
+                  className="border-2 border-red-400 bg-yellow-200 font-bold text-center text-lg "
+                  disabled={true}
+                  value={(sum - currentValue).toLocaleString("en-US")}
+                  type="text"
+                  onChange={(e) => setTotalAmount(e.target.value)}
+                  name="total"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col mx-4 w-fit">
+              <label className="font-bold my-2">Payment Method</label>
+
+              <select
+                id={id}
+                className=" border-2 py-1 px-3 rounded-lg justify-between mr-2"
+                value={payment}
+                onChange={(e) => setPayment(e.target.value)}
+                name="payment"
+              >
+                <option id={id} value="CASH">
+                  CASH
+                </option>
+                <option id={id} value="MPESA">
+                  MPESA
+                </option>
+              </select>
             </div>
           </div>
 
@@ -541,6 +577,7 @@ export default function Booking({ value, trip }) {
           <div className="flex flex-col lg:flex-row mt-10 overflow-auto">
             <span className="ml-2 my-2 lg:my-0">
               <input
+                id={id}
                 className="border-2 border-gray-300  p-1"
                 type="text"
                 placeholder="Note"
@@ -550,6 +587,7 @@ export default function Booking({ value, trip }) {
             </span>
             <span className="ml-2 my-2 lg:my-0">
               <input
+                id={id}
                 className="border-2 border-gray-300 p-1"
                 type="text"
                 placeholder="Voucher Code"
