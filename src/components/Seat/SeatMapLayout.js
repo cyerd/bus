@@ -53,8 +53,6 @@ export default function SeatMapLayout({
 
   const previousDates = now > dbDate;
 
-
-
   return (
     <div className="flex justify-around w-full mt-2 relative ">
       <div>
@@ -66,8 +64,17 @@ export default function SeatMapLayout({
               const Reserved = seats?.reservedSeats?.includes(seat.name);
 
               return (
-                <Tooltip
-                  content={Booked ? "Already Booked": Reserved ? "This Seat is reserved" : previousDates ? "The Bus departed " : ""}
+                 <Tooltip
+                  key={seat.name}
+                    content={
+                    Booked
+                      ? "Already Booked"
+                      : Reserved
+                      ? "This Seat is reserved"
+                      : previousDates
+                      ? "The Bus departed "
+                      : ""
+                  }
                   animate={{
                     mount: { scale: 1, y: 0 },
                     unmount: { scale: 0, y: 25 },
@@ -122,6 +129,7 @@ export default function SeatMapLayout({
 
                 return (
                   <Tooltip
+                    key={seat.name}
                     content={
                       Booked
                         ? "Already Booked"
@@ -185,6 +193,7 @@ export default function SeatMapLayout({
                 const Reserved = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <Tooltip
+                    key={seat.name}
                     content={
                       Booked
                         ? "Already Booked"
@@ -247,6 +256,7 @@ export default function SeatMapLayout({
                 const Reserved = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <Tooltip
+                    key={seat.name}
                     content={
                       Booked
                         ? "Already Booked"
@@ -312,8 +322,9 @@ export default function SeatMapLayout({
           const Booked = seats?.takenSeats?.includes(seat.name);
           const Reserved = seats?.reservedSeats?.includes(seat.name);
           return (
-            <Tooltip
-              content={
+             <Tooltip
+                  key={seat.name}
+                    content={
                 Booked
                   ? "Already Booked"
                   : Reserved
@@ -381,6 +392,7 @@ export default function SeatMapLayout({
                 const Reserved = seats?.reservedSeats?.includes(seat.name);
                 return (
                   <Tooltip
+                    key={seat.name}
                     content={
                       Booked
                         ? "Already Booked"
