@@ -142,9 +142,9 @@ export default function Header() {
               <span className="sr-only">Online Bus Service</span>
               <Image
                 width="50"
-                height="30"
+                height="50"
                 className="h-8 w-auto sm:h-10 "
-                src="/main.svg"
+                src="/TEST.svg"
                 alt="Logo"
                 media="(prefers-color-scheme: dark)"
               />
@@ -164,8 +164,8 @@ export default function Header() {
               <button className="group flex flex-col items-center rounded-md bg-white  text-base font-medium hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 <Image
                   src="/Dashboard.png"
-                  height="30"
-                  width="30"
+                  height="50"
+                  width="50"
                   className="ml-2 h-5 w-5  group-hover:text-gray-500"
                   aria-hidden="true"
                   alt="Dashboard"

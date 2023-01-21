@@ -26,10 +26,10 @@ export default async function bookings(req, res) {
        },
      });
 
-    const takenSeats = bookings.map((seat) => seat.seatNo);
-    const reservedSeats = reserves.map((seat) => seat.seatNo);
+    const takenSeats = bookings.map((seat) => seat.name);
+    const reservedSeats = reserves.map((seat) => seat.name);
 
-    res.status(200).json({ takenSeats, bookings, reservedSeats });
+    res.status(200).json({ takenSeats, bookings, reserves, reservedSeats });
   } catch (error) {
     res.status(500).json({ success: false, message: error, ...error });
   }

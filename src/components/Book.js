@@ -1,32 +1,44 @@
 import { TableCellsIcon } from "@heroicons/react/20/solid";
 import React, { use, useEffect, useId, useState } from "react";
 import useSWR from "swr";
-import fetcher from "../../utils/fetchBookings";
 import { v4 as uuid } from "uuid";
-
 import { CalendarDaysIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import { format } from "date-fns";
 import { Tooltip } from "@material-tailwind/react";
-
 import { Destination, Places, Trips } from "./Seat/SeatConstants";
 import Trip from "./Seat/Trip";
 import SeatMapLayout from "./Seat/SeatMapLayout";
-
+import { data } from "autoprefixer";
 export default function Booking({ value, trip }) {
   const [destinations, setDestination] = useState("NAIROBI");
   const [pickup, setPickup] = useState("GARISSA");
   const [currentValue, setCurrentValue] = useState(0);
-  const [fullName, setFullName] = useState("");
-  const [gender, setgender] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [age, setAge] = useState("");
-  const [nationality, setNationality] = useState("");
-  const [idNumber, setIdNumber] = useState();
+
   const [luggage, setLuggage] = useState("NO");
+  const [startDate, setStartDate] = useState(new Date());
+  const today = new Date();
+  const resetDate = (date) => setStartDate(today);
+  const nedate = format(new Date(startDate), "d-MMM-y");
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [payment, setPayment] = useState("CASH");
+  let [sum, setSum] = useState(0);
+  // const handleSeatNo = (e) => {
+  //   setSeatNo(e.target.value);
+  // };
+  // seat
+  const [selectedTrip, setSelectedTrip] = useState(Trips[0]);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [place, setPlace] = useState("GARISSA");
+  const date = new Date(startDate).toDateString();
+  const timestamp = Date.now();
+  const now = new Date(timestamp).toDateString();
+  const selectedtrip = trip.name;
+
+  const handlePlace = (e) => {
+    setPlace(e.target.value);
+  };
 
   const handleDestination = (e) => {
     setDestination(e.target.value);
@@ -35,45 +47,19 @@ export default function Booking({ value, trip }) {
     setPickup(e.target.value);
   };
   const handlegender = (e) => {
+    e.preventDefault();
     setgender(e.target.value);
   };
 
-  const [place, setPlace] = useState("GARISSA");
-
-  const handlePlace = (e) => {
-    setPlace(e.target.value);
-  };
-
-  const [startDate, setStartDate] = useState(new Date());
-
   const handleDate = (date) => setStartDate(date);
 
-  const today = new Date();
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     fakeApi();
+  //   }, 500);
 
-  const resetDate = (date) => setStartDate(today);
-
-  const nedate = format(new Date(startDate), "d-MMM-y");
-  const [totalAmount, setTotalAmount] = useState();
-  const [payment, setPayment] = useState("CASH");
-  let [sum, setSum] = useState(0);
-  let [seatNo, setSeatNo] = useState();
-  // const handleSeatNo = (e) => {
-  //   setSeatNo(e.target.value);
-  // };
-  // seat
-  const [selectedTrip, setSelectedTrip] = useState(Trips[0]);
-  const [selectedSeats, setSelectedSeats] = useState([]);
-
-  useEffect(() => {
-    setCurrentValue("");
-    setSelectedSeats([]);
-  }, [trip, seatNo, startDate]);
-
-  const date = new Date(startDate).toDateString();
-  const timestamp = Date.now();
-  const now = new Date(timestamp).toDateString();
-
-  const selectedtrip = trip.name;
+  //   return () => clearTimeout(timer);
+  // }, [fullName]);
 
   const params = `/api/bookings/${date}?trip=${selectedtrip}`;
 
@@ -81,41 +67,64 @@ export default function Booking({ value, trip }) {
     const bookedSeats = await fetch(params);
     const data = await bookedSeats.json();
     const seats = data;
-
     return seats;
   };
 
-
-
   const { data: seats, error, mutate } = useSWR(params, fetcher);
+
+
+  // console.log("dummy:", seats?.takenSeats);
+
+  const id = uuid();
+
+  const [formData, setFormData] = useState([
+    {
+      id,
+      fullName: "",
+      mobile: "",
+      gender: "Male",
+      age: "0",
+      nationality: "kenyan",
+      idNumber: "0000",
+      name: "",
+      from: value,
+      destination: destinations,
+      pickup: pickup,
+      startDate: startDate.toDateString(),
+      trip: selectedTrip.name,
+      totalAmount: sum,
+      discount: currentValue,
+      totalPaid: sum - currentValue,
+      luggage: luggage,
+      paymentMethod: payment,
+    },
+  ]);
+
+  // const handlesubmitt = async (e) => {
+  //   e.preventDefault();
+  //   console.log("real data", realForm);
+  // };
 
   const BookTicket = async (e) => {
     e.preventDefault();
 
-    const id = uuid();
-
-    const booking = {
-      id,
-      from: value,
-      destination: destinations,
-      pickup: pickup,
-      fullName: fullName,
-      mobile: mobile,
-      age: age,
-      nationality: nationality,
-      luggage: luggage,
-      startDate: startDate.toDateString(),
-      gender: gender,
-      trip: selectedTrip.name,
-      selectedSeats: selectedSeats.toString,
-      totalAmount: sum,
-      discount: currentValue,
-      totalPaid: sum - currentValue,
-      paymentMethod: payment,
-      seatNo: seatNo,
-      idNumber: idNumber,
-    };
-
+    const booking = formData.map((formu, index) => {
+      const id = uuid();
+      return {
+        id: id.concat(index),
+        ...formData[index],
+        from: value,
+        destination: destinations,
+        pickup: pickup,
+        startDate: startDate.toDateString(),
+        trip: selectedTrip.name,
+        totalAmount: sum,
+        discount: currentValue,
+        totalPaid: sum - currentValue,
+        luggage: luggage,
+        paymentMethod: payment,
+      };
+    });
 
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/addBookings", {
@@ -128,42 +137,37 @@ export default function Booking({ value, trip }) {
         }),
       }).then((res) => res.json());
 
-      return [data.booking, ...seats?.bookings];
+    console.log("cooking",data.booking)
+
+      return [data.booking, ...seats?.takenSeats];
     };
     await mutate(uploadMessageToUpstash, {
-      optimisticData: [booking, ...seats?.bookings],
+      optimisticData: [booking, ...seats?.takenSeats],
       rollbackOnError: true,
     });
-
     setSelectedSeats([]);
   };
 
   const ReserveSeats = async (e) => {
     e.preventDefault();
 
-    const id = uuid();
-
-    const booking = {
-      id,
-      from: value,
-      destination: destinations,
-      pickup: pickup,
-      fullName: fullName,
-      mobile: mobile,
-      age: age,
-      nationality: nationality,
-      luggage: luggage,
-      startDate: startDate.toDateString(),
-      gender: gender,
-      trip: selectedTrip.name,
-      selectedSeats: selectedSeats.toString,
-      totalAmount: sum,
-      discount: currentValue,
-      totalPaid: sum - currentValue,
-      paymentMethod: payment,
-      seatNo: seatNo,
-      idNumber: idNumber,
-    };
+    const booking = formData.map((formu, index) => {
+      const id = uuid();
+      return {
+        id: id.concat(index),
+        ...formData[index],
+        from: value,
+        destination: destinations,
+        pickup: pickup,
+        startDate: startDate.toDateString(),
+        trip: selectedTrip.name,
+        totalAmount: sum,
+        discount: currentValue,
+        totalPaid: sum - currentValue,
+        luggage: luggage,
+        paymentMethod: payment,
+      };
+    });
 
     const uploadMessageToUpstash = async () => {
       const data = await fetch("/api/reserveSeat", {
@@ -179,20 +183,41 @@ export default function Booking({ value, trip }) {
       return [data.booking, ...seats?.bookings];
     };
     await mutate(uploadMessageToUpstash, {
-      optimisticData: [booking, ...seats?.bookings],
+      optimisticData: [booking, ...seats?.reservedSeats],
       rollbackOnError: true,
     });
     setSelectedSeats([]);
   };
 
-  const id = useId()
+  // const id = useId();
+
+  const handleinputchange = (e, index) => {
+    const { name, value } = e.target;
+    let list = [...formData];
+    if (list[index]) {
+      list[index][name] = value;
+    } else {
+      list[index] = {
+        name: value,
+      };
+    }
+
+    setFormData(list);
+  };
+
+  useEffect(() => {
+    setCurrentValue("");
+    setSelectedSeats([]);
+  }, [trip, seats, startDate]);
 
   return (
     <div className="flex w-full">
       <form
+        // method="POST"
         id={id}
-        onSubmit={BookTicket}
+        // onSubmit={BookTicket}
         className="flex w-full flex-col xl:flex-row"
+        // encType="multipart/form-data"
       >
         <div className="mx-1 w-full xl:w-9/12 overflow-auto ">
           <div className="flex bg-blue-300 py-1 flex flex-col lg:flex-row items-center">
@@ -346,25 +371,23 @@ export default function Booking({ value, trip }) {
               <TableCellsIcon className="mr-2" height="25" /> Passengers
             </span>
             <div>
-              {selectedSeats.map((seat) => (
+              {selectedSeats.map((seat, index) => (
                 <div
-                  id={id}
+                  id={index}
                   key={seat.name}
                   className="flex flex-col  lg:flex-row mx-2 overflow-auto text-xs pb-2"
                 >
                   <div className="flex flex-col mx-1 ">
                     <label className="font-bold my-2 ">Full Name</label>
                     <input
-                      id={id}
+                      id={index}
                       className="border-2 border-gray-300 rounded px-1 w-fit py-2"
                       placeholder="Full Name"
                       type="text"
                       required
-                      value={fullName}
-                      onChange={(e) => {
-                        setFullName(e.target.value);
-                      }}
                       name="fullName"
+                      // value=""
+                      onChange={(e) => handleinputchange(e, index)}
                     />
                   </div>
 
@@ -375,7 +398,7 @@ export default function Booking({ value, trip }) {
                         id={id}
                         className="border border-gray-300 bg-gray-200 font-bold  py-2"
                       >
-                        <option>+254</option>
+                        <option className="text-xs">+254</option>
                       </select>
                       <input
                         id={id}
@@ -383,10 +406,8 @@ export default function Booking({ value, trip }) {
                         placeholder="Mobile"
                         type="text"
                         required
-                        value={mobile}
-                        onChange={(e) => {
-                          setMobile(e.target.value);
-                        }}
+                        // value={mobile}
+                        onChange={(e) => handleinputchange(e, index)}
                         name="mobile"
                       />
                     </span>
@@ -398,11 +419,8 @@ export default function Booking({ value, trip }) {
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="Age"
                       type="text"
-                      value={age}
-                      onChange={(e) => {
-                        setAge(e.target.value);
-                      }}
-                      name="Age"
+                      onChange={(e) => handleinputchange(e, index)}
+                      name="age"
                     />
                   </div>
                   <div className="flex flex-col  mx-1">
@@ -414,7 +432,7 @@ export default function Booking({ value, trip }) {
                           type="radio"
                           name="gender"
                           value="male"
-                          onChange={handlegender}
+                          onChange={(e) => handleinputchange(e, index)}
                         />
                         <p className="pl-1">M</p>
                       </span>
@@ -425,7 +443,7 @@ export default function Booking({ value, trip }) {
                           type="radio"
                           name="gender"
                           value="Female"
-                          onChange={handlegender}
+                          onChange={(e) => handleinputchange(e, index)}
                         />
                         <p className="pl-1">F</p>
                       </span>
@@ -438,10 +456,7 @@ export default function Booking({ value, trip }) {
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="Nationality"
                       type="text"
-                      value={nationality}
-                      onChange={(e) => {
-                        setNationality(e.target.value);
-                      }}
+                      onChange={(e) => handleinputchange(e, index)}
                       name="nationality"
                     />
                   </div>
@@ -452,11 +467,8 @@ export default function Booking({ value, trip }) {
                       className="border-2 border-gray-300 rounded px-1 py-2"
                       placeholder="ID No."
                       type="text"
-                      value={idNumber}
-                      onChange={(e) => {
-                        setIdNumber(e.target.value);
-                      }}
-                      name="idnumber"
+                      onChange={(e) => handleinputchange(e, index)}
+                      name="idNumber"
                     />
                   </div>
                   <div className="flex flex-col mx-1">
@@ -464,14 +476,16 @@ export default function Booking({ value, trip }) {
 
                     <input
                       id={id}
-                      className="border-2 border-gray-300 rounded px-1 py-2"
+                      className="border-2  lg:w-20  font-bold tracking-widest text-lg text-white bg-green-700 border-gray-300 rounded pl-1 pb-1"
                       type="text"
                       required
                       // defaultValue={seat.name}
                       autoFocus
-                      value={(seatNo = seat.name)}
+                      onFocus={(e) => handleinputchange(e, index)}
+                      // onChange={(e) => handleinputchange(e, index)}
+                      value={seat.name}
                       // onInput={handleSeatNo}
-                      name="seatno"
+                      name="name"
                     />
                   </div>
                 </div>
@@ -492,7 +506,7 @@ export default function Booking({ value, trip }) {
               name="luggage"
               className="text-sm mx-3 my-2 py-1 px-2 bg-blue-300 rounded px-2"
             >
-              <option id={id} className="bg-gray-100" value="No">
+              <option id={id} className="bg-gray-100" value="NO">
                 NO
               </option>
               <option id={id} className="bg-blue-100" value="YES">
@@ -515,11 +529,11 @@ export default function Booking({ value, trip }) {
 
                 <input
                   id={id}
-                  value={sum}
+                  value={sum.toLocaleString("en-US")}
                   disabled
                   onChange={(e) => setSum(e.target.value)}
                   type="text"
-                  className="bg-white text-red-500 px-5 lg:w-20 rounded-lg text-center text-lg font-bold"
+                  className="bg-white ordinal slashed-zero text-red-500  lg:w-20 rounded-lg text-center text-lg font-bold"
                   name="sum"
                 />
               </div>
@@ -549,7 +563,7 @@ export default function Booking({ value, trip }) {
                   value={(sum - currentValue).toLocaleString("en-US")}
                   type="text"
                   onChange={(e) => setTotalAmount(e.target.value)}
-                  name="total"
+                  name="totalAmount"
                 />
               </div>
             </div>
@@ -625,7 +639,8 @@ export default function Booking({ value, trip }) {
             </button>
             <button
               type="submit"
-              disabled={!fullName || !mobile}
+              onClick={BookTicket}
+              // disabled={!fullName || !mobile}
               className="bg-gray-800 disabled:cursor-not-allowed text-white px-2 py-1 rounded mx-1 border border-gray-300 my-2 lg:my-0"
             >
               Book

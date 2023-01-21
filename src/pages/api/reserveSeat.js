@@ -14,11 +14,15 @@ export default async function handler(req, res) {
   };
 
   try {
-    await prisma.bookedSeats.create({
-      data: newBooking,
+    booking.forEach(async (element) => {
+      await prisma.bookedSeats.create({
+        data: element,
+      });
     });
 
-    res.status(200).json({ booking: newBooking });
+    console.log("here", booking);
+
+    await res.status(200).json({ booking: [...booking] });
   } catch (error) {
     res.status(500).json({
       success: false,

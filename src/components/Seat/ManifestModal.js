@@ -1,6 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import {
+  ExclamationTriangleIcon,
+  EyeIcon,
+  PrinterIcon,
+} from "@heroicons/react/24/outline";
 import fetcher from "../../../utils/fetchBookings";
 import useSWR from "swr";
 
@@ -81,7 +85,7 @@ export default function ManifestModal({
                                 <th className="border border-gray-400 bg-gray-800 text-white px-4">
                                   ID
                                 </th>
-                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                <th className="border  border-gray-400 bg-gray-800 text-white px-4">
                                   DATE
                                 </th>
                                 <th className="border border-gray-400 bg-gray-800 text-white px-4">
@@ -96,19 +100,22 @@ export default function ManifestModal({
                                 <th className="border border-gray-400 bg-gray-800 text-white px-4">
                                   TOTAL PAID
                                 </th>
+                                <th className="border border-gray-400 bg-gray-800 text-white px-4">
+                                  ACTION
+                                </th>
                               </tr>
                             </thead>
                             {bookings?.bookings?.map((booking) => (
                               <tbody key={booking.id}>
                                 <tr className="border w-full border-gray-400">
-                                  <td className="border   px-5  border-gray-400">
+                                  <td className="border truncate max-w-[150px]  px-5  border-gray-400">
                                     {booking.id}
                                   </td>
                                   <td className="border w-fit px-5 border-gray-400">
                                     {booking.startDate}
                                   </td>
                                   <td className="border w-fit px-5 border-gray-400">
-                                    {booking.seatNo}
+                                    {booking.name}
                                   </td>
                                   <td className="border w-fit px-5 border-gray-400">
                                     {booking.fullName}
@@ -118,6 +125,21 @@ export default function ManifestModal({
                                   </td>
                                   <td className="border w-fit px-5 border-gray-400">
                                     {booking.totalPaid}
+                                  </td>
+                                  <td className="text-sm text-gray-900 font-light py-2  ">
+                                    <button
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        window.print();
+                                      }}
+                                      className="flex items-center text-white px-4 py-1 bg-purple-800 rounded px-1"
+                                    >
+                                      <PrinterIcon
+                                        height="25"
+                                        className="pr-1"
+                                      />{" "}
+                                      Print{" "}
+                                    </button>
                                   </td>
                                 </tr>
                               </tbody>

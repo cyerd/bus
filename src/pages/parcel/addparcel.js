@@ -24,15 +24,14 @@ export default function Addparcel() {
   const [cost, setCost] = useState("");
   let [totalAmount, setTotalAmount] = useState("");
 
+  const [query, setQuery] = useState("");
+  const fetcher = async () => {
+    const ParcelList = await fetch(`/api/getparcel?receiver=${query}`);
+    const data = await ParcelList.json();
+    const parcels = data.parcelList;
 
-    const [query, setQuery] = useState("");
-    const fetcher = async () => {
-      const ParcelList = await fetch(`/api/getparcel?receiver=${query}`);
-      const data = await ParcelList.json();
-      const parcels = data.parcelList;
-
-      return parcels;
-    };
+    return parcels;
+  };
 
   const {
     data: parcelList,
@@ -46,8 +45,8 @@ export default function Addparcel() {
     e.preventDefault();
 
     const id = uuid();
-    const parcelNo = format(new Date(), "MMddyhmmss")
-
+    const parcelNo = format(new Date(), "MMddyhmmss");
+    const status = "In Process";
 
     const parcel = {
       id,
@@ -65,9 +64,8 @@ export default function Addparcel() {
       cost: Number(cost),
       totalAmount: Number(totalAmount),
       pickDate: pickDate,
-      status: "In Process",
+      status: status,
       parcelNo: Number(parcelNo),
-
     };
 
     const uploadMessageToUpstash = async () => {
@@ -239,7 +237,7 @@ export default function Addparcel() {
                 />
               </div>
               <div className="flex flex-col items-center ">
-                <label>Item  Color</label>
+                <label>Item Color</label>
                 <input
                   onChange={(e) => {
                     setItemName(e.target.value);

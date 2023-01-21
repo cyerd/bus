@@ -175,7 +175,10 @@ export default function Trips() {
                       </p>
                     </td>
                     <td className="text-sm text-gray-900 font-light px-3 py-4 ">
-                      <button className="flex items-center text-white bg-purple-800 rounded px-1">
+                      <button
+                        
+                        className="flex items-center text-white bg-purple-800 rounded px-1"
+                      >
                         <EyeIcon height="15" className="pr-1" /> View{" "}
                       </button>
                     </td>

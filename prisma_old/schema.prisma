@@ -11,7 +11,7 @@ datasource db {
 }
 
 model bookings {
-  id            String   @id @map("_id")
+  id            String @id @map("_id")
   from          String
   destination   String
   pickup        String
@@ -19,22 +19,22 @@ model bookings {
   mobile        String
   age           String
   nationality   String
-  luggage       String
+  luggage       String?
   startDate     String
-  gender        String
+  gender        String?
   trip          String
   totalAmount   Int
   discount      String
   totalPaid     Int
-  paymentMethod String
-  name          String
+  paymentMethod String?
+  name        String
   idNumber      String
-  updateAt      DateTime @updatedAt
-  createdAt     DateTime @default(now())
+  updateAt       DateTime @updatedAt
+  createdAt      DateTime @default(now())
 }
 
 model bookedSeats {
-  id            String   @id @map("_id")
+  id            String @id @map("_id")
   from          String
   destination   String
   pickup        String
@@ -50,10 +50,10 @@ model bookedSeats {
   discount      String
   totalPaid     Int
   paymentMethod String
-  name          String
+  name        String
   idNumber      String
-  updateAt      DateTime @updatedAt
-  createdAt     DateTime @default(now())
+  updateAt       DateTime @updatedAt
+  createdAt      DateTime @default(now())
 }
 
 model parcels {

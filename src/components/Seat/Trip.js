@@ -45,17 +45,17 @@ export default function Trip({ selectedTrip, onChange, selectedDate }) {
             <div className=" ">{trip.name}</div>
             <div className="">NAIROBI</div>
             <div className=" ">
-              <button className=" border border-red-400 px-1">1500</button>
-              <button className="mx-2 border border-red-400 px-1">1800</button>
+              <span className=" border border-red-400 px-1">1500</span>
+              <span className="mx-2 border border-red-400 px-1">1800</span>
             </div>
 
-            <button
+            <span
               key={trip.name}
               onClick={() => setOpen(true)}
               className="flex justify-around items-center text-center text-white bg-purple-600  rounded-lg"
             >
               <p className="text-center">View</p> <EyeIcon height={20} />{" "}
-            </button>
+            </span>
           </button>
         </div>
       ))}
